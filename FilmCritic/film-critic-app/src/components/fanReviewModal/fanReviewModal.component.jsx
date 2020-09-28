@@ -32,7 +32,7 @@ class FanReviewModal extends React.Component {
 
     handleReviewSubmit() {
         const { reviewText, fanScore } = this.state;
-        const {imdbID, submitFirstMovieReviewStart, currentUser } = this.props;
+        const {imdbID, submitMovieReviewStart, currentUser } = this.props;
         const token = window.sessionStorage.getItem('token');
         const reviewObjDB = {
             review: reviewText,
@@ -42,7 +42,7 @@ class FanReviewModal extends React.Component {
             token: token
         }
         
-        submitFirstMovieReviewStart(reviewObjDB)
+        submitMovieReviewStart(reviewObjDB)
         this.toggle();
     }
 

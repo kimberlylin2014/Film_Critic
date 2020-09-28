@@ -23,23 +23,23 @@ export const getMovieSearchFailure = (error) => {
 }
 
 // Post Movie Review
-export const submitFirstMovieReviewStart = (review) => {
+export const submitMovieReviewStart = (review) => {
     return {
-        type: movieActionTypes.SUBMIT_FIRSTMOVIEREVIEW_START,
+        type: movieActionTypes.SUBMIT_MOVIEREVIEW_START,
         payload: review
     }
 }
 
-export const submitFirstMovieReviewSuccess = (movieResult) => {
+export const submitMovieReviewSuccess = (movieResult) => {
     return {
-        type: movieActionTypes.SUBMIT_FIRSTMOVIEREVIEW_SUCCESS,
+        type: movieActionTypes.SUBMIT_MOVIEREVIEW_SUCCESS,
         payload: movieResult
     }
 }
 
-export const submitFirstMovieReviewFailure = (error) => {
+export const submitMovieReviewFailure = (error) => {
     return {
-        type: movieActionTypes.SUBMIT_FIRSTMOVIEREVIEW_FAILURE,
+        type: movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE,
         payload: error
     }
 }

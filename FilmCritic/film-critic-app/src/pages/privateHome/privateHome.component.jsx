@@ -1,7 +1,7 @@
 import React from 'react';
 import './privateHome.styles.scss';
 import { getUserBlogStart } from '../../redux/user/user.actions';
-import { submitFirstMovieReviewStart } from '../../redux/movie/movie.actions';
+import { submitMovieReviewStart } from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -40,7 +40,7 @@ class PrivateHome extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
       getUserBlogStart: (accessBlogCredentials) => dispatch(getUserBlogStart(accessBlogCredentials)),
-      submitFirstMovieReviewStart: (review) => dispatch(submitFirstMovieReviewStart(review))
+      submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review))
     }
 }
 

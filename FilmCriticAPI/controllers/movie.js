@@ -204,7 +204,7 @@ const userAlreadyReviewedSelectedMovie = (req, db) => {
 }
 
 // SUBMIT FIRST REVIEW MOVIE ROUTE
-const submitReview = async (req, res, db) => {
+const submitReview = (req, res, db) => {
     return userAlreadyReviewedSelectedMovie(req, db)
         .then(denied => {
             if(denied) {
@@ -215,7 +215,36 @@ const submitReview = async (req, res, db) => {
         .catch(error => console.log(error))
 }
 
+// GET REVIEWS BY MOVIE ID
+const getReviewsByMovieID = (req, res, db) => {
+  
+        const { imdbID } = req.params;
+        return db.transaction(tx => {
+            return db('reviews')
+                .select('*')
+                .where({movieid: imdbID})
+                .join('users', 'reviews.userid', '=' , 'users.id')
+                .then(reviewsArray => {
+                    return getOneDetailMovieByID(imdbID)
+                        .then(detailedMovie => {
+                            const obj= [{...detailedMovie, reviewsArray: [...reviewsArray]}]
+                            console.log(obj);
+                            return obj;
+                        })
+                })
+                .then(tx.commit)
+                .catch(tx.rollback)
+        })
+        .catch(error => console.log(error))   
+}
+
+const getOneDetailMovieByID = async (imdbID) => {
+    const resp = await fetch(`http://omdbapi.com/?apikey=${process.env.MOVIE_API_KEY}&i=${imdbID}`);
+    const movieData = await resp.json()
+    return movieData;
+}
 module.exports = {
     getMovies: getMovies,
-    submitReview: submitReview
+    submitReview: submitReview,
+    getReviewsByMovieID: getReviewsByMovieID
 }

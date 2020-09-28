@@ -1,3 +1,4 @@
+// public route
 export const getMoviesAPI = async (searchWords) => {
     try {   
         const resp = await fetch(`http://localhost:3000/movieSearch/${searchWords}`)
@@ -13,7 +14,8 @@ export const getMoviesAPI = async (searchWords) => {
     }
 }
 
-export const submitFirstMovieReview = async(reviewObj) => {
+// authorized routes
+export const submitMovieReview = async(reviewObj) => {
     try {
         const reviewBody = {
             review: reviewObj.review,
@@ -31,6 +33,25 @@ export const submitFirstMovieReview = async(reviewObj) => {
         return null;
     } catch (error) {
         console.debug('Caught an error inside submitMovieReview');
+        console.debug(error);
+        return null;
+    }
+}
+
+
+export const getReviewsByMovieID = async(reviewObj) => {
+    try {
+        const resp = await fetch(`http://localhost:3000/users/${reviewObj.userID}/movies/${reviewObj.imdbID}/reviews`, {
+            method: "GET",
+            headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${reviewObj.token}`}
+        })
+        if(resp.status === 200) {
+            const data = await resp.json();
+            return data;
+        }
+         return null;
+    } catch (error) {
+        console.debug('Caught an error inside getReviewByMovieID');
         console.debug(error);
         return null;
     }

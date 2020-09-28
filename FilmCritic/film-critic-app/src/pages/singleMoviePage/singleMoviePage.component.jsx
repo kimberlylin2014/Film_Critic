@@ -1,13 +1,21 @@
 import React from 'react';
 import { getReviewsByMovieIDStart} from '../../redux/movie/movie.actions';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from '../../redux/user/user.selectors';
 class SingleMoviePage extends React.Component {
     constructor(props) {
         super(props)
     }
     componentDidMount() {
-        // const {match: {params: {imdbID}, getReviewsByMovieIDStart}} = this.props;
-        // getReviewsByMovieIDStart(imdbID);
+        const {match: {params: {imdbID}},getReviewsByMovieIDStart, currentUser} = this.props;
+        const token = window.sessionStorage.getItem('token');
+        const reviewObj = {
+            userID: currentUser.id,
+            imdbID: imdbID,
+            token: token
+        }
+        getReviewsByMovieIDStart(reviewObj);
     }
     render(){
 
@@ -21,8 +29,12 @@ class SingleMoviePage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getReviewsByMovieIDStart: (movieID) => dispatch(getReviewsByMovieIDStart(movieID))
+        getReviewsByMovieIDStart: (reviewObj) => dispatch(getReviewsByMovieIDStart(reviewObj))
     }
 }
 
-export default connect(null, mapDispatchToProps)(SingleMoviePage);
+const mapStateToProps = createStructuredSelector({
+    currentUser: selectCurrentUser
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleMoviePage);

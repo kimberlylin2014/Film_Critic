@@ -16,6 +16,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 isLoading: true
             }
         case movieActionTypes.GET_MOVIESEARCH_SUCCESS:
+        case movieActionTypes.GET_REVIEWSBYMOVIEID_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
@@ -27,11 +28,11 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 isLoading: false,
                 errorMessage: action.payload
             }
-        case movieActionTypes.SUBMIT_FIRSTMOVIEREVIEW_SUCCESS:
+        case movieActionTypes.SUBMIT_MOVIEREVIEW_SUCCESS:
             return {
                 ...state,
                 movieList: updateMovieListWithNewReviews(state.movieList, action.payload)
-            }
+            }   
         case userActionTypes.LOGOUT_USER_SUCCESS:
             return {
                 movieList: [],

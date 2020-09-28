@@ -82,20 +82,13 @@ app.post('/users/:userID/movies/:imdbID/review', auth.requireAuth, async (req, r
     }
 })
 
-app.get('/users/:userID/movies/:imdbID/reviews', (req, res) => {
+app.get('/users/:userID/movies/:imdbID/reviews', auth.requireAuth, async (req, res) => {
     try {
-        const { imdbID } = req.params;
-        // user imdbID to fetch review data table, join review and user data tables
-        db('reviews')
-            .select('*')
-            .where({movieid: imdbID})
-            .join('users', 'reviews.userid', '=' , 'users.id')
-            .then(foundReviews => {
-                console.log(foundReviews)
-                res.json(foundReviews)
-
-            })
-
+        const data = await movie.getReviewsByMovieID(req, res, db);
+        if(!data) {
+            throw Error('Can not get reviews from selected movie')
+        }
+        res.json(data)
     } catch(error) {
         console.debug(error);
         res.status(400).json(error)
