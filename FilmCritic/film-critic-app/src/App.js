@@ -35,12 +35,13 @@ class App extends React.Component {
             <Route exact path='/register' render={(props) => {
               return currentUser ? <Redirect to='/home'/>:  <Register {...props} />
             }}/>
-            <Route exact path='/home' render={() => {
-              return currentUser ? <PrivateHome /> :  <Redirect to='/register'/>
-            }}/>
             <Route exact path='/login' render={(props) => {
               return currentUser ? <Redirect to='/home' /> :  <Login {...props} />
             }}/>
+            <Route exact path='/home' render={() => {
+              return currentUser ? <PrivateHome /> :  <Redirect to='/register'/>
+            }}/>
+
             <Route exact path='/movies/:imdbID/reviews' render={(props) => {
               return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/register'/>
             }}

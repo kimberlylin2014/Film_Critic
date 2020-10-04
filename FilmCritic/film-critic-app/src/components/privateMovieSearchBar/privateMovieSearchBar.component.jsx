@@ -1,10 +1,10 @@
 import React from 'react';
 import FormInput from '../formInput/formInput.component';
 import { Button } from 'reactstrap';
-import { getMovieSearchStart } from '../../redux/movie/movie.actions'
+import { getPrivateMovieSearchStart } from '../../redux/movie/movie.actions'
 import {connect } from 'react-redux';
 
-class MovieSearchBar extends React.Component {
+class PrivateMovieSearchBar extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -22,8 +22,13 @@ class MovieSearchBar extends React.Component {
 
     handleMovieSearchButton() {
         const { movieSearch } = this.state;
-        const { getMovieSearchStart } = this.props;
-        getMovieSearchStart(movieSearch);
+        const { getPrivateMovieSearchStart } = this.props;
+        const token = window.sessionStorage.getItem('token');
+        const searchObj = {
+            token,
+            movieSearch
+        }
+        getPrivateMovieSearchStart(searchObj);
     }
     render() {
         return (
@@ -46,9 +51,9 @@ class MovieSearchBar extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMovieSearchStart: (searchWords) => dispatch(getMovieSearchStart(searchWords))
+        getPrivateMovieSearchStart: (searchObj) => dispatch(getPrivateMovieSearchStart(searchObj))
     }
 }
 
 
-export default connect(null, mapDispatchToProps)(MovieSearchBar);
+export default connect(null, mapDispatchToProps)(PrivateMovieSearchBar);

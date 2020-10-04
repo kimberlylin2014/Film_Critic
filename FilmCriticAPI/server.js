@@ -56,7 +56,21 @@ app.post('/signout', (req, res) => {
     })
 })
 
-app.get('/movieSearch/:movie', async (req, res) => {
+app.get('/movieSearchPublic/:movie', async (req, res) => {
+    try {
+        const movies = await movie.getMovies(req, res, db)
+        if(!movies) {
+            throw Error('Can not find movie')
+        }
+        res.json(movies)
+    } catch (error) {
+        console.debug(error)
+        res.status(400).json(error)
+    }   
+})
+
+// Authenticated Routes
+app.get('/movieSearchPrivate/:movie', auth.requireAuth, async (req, res) => {
     try {
         const movies = await movie.getMovies(req, res, db)
         if(!movies) {

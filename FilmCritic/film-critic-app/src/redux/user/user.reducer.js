@@ -1,4 +1,5 @@
 import userActionTypes from './user.types';
+import movieActionTypes from '../movie/movie.types';
 
 const INITIAL_STATE = {
     currentUser: null,
@@ -29,6 +30,9 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 errorMessage: action.payload
             }
         case userActionTypes.LOGOUT_USER_SUCCESS:
+        case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION:
+        case movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION:
+        case movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION:
         case userActionTypes.GET_USERBLOGS_FAILURE:
             return {
                 currentUser: null,

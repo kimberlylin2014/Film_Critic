@@ -1,6 +1,6 @@
 import movieActionTypes from './movie.types';
 
-// Get Movie Search
+// Get Movie Search for PUBLIC ROUTE
 export const getMovieSearchStart = (searchWords) => {
     return {
         type: movieActionTypes.GET_MOVIESEARCH_START,
@@ -18,6 +18,33 @@ export const getMovieSearchSuccess = (results) => {
 export const getMovieSearchFailure = (error) => {
     return {
         type: movieActionTypes.GET_MOVIESEARCH_FAILURE,
+        payload: error
+    }
+}
+// Get Movie Search for PRIVATE ROUTE
+export const getPrivateMovieSearchStart = (searchWords) => {
+    return {
+        type: movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_START,
+        payload: searchWords
+    }
+}
+
+export const getPrivateMovieSearchSuccess = (results) => {
+    return {
+        type: movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_SUCCESS,
+        payload: results
+    }
+}
+
+export const getPrivateMovieSearchFailure = (error) => {
+    return {
+        type: movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE,
+        payload: error
+    }
+}
+export const getPrivateMovieSearchFailureSession = (error) => {
+    return {
+        type: movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION,
         payload: error
     }
 }
@@ -44,6 +71,13 @@ export const submitMovieReviewFailure = (error) => {
     }
 }
 
+export const submitMovieReviewFailureSession = (error) => {
+    return {
+        type: movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION,
+        payload: error
+    }
+}
+
 // GET MOVIE REVIWS BY MOVIE ID
 export const getReviewsByMovieIDStart = (movieID) => {
     return {
@@ -62,6 +96,13 @@ export const getReviewsByMovieIDSuccess = (reviews) => {
 export const getReviewsByMovieIDFailure = (error) => {
     return {
         type: movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE,
+        payload: error
+    }
+}
+
+export const getReviewsByMovieIDFailureSession = (error) => {
+    return {
+        type: movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION,
         payload: error
     }
 }

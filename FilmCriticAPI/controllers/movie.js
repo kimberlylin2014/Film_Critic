@@ -135,7 +135,7 @@ const insertNewMovieToDB = (tx, req) => {
 }
 
 const handleSubmitReviewIfMovieDoesNotExistInDB = (tx, req, reviewID) => {
-    console.debu('movie is not in db')
+    console.debug('movie is not in db')
     return insertNewMovieToDB(tx, req)
         .then(movieDataTable => updateMovieTableWithNewReview(tx,req,reviewID))
         .then(movie => getMovieReviewArray(tx, req, movie))
@@ -208,6 +208,7 @@ const submitReview = (req, res, db) => {
     return userAlreadyReviewedSelectedMovie(req, db)
         .then(denied => {
             if(denied) {
+            
                 return null;
             }
             return submitReviewTransaction(req, db)

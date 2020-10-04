@@ -37,7 +37,7 @@ const setTokenInRedis = (token, id) => {
     return Promise.resolve(redisClient.set(token, id))
 }
 const generateAccessToken = async (userJwtObj) => {
-    const token = await jwt.sign(userJwtObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '2h'});
+    const token = await jwt.sign(userJwtObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'});
     await setTokenInRedis(token, userJwtObj.id)
     const accessToken = {...userJwtObj, token }
     console.log(accessToken)

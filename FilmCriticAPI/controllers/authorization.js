@@ -15,7 +15,7 @@ const requireAuth = (req, res, next) => {
         jwt.verify(tokenID, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if(err) {
                 redis.redisClient.del(tokenID)
-                return res.status(400).json('Expired Token')
+                return res.status(401).json('Expired Token')
             }
             // req.user = {id: user.id, email: user.email}
             next()

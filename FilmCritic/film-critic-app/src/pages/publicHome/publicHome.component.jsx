@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectMovieList } from '../../redux/movie/movie.selectors';
-import MovieSearchBar from '../../components/movieSearchBar/movieSearchBar.component';
+import PublicMovieSearchBar from '../../components/publicMovieSearchBar/publicMovieSearchBar.component';
 import MovieList from '../../components/movieList/movieList.component';
 
 class PublicHome extends React.Component {
@@ -23,7 +23,7 @@ class PublicHome extends React.Component {
                 <div className='row justify-content-center'>
                     <div className='col-lg-8'>
                         <h1>PUBLIC PAGE</h1>
-                        <MovieSearchBar />
+                        <PublicMovieSearchBar />
                         <MovieList {...this.props} privateRoute={false}/>
                     </div>
 
