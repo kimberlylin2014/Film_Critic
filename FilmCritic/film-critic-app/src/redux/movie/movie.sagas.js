@@ -28,8 +28,7 @@ function* getReviews({payload}) {
             yield put(getReviewsByMovieIDFailureSession(error))
         } else {
             yield put(getReviewsByMovieIDFailure(error))
-        } 
-        
+        }  
     }
 }
 

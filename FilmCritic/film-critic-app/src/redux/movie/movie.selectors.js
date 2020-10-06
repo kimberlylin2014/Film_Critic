@@ -6,3 +6,8 @@ export const selectMovieList = createSelector(
     [movieSelector],
     (movies) => movies.movieList
 )
+
+export const selectIsMovieListLoading = createSelector(
+    [movieSelector],
+    (movies) => movies.isLoading
+)

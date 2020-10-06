@@ -1,5 +1,10 @@
 import movieActionTypes from './movie.types';
 
+export const resetMovieSearch = () => {
+    return {
+        type: movieActionTypes.RESET_MOVIESEARCH,
+    }
+}
 // Get Movie Search for PUBLIC ROUTE
 export const getMovieSearchStart = (searchWords) => {
     return {

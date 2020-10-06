@@ -47,10 +47,6 @@ export const submitMovieReview = async(reviewObj) => {
             headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${reviewObj.token}`},
             body: JSON.stringify(reviewBody)
         })
-        // if(resp.status === 200) {
-        //     const data = await resp.json();
-        //     return data;
-        // }
         if(resp.status === 200) {
             const data = await resp.json();
             return data;
@@ -75,8 +71,10 @@ export const getReviewsByMovieID = async(reviewObj) => {
         if(resp.status === 200) {
             const data = await resp.json();
             return data;
+        } else if (resp.status === 401) {
+            return resp.statusText;
         }
-         return null;
+        return null;
     } catch (error) {
         console.debug('Caught an error inside getReviewByMovieID');
         console.debug(error);

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './header.styles.scss';
 import {
   Collapse,
   Navbar,
@@ -40,23 +41,30 @@ class Header extends React.Component {
   render() {
     const {currentUser, history} = this.props;
     return (
-      <div>
+      <div className='Header'>
         <Navbar color="light" light expand="md">
-          <NavbarBrand>Tumblr</NavbarBrand>
-          <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                {currentUser ? '' :  <NavLink onClick={() => history.push('/')}>Movies</NavLink>}
-              </NavItem>
-              <NavItem>
-                {currentUser ? <NavLink onClick={this.handleSignOut}>Sign Out</NavLink> : <NavLink onClick={() => history.push('/register')}>Register</NavLink>}
-              </NavItem>
-              <NavItem>
-                {currentUser ? '' :  <NavLink onClick={() => history.push('/login')}>Sign In</NavLink>}
-              </NavItem>
-            </Nav>
-          </Collapse>
+
+            <NavbarBrand>
+               <img src="https://www.flaticon.com/svg/static/icons/svg/3132/3132754.svg" alt="logo" width='30px'/>
+               FilmCritic App
+              
+
+            </NavbarBrand>
+            <NavbarToggler onClick={this.toggle} />
+            <Collapse isOpen={this.state.isOpen} navbar>
+              <Nav className="ml-auto" navbar>
+                <NavItem>
+                  {currentUser ? <NavLink onClick={() => history.push('/home')}>Search</NavLink> :  ''}
+                </NavItem>
+                <NavItem>
+                  {currentUser ? <NavLink onClick={this.handleSignOut}>Sign Out</NavLink> : <NavLink onClick={() => history.push('/register')}>Register</NavLink>}
+                </NavItem>
+                <NavItem>
+                  {currentUser ? '' :  <NavLink onClick={() => history.push('/login')}>Sign In</NavLink>}
+                </NavItem>
+              </Nav>
+            </Collapse>
+
         </Navbar>
       </div>
     );

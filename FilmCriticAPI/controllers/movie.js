@@ -225,11 +225,19 @@ const getReviewsByMovieID = (req, res, db) => {
                 .select('*')
                 .where({movieid: imdbID})
                 .join('users', 'reviews.userid', '=' , 'users.id')
+                .join('movies', 'reviews.movieid', '=', 'movies.id')
                 .then(reviewsArray => {
+                    console.log(reviewsArray)
                     return getOneDetailMovieByID(imdbID)
                         .then(detailedMovie => {
-                            const obj= [{...detailedMovie, reviewsArray: [...reviewsArray]}]
-                            console.log(obj);
+                            console.log(detailedMovie)
+                            if(reviewsArray.length > 0) {
+                                const averageFanScore = reviewsArray[0].averagefanscore;
+                                const obj= [{...detailedMovie, averageFanScore: averageFanScore, moreReviewInfo: [...reviewsArray]}]
+                                console.log(obj);
+                                return obj;
+                            }
+                            const obj= [{...detailedMovie}]
                             return obj;
                         })
                 })

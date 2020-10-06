@@ -12,10 +12,16 @@ const movieReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case movieActionTypes.GET_MOVIESEARCH_START:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_START:
+        case movieActionTypes.GET_REVIEWSBYMOVIEID_START:
             return {
                 ...state,
                 isLoading: true
             }
+        // case movieActionTypes.GET_REVIEWSBYMOVIEID_SUCCESS:
+        //     return {
+        //         ...state,
+        //         isLoading: true
+        //     }
         case movieActionTypes.GET_MOVIESEARCH_SUCCESS:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_SUCCESS:
         case movieActionTypes.GET_REVIEWSBYMOVIEID_SUCCESS:
@@ -40,6 +46,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION:
         case movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION:
         case movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION:
+        case movieActionTypes.RESET_MOVIESEARCH:
             return {
                 movieList: [],
                 errorMessage: null,

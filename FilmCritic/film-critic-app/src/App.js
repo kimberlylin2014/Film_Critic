@@ -6,7 +6,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import Register from './pages/register/register.component';
 import PrivateHome from './pages/privateHome/privateHome.component';
 import PublicHome from './pages/publicHome/publicHome.component';
-import SingleMoviePage from './pages/singleMoviePage/singleMoviePage.component';
+import MoviePageContainer from './pages/singleMoviePage/singleMoviePage.component';
 import Login from './pages/login/login.component';
 import Header from './components/header/header.component';
 import { loginUserStart } from  './redux/user/user.actions';
@@ -30,7 +30,9 @@ class App extends React.Component {
       <div className='App'>
         <Header />
         <Switch>
-            <Route exact path='/' component={PublicHome}
+            <Route exact path='/' render={() => {
+              return currentUser ? <Redirect to='/home'/> :  <PublicHome />
+            }}
             />
             <Route exact path='/register' render={(props) => {
               return currentUser ? <Redirect to='/home'/>:  <Register {...props} />
@@ -43,7 +45,7 @@ class App extends React.Component {
             }}/>
 
             <Route exact path='/movies/:imdbID/reviews' render={(props) => {
-              return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/register'/>
+              return currentUser ? <MoviePageContainer {...props}/> :  <Redirect to='/register'/>
             }}
             
             
