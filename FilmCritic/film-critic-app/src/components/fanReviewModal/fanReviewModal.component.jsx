@@ -50,7 +50,7 @@ class FanReviewModal extends React.Component {
     const { buttonLabel, className } = this.props;
     return (
         <div>
-          <Button color="danger" onClick={this.toggle}>{buttonLabel}</Button>
+          <Button color="info" onClick={this.toggle}>{buttonLabel}</Button>
           <Modal isOpen={this.state.modal} toggle={this.toggle} className={className}>
             <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
             <ModalBody>

@@ -89,6 +89,7 @@ app.post('/users/:userID/movies/:imdbID/review', auth.requireAuth, async (req, r
         if(!data) {
             throw Error('User Already Reviewed This Movie')
         }
+        console.log(data)
         res.json(data)
     } catch (error) {
         console.debug(error)

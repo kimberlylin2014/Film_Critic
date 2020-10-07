@@ -36,6 +36,10 @@ function* onGetReviewsByMovieIDStart() {
     yield takeLatest(movieActionTypes.GET_REVIEWSBYMOVIEID_START, getReviews)
 }
 
+function* onSubmitReviewSuccess() {
+    yield takeLatest(movieActionTypes.SUBMIT_MOVIEREVIEW_SUCCESS, getReviews)
+}
+
 function* submitReview({payload}) {
     try {   
         const data = yield submitMovieReview(payload)
@@ -100,7 +104,7 @@ function* onGetPublicMovieSearchStart() {
 }
 
 function* movieSagas() {
-    yield all([call(onGetPublicMovieSearchStart), call(onSubmitMovieReviewStart), call(onGetReviewsByMovieIDStart), call(onGetPrivateMovieSearchStart)])
+    yield all([call(onGetPublicMovieSearchStart), call(onSubmitMovieReviewStart), call(onGetReviewsByMovieIDStart), call(onGetPrivateMovieSearchStart), call(onSubmitReviewSuccess)])
 }
 
 export default movieSagas;

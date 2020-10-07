@@ -49,7 +49,9 @@ export const submitMovieReview = async(reviewObj) => {
         })
         if(resp.status === 200) {
             const data = await resp.json();
-            return data;
+            const { id } = data;
+            const newData = {imdbID: id, userID: reviewObj.userID, token: reviewObj.token}
+            return newData;
         } else if (resp.status === 401) {
             return resp.statusText;
         }
