@@ -6,7 +6,7 @@ const WithSpinner = (WrappedComponent, height) => {
     const componentWithSpinner = ({isLoading, ...props}) => {
         return isLoading ? (
             <div className='PageWithSpinner' style={{height: height}}>
-                <Spinner style={{ width: '5rem', height: '5rem' }} color="dark" />
+                <Spinner style={{ width: '5rem', height: '5rem' }} color="light" />
             </div>
         ) : (
             <WrappedComponent {...props}/>

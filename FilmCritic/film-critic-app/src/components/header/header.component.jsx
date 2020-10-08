@@ -7,7 +7,8 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink
+  NavLink,
+  NavbarText
 } from 'reactstrap';
 import { logoutUserStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
@@ -40,19 +41,19 @@ class Header extends React.Component {
 
   render() {
     const {currentUser, history} = this.props;
+    console.log(currentUser)
     return (
       <div className='Header'>
         <Navbar color="light" light expand="md">
-
+            <div className='container'>
             <NavbarBrand>
                <img src="https://www.flaticon.com/svg/static/icons/svg/3132/3132754.svg" alt="logo" width='30px'/>
                FilmCritic App
-              
-
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
+         
                 <NavItem>
                   {currentUser ? <NavLink onClick={() => history.push('/home')}>Search</NavLink> :  ''}
                 </NavItem>
@@ -62,9 +63,12 @@ class Header extends React.Component {
                 <NavItem>
                   {currentUser ? '' :  <NavLink onClick={() => history.push('/login')}>Sign In</NavLink>}
                 </NavItem>
+                <NavbarText className='username'>
+                  {currentUser ? `${currentUser.username.toUpperCase()}` : ''}
+                </NavbarText>
               </Nav>
             </Collapse>
-
+            </div>
         </Navbar>
       </div>
     );

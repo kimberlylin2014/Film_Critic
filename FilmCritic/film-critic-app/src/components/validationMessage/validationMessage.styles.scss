@@ -1,0 +1,22 @@
+.ValidationMessage {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ffd36b;
+    background-color: #ffd36b;
+    padding: 2px;
+    border-radius: 5px;
+    margin: 5px 0 10px;
+
+    
+    img {
+        width: 30px;
+        margin: 0 15px 0 5px;
+    }
+    p {
+        margin: 0;
+        font-size: 18px;
+        padding: 3px 0;
+        font-weight: 600;
+    }
+    
+}

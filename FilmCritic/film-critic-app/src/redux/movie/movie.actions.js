@@ -43,7 +43,7 @@ export const getPrivateMovieSearchSuccess = (results) => {
 
 export const getPrivateMovieSearchFailure = (error) => {
     return {
-        type: movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE,
+        type: movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE,
         payload: error
     }
 }

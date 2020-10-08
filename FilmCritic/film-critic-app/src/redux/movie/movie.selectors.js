@@ -11,3 +11,8 @@ export const selectIsMovieListLoading = createSelector(
     [movieSelector],
     (movies) => movies.isLoading
 )
+
+export const selectMovieErrorMessage = createSelector(
+    [movieSelector],
+    (movies) => movies.errorMessage
+)

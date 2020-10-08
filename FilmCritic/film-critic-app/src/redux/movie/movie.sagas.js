@@ -68,16 +68,16 @@ function* fetchMoviesPrivate({payload}) {
     try {   
         const data = yield getMoviesPrivateAPI(payload);
         if(!data) {
-            throw Error('Can not fetch movies')
+            throw Error('Can not find movie. Try Again.')
         } else if (data === 'Unauthorized') {
             throw Error(data)
         }
         yield put(getPrivateMovieSearchSuccess(data))
     } catch(error) {
-        if(error.message === 'Unauthorized'){
-            yield put(getPrivateMovieSearchFailureSession(error))
+        if(error.message === 'Your session has expired. Please sign back in.'){
+            yield put(getPrivateMovieSearchFailureSession(error.message))
         } else {
-            yield put(getPrivateMovieSearchFailure(error))
+            yield put(getPrivateMovieSearchFailure(error.message))
         } 
     }
 }

@@ -1,8 +1,12 @@
 import React from 'react';
+import './privateMovieSearchBar.styles.scss';
 import FormInput from '../formInput/formInput.component';
+import ValidationMessage from '../validationMessage/validationMessage.component';
 import { Button } from 'reactstrap';
 import { getPrivateMovieSearchStart } from '../../redux/movie/movie.actions'
 import {connect } from 'react-redux';
+import { selectMovieErrorMessage } from '../../redux/movie/movie.selectors'
+import { createStructuredSelector } from 'reselect'
 
 class PrivateMovieSearchBar extends React.Component {
     constructor(props){
@@ -22,7 +26,7 @@ class PrivateMovieSearchBar extends React.Component {
 
     handleMovieSearchButton() {
         const { movieSearch } = this.state;
-        const { getPrivateMovieSearchStart } = this.props;
+        const { getPrivateMovieSearchStart} = this.props;
         const token = window.sessionStorage.getItem('token');
         const searchObj = {
             token,
@@ -31,18 +35,22 @@ class PrivateMovieSearchBar extends React.Component {
         getPrivateMovieSearchStart(searchObj);
     }
     render() {
+        const { errorMessage } = this.props;
         return (
-            <div>
+            <div className='PrivateMovieSearchBar'>
                 <form>
                     <FormInput 
                         id='movie-search'
-                        label='Search Movie'
+                        label='Movie Search'
                         name='movieSearch'
                         type='text'
                         placeholder='movie name'
                         handleOnChange={this.handleOnChange}
                     />
-                    <Button onClick={this.handleMovieSearchButton}>Search</Button>
+                    {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
+                    
+                    <Button onClick={this.handleMovieSearchButton} outline color='secondary'>Search</Button>
+    
                 </form>
             </div>
         )
@@ -55,5 +63,9 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+const mapStateToProps = createStructuredSelector({
+    errorMessage: selectMovieErrorMessage
+})
 
-export default connect(null, mapDispatchToProps)(PrivateMovieSearchBar);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateMovieSearchBar);

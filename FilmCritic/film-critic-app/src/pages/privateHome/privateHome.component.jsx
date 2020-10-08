@@ -23,20 +23,19 @@ class PrivateHome extends React.Component {
     }
     render() {
         return (
-            <div className='PrivateHome container'>
-                <h1 className='text-center'>PRIVATE PAGE</h1>
-                 <div className='row justify-content-center'>
-                    <div className='col-lg-5'>
-                        <PrivateMovieSearchBar />
+            <div className='PrivateHome'>
+                <div className='container'>
+                    <div className='row justify-content-center'>
+                        <div className='col-lg-5'>
+                            <PrivateMovieSearchBar />
+                        </div>
                     </div>
-                </div>
-                <div className='row justify-content-center'>
-                    <div className='col-lg-10'>
-                        <MovieListContainer {...this.props} privateRoute={true}/>
+                    <div className='row justify-content-center'>
+                        <div className='col-lg-9'>
+                            <MovieListContainer {...this.props} privateRoute={true}/>
+                        </div>
                     </div>
-
-                </div>
-               
+                </div>    
             </div>
         )
     }  
