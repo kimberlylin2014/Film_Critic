@@ -2,13 +2,16 @@ import React from 'react';
 import './detailedMovieRatings.styles.scss';
 import  FanReviewModal  from '../fanReviewModal/fanReviewModal.component';
 
+import 'react-circular-progressbar/dist/styles.css';
+
 class DetailedMovieRatings extends React.Component  {
     constructor(props) {
         super(props)
         this.calculateImdbRating = this.calculateImdbRating.bind(this)
         this.calculateAudienceRating = this.calculateAudienceRating.bind(this)
+        this.determineRatingImage = this.determineRatingImage.bind(this);
+        this.calculateAudienceReviewLength = this.calculateAudienceReviewLength.bind(this)
         this.displayReviewButton = this.displayReviewButton.bind(this);
-        this.determineRatingImage = this.determineRatingImage.bind(this)
     }
 
     calculateImdbRating() {
@@ -17,18 +20,30 @@ class DetailedMovieRatings extends React.Component  {
     }
 
     calculateAudienceRating() {
-        const {averageFanScore} = this.props;
-        console.log(averageFanScore)
+        const {averageFanScore } = this.props;
         if(averageFanScore) {
-            return `${(parseFloat(averageFanScore)/5 * 100).toFixed(0)}%`
+            const percentageScore = (parseFloat(averageFanScore)/5 * 100).toFixed(0);
+            return percentageScore;
         } 
-        return 'N/A'
+        return null;  
+    }
+
+    calculateAudienceReviewLength() {
+        const {moreReviewInfo} = this.props;
+        if(moreReviewInfo) {
+            const data = moreReviewInfo[0];
+            const { fanreviews } = data;
+            if(fanreviews.length === 1) {
+                return `${fanreviews.length} Review`
+            } 
+            return `${fanreviews.length} Reviews`
+        }
+        return null;
     }
 
     displayReviewButton() {
         const {moreReviewInfo, currentUser} = this.props;
         if(moreReviewInfo) {
-            console.log('testing')
             const userAlreadyReviewed = moreReviewInfo.find(review => review.userid === currentUser.id);
             if(!userAlreadyReviewed) {
                 return <div><FanReviewModal buttonLabel='Write A Review' className={`review-modal`} {...this.props}/></div> 
@@ -41,22 +56,24 @@ class DetailedMovieRatings extends React.Component  {
 
     determineRatingImage() {
         const {averageFanScore} = this.props;
-        console.log(averageFanScore)
-        const score = (parseFloat(averageFanScore)/5 * 100).toFixed(0)
         let imgSrc;
-        if(score >= 0 && score < 70) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/2665/2665044.svg';
-        } else if (score >= 70 && score < 90) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/3572/3572255.svg'
-        } else if (score >= 90) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616490.svg'
-        } else {
-            imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
+        if(averageFanScore) {
+            const score = (parseFloat(averageFanScore)/5 * 100).toFixed(0)
+            if(score >= 0 && score < 70) {
+                imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
+            } else if (score >= 70 && score < 90) {
+                imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
+            } else if (score >= 90) {
+                imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616490.svg'
+            } 
+            return imgSrc
         }
-        return <img src={imgSrc} alt="audience-icon" width='70px'/> 
+        imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
+        return imgSrc
     }
 
     render() {
+        const {moreReviewInfo} = this.props;
         return (
             <div className='DetailedMovieRatings'>
                 <div className='Critic'>
@@ -70,11 +87,27 @@ class DetailedMovieRatings extends React.Component  {
                 </div>
                 <div className='Audience'>
                     <div className='rating'>
-                        {this.determineRatingImage()} 
-                        <div>{this.calculateAudienceRating()}</div>
+                        {moreReviewInfo ? (
+          
+                            <img src={this.determineRatingImage()} alt="audience-icon" width='70px'/> 
+                        ): (
+                            <img src={this.determineRatingImage()} alt="audience-icon" width='70px'/> 
+                        )} 
+
+                        {moreReviewInfo ? (
+                            <div>
+                                    {this.calculateAudienceRating()}%
+                            </div>
+                          
+                        ): ''}      
                     </div>
                     <div className='label'>
-                        Audience 
+                        {moreReviewInfo ? (
+                            <div>
+                                    {this.calculateAudienceReviewLength()}
+                            </div>
+                          
+                        ): 'No Reviews'}    
                     </div>
                 </div>
                 {this.displayReviewButton()}  

@@ -5,13 +5,16 @@ import DetailedMovieRatings from '../detailedMovieRatings/detailedMovieRatings.c
 import DetailedMovieInfo from '../detailedMovieInfo/detailedMovieInfo.component';
 
 const DetailedMovie = ({...props}) => {
+    console.log(props)
     return(
         <div className='DetailedMovie'>
-            <DetailedMovieInfo {...props}/>
             <h3>RATINGS</h3>
             <hr/>
             <DetailedMovieRatings {...props}/>
             <br/>
+            <DetailedMovieInfo {...props}/>
+   
+   
             <h3>AUDIENCE REVIEWS</h3>
             <hr/>
             <DetailedFanReviews {...props}/>

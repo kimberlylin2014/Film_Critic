@@ -1,9 +1,8 @@
 import React from 'react';
 import './privateMovie.styles.scss';
 import { Button } from 'reactstrap';
-import FanReviewModal from '../fanReviewModal/fanReviewModal.component';
 import {withRouter} from 'react-router-dom';
-// DB: id, Title, Year, Poster, Plot, Director, Rotten Tomatoes, Rated, Review[ids]
+
 class PrivateMovie extends React.Component {
     constructor(props) {
         super(props)
@@ -13,6 +12,7 @@ class PrivateMovie extends React.Component {
         this.calculateImdbRating = this.calculateImdbRating.bind(this)
         this.calculateAudienceRating = this.calculateAudienceRating.bind(this)
         this.determineRatingImage = this.determineRatingImage.bind(this)
+        this.determineIfPlural = this.determineIfPlural.bind(this)
     }
 
     calculateImdbRating() {
@@ -22,22 +22,20 @@ class PrivateMovie extends React.Component {
 
     calculateAudienceRating() {
         const {averagefanscore} = this.props;
-        console.log(averagefanscore)
         if(averagefanscore) {
             return `${(parseFloat(averagefanscore)/5 * 100).toFixed(0)}%`
         } 
-        return 'N/A'
+        return ''
     }
 
     determineRatingImage() {
         const {averagefanscore} = this.props;
-        console.log(averagefanscore)
         const score = (parseFloat(averagefanscore)/5 * 100).toFixed(0)
         let imgSrc;
         if(score >= 0 && score < 70) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/2665/2665044.svg';
+            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
         } else if (score >= 70 && score < 90) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/3572/3572255.svg'
+            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
         } else if (score >= 90) {
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616490.svg'
         } else {
@@ -46,28 +44,44 @@ class PrivateMovie extends React.Component {
         return <img src={imgSrc} alt="audience-icon" width='70px'/> 
     }
 
+    determineIfPlural() {
+        const {fanreviews} = this.props;
+        if(fanreviews.length === 1) {
+            return 'Review'
+        }
+        return 'Reviews'
 
+    }
     render() {
-        const {Title, Year, Poster, Actors, Released, Plot, Director, imdbRating, Rated, imdbID, averagefanscore, fanreviews, history} = this.props;
-        console.log(averagefanscore)
+        const {Title, Poster, Actors, Released, imdbVotes, imdbID, fanreviews, history} = this.props;
         return (
             <div className='PrivateMovie'>
                 <div className='main-section'>
                     <div className='img'>
                         <img src={Poster} alt={Title} width='220px' height='280px'/>
-
                     </div>
                     <div className='details'>
                         <div className='top'>
-                            <h3>{Title}</h3>
+                            <div className='d-flex justify-content-between align-items-center'>
+                                <div>
+                                <h3>{Title}</h3>
+                                </div>
+                                <div  className='view-more'>
+                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Details </Button>
+                                </div>
+                            </div>
                             <p><span className='text-bold'>Released:</span>  {Released}</p>
                             <p><span className='text-bold'>Actors:</span>  {Actors}</p>
                         </div>
-                    
                         <div className='ratings'>
                             <div className='imdb-review'>
-                                <img src="https://www.flaticon.com/svg/static/icons/svg/889/889118.svg" alt="imdb-icon" width='75px' />
-                                <p>{this.calculateImdbRating()}</p>
+                                <div className='critic-score'>
+                                    <img src="https://www.flaticon.com/svg/static/icons/svg/889/889118.svg" alt="imdb-icon" width='75px' />
+                                    <p>{this.calculateImdbRating()}</p>
+                                </div>
+                                <div className='total'>
+                                    {imdbVotes ?    imdbVotes + ` Critic Votes` : ''}
+                                </div>
                             </div>
                             <div className='fan-review'>
                                 <div className='fan-score'>
@@ -75,21 +89,15 @@ class PrivateMovie extends React.Component {
                                     <p>  {this.calculateAudienceRating()}</p>
                                 </div>
                                 <div className='total'>
-                                    {fanreviews ? `${fanreviews.length} reviews` : 'No reviews'}
+                                    {fanreviews ? `${fanreviews.length} Fan ${this.determineIfPlural()}` : 'Be First to Review!'}
                                 </div>
                             </div>     
                         </div>
                     </div>   
-                </div>
-
-                <div  className='view-more'>
-                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Click for More! </Button>
-
-                </div>
+                </div>    
             </div>
         )
-    }
-    
+    }   
 }
 
 export default withRouter(PrivateMovie);

@@ -1,22 +1,25 @@
 .PrivateMovie {
     .main-section {
         display: flex;
-        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+        // background-color: #ffffff;
+        margin-bottom: 30px;
+
         .details {
             background-color: #ffffff;
+            height: 280px;
             width: 70%;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 15px 0 15px 15px;
+            padding: 15px 20px 15px 20px;
             .top {
                 h4 {
                     margin: 0;
                 }
                 p {
-                    margin: 10px 0;
+                    margin: 5px 0;
                 }
                 .text-bold {
                     font-weight: 600;
@@ -28,20 +31,28 @@
             }
             .ratings {
                 display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                padding: 3px 0;
+                padding: 15px 0;
                 .imdb-review {
                     display: flex;
-                    align-items: center;
+                    flex-direction: column;
                     justify-content: center;
+                    align-items: center;
                     width: 50%;
-                    p {
-                        margin: 0 0 0 15px;
-                        padding: 0;
-                        font-weight: 600;
-                        font-size: 20px;
+                    .critic-score {
+                        display: flex;
+                        align-items: center;
+                        p {
+                            margin: 0 0 0 10px;
+                            padding: 0;
+                            font-weight: 600;
+                            font-size: 20px;
+                        }
                     }
+                    .total {
+                        font-weight: 600;
+                        text-align: center;
+                    }
+        
                 }
                 .fan-review {
                     display: flex;
@@ -53,14 +64,14 @@
                         display: flex;
                         align-items: center;
                         p {
-                            margin: 0 0 0 15px;
+                            margin: 0 0 0 10px;
                             padding: 0;
                             font-weight: 600;
                             font-size: 20px;
                         }
                     }
                     .total {
-                        padding-top: 3px;
+                        padding-top: 4px;
                         font-weight: 600;
                         text-align: center;
                     }
@@ -69,10 +80,20 @@
         }
     }
     .view-more {
-        margin: 0 0 30px;
         font-weight: 600;
-        // width: 220px;
         cursor: pointer;
         text-align: right;
+        button {
+            padding: 5px;
+            background-color: #3282b8;
+            border: 2px solid #2d4059;
+            color: white;
+            // margin-right: 35px;
+            &:hover,&:focus, &:active {
+                background-color: #0f4c75!important;
+                border: 2px solid #2d4059!important;
+                color: white!important;
+            }
+        }
     }
 }
