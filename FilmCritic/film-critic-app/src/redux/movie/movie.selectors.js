@@ -16,3 +16,8 @@ export const selectMovieErrorMessage = createSelector(
     [movieSelector],
     (movies) => movies.errorMessage
 )
+
+export const selectSingleMoviePage = createSelector(
+    [movieSelector],
+    (movies) => movies.singleMoviePage
+)

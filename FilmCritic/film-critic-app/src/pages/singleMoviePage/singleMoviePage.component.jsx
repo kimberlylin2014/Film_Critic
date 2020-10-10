@@ -4,8 +4,10 @@ import { getReviewsByMovieIDStart, submitMovieReviewStart} from '../../redux/mov
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { selectMovieList } from '../../redux/movie/movie.selectors';
+// import { selectMovieList } from '../../redux/movie/movie.selectors';
+import { selectSingleMoviePage } from '../../redux/movie/movie.selectors';
 import DetailedMovie from '../../components/detailedMovie/detailedMovie.component';
+
 
 class SingleMoviePage extends React.Component {
     constructor(props) {
@@ -25,6 +27,7 @@ class SingleMoviePage extends React.Component {
 
     render(){
         const { movieList } = this.props;
+        console.log(movieList)
         return(
             <div className='SingleMoviePage'>
                 <div className='container'>
@@ -50,7 +53,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    movieList: selectMovieList
+    movieList: selectSingleMoviePage
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleMoviePage);

@@ -15,6 +15,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import {Link, withRouter} from 'react-router-dom';
+import { resetMovieSearch } from '../../redux/movie/movie.actions';
 
 class Header extends React.Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const {currentUser, history} = this.props;
+    const {currentUser, history, resetMovieSearch} = this.props;
     console.log(currentUser)
     return (
       <div className='Header'>
@@ -55,7 +56,10 @@ class Header extends React.Component {
               <Nav className="ml-auto" navbar>
          
                 <NavItem>
-                  {currentUser ? <NavLink onClick={() => history.push('/home')}>Search</NavLink> :  ''}
+                  {currentUser ? <NavLink onClick={() => {
+                    history.push('/home')
+                    resetMovieSearch()
+                  }}>New Search</NavLink> :  ''}
                 </NavItem>
                 <NavItem>
                   {currentUser ? <NavLink onClick={this.handleSignOut}>Sign Out</NavLink> : <NavLink onClick={() => history.push('/register')}>Register</NavLink>}
@@ -77,7 +81,8 @@ class Header extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      logoutUserStart: () => dispatch(logoutUserStart())
+      logoutUserStart: () => dispatch(logoutUserStart()),
+      resetMovieSearch: () => dispatch(resetMovieSearch())
   }
 }
 

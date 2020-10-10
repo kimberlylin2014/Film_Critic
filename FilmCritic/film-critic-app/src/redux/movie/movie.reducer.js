@@ -4,6 +4,7 @@ import { updateMovieListWithNewReviews } from './movie.util';
 
 const INITIAL_STATE = {
     movieList: [],
+    singleMoviePage: [],
     errorMessage: null,
     isLoading: false
 }
@@ -20,17 +21,25 @@ const movieReducer = (state = INITIAL_STATE, action) => {
             }
         case movieActionTypes.GET_MOVIESEARCH_SUCCESS:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_SUCCESS:
+      
+            return {
+                ...state,
+                isLoading: false,
+                movieList : [...action.payload],
+                singleMoviePage: []
+            }
         case movieActionTypes.GET_REVIEWSBYMOVIEID_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
-                movieList : [...action.payload]
+                singleMoviePage: [...action.payload]
             }
         case movieActionTypes.GET_MOVIESEARCH_FAILURE:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE:
             return {
                 ...state,
                 movieList: [],
+                singleMoviePage: [],
                 isLoading: false,
                 errorMessage: action.payload
             }
@@ -41,6 +50,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.RESET_MOVIESEARCH:
             return {
                 movieList: [],
+                singleMoviePage: [],
                 errorMessage: null,
                 isLoading: false
             }

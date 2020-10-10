@@ -10,12 +10,16 @@ import {store, persistor} from './redux/store';
 import {PersistGate} from 'redux-persist/integration/react';
 
 import * as serviceWorker from './serviceWorker';
+import ScrollToTopComponent from './components/scrollToTop/scrollToTop.component';
 
 ReactDOM.render(
   <Provider store={store}>
       <BrowserRouter>
         <PersistGate persistor={persistor}>
-          <App />
+          <ScrollToTopComponent>
+             <App />
+          </ScrollToTopComponent>
+       
         </PersistGate>
       </BrowserRouter>
   </Provider>,
