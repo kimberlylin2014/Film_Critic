@@ -1,8 +1,5 @@
 import React from 'react';
 import './detailedMovieRatings.styles.scss';
-import  FanReviewModal  from '../fanReviewModal/fanReviewModal.component';
-
-// Import react-circular-progressbar module and styles
 import {
     CircularProgressbar,
     CircularProgressbarWithChildren,
@@ -10,20 +7,17 @@ import {
   } from "react-circular-progressbar";
   import "react-circular-progressbar/dist/styles.css";
   
-
-
 class DetailedMovieRatings extends React.Component  {
     constructor(props) {
         super(props)
         this.state = {
             imdbRating: 0
         }
-        this.calculateImdbRating = this.calculateImdbRating.bind(this)
-        this.calculateAudienceRating = this.calculateAudienceRating.bind(this)
-        this.determineRatingImage = this.determineRatingImage.bind(this);
-        this.calculateAudienceReviewLength = this.calculateAudienceReviewLength.bind(this)
-        this.displayReviewButton = this.displayReviewButton.bind(this);
+        this.calculateImdbRating = this.calculateImdbRating.bind(this);
+        this.calculateAudienceRating = this.calculateAudienceRating.bind(this);
+        this.calculateAudienceReviewLength = this.calculateAudienceReviewLength.bind(this);
         this.calculatePluralTense = this.calculatePluralTense.bind(this);
+        this.determineRatingImage = this.determineRatingImage.bind(this);
     }
 
     componentDidMount() {
@@ -73,19 +67,6 @@ class DetailedMovieRatings extends React.Component  {
         return null;
     }
 
-    displayReviewButton() {
-        const {moreReviewInfo, currentUser} = this.props;
-        if(moreReviewInfo) {
-            const userAlreadyReviewed = moreReviewInfo.find(review => review.userid === currentUser.id);
-            if(!userAlreadyReviewed) {
-                return <div><FanReviewModal buttonLabel='Write A Review' className={`review-modal`} {...this.props}/></div> 
-            }
-            return '';
-        }
-
-     return  <div><FanReviewModal buttonLabel='Write A Review' className={`review-modal`} {...this.props}/></div> 
-    } 
-
     determineRatingImage() {
         const {averageFanScore} = this.props;
         let imgSrc;
@@ -103,8 +84,6 @@ class DetailedMovieRatings extends React.Component  {
         imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
         return imgSrc
     }
-
-
 
     render() {
         const {moreReviewInfo, imdbVotes} = this.props;
@@ -134,13 +113,10 @@ class DetailedMovieRatings extends React.Component  {
                                 </CircularProgressbarWithChildren>
                             </div>
                         </div>
-                        <div className='label'>
-                        <span className='text-bold'> {imdbVotes}</span> &nbsp;Votes 
-                        </div>
+                        <div className='label'><span className='text-bold'>{imdbVotes}</span>&nbsp;Votes</div>
                     </div>
                     <div className='Audience'>
                         <div className='rating'>   
-            
                             <div style={{width: '110px', height: '110px'}}>
                                 <CircularProgressbarWithChildren 
                                     value={this.calculateAudienceRating()}
@@ -156,7 +132,6 @@ class DetailedMovieRatings extends React.Component  {
                                     })}
                                 >
                                     <img style={{ width: 38, marginTop: 0}} src={`${this.determineRatingImage()}`} alt="rating" />
-                        
                                     <div className='percent' style={{ fontSize: 16, marginTop: 0 }}>
                                         {this.calculateAudienceRating() === 0 ? '' : this.calculateAudienceRating() + '%'}
                                     </div> 
@@ -168,11 +143,6 @@ class DetailedMovieRatings extends React.Component  {
                         </div>
                     </div>
                 </div>
-                <div className='review-btn'> 
-                    {this.displayReviewButton()}  
-
-                </div>
-               
             </div>
         )
     }

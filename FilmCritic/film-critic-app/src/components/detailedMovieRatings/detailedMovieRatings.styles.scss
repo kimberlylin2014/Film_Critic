@@ -1,19 +1,15 @@
 .DetailedMovieRatings {
-    // text-align: center;
-    margin: 40px auto 0;
-    width: 70%;
+    margin: 20px auto 0;
+    width: 88%;
     .white-card {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
         align-items: center;
-        // border: solid 5px #ffd57e;
-        padding: 15px 0;
-      
-
-        background-color: white;
-
-
+        padding: 10px 0;
+        background-color: #ffffff;
+        border: 3px solid #393e46;
+        border-radius: 5px;
         .rating {
             display: flex;
             flex-wrap: wrap;
@@ -25,10 +21,8 @@
             .percent {
                 font-size: 12px;
             }
-     
         }
         .label {
-
             font-size: 18px;
             font-weight: 600;
             display: flex;
@@ -43,11 +37,5 @@
                 color: #00bcd4;
             }
         }
-    }
-        
-    .review-btn {
-        text-align: center;
-        margin-top: 20px;
-    }
-
+    }   
 }

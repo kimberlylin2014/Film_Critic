@@ -25,7 +25,6 @@ class SingleMoviePage extends React.Component {
 
     render(){
         const { movieList } = this.props;
-        console.log(movieList)
         return(
             <div className='SingleMoviePage'>
                 <div className='container'>

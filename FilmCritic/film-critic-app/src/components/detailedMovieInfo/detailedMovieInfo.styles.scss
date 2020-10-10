@@ -1,28 +1,32 @@
 .DetailedMovieInfo {
-        color: #ffffff;
-        // margin-top: 50px;
-        margin-bottom: 50px;
+        margin: 30px 0;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         .title-img {
-            margin-left: 30px;
+            margin-right: 1%;
+            padding: 6px;
+            background-color: #ffffff;
         }
         .details {
-            width: 50%;
+            width: 55%;
+            margin-left: 1%;
+            background-color: #ffffff;
+            padding: 10px;
             @media (max-width: 600px) {
                 width: 100%;
                 margin-top: 20px;
             }
             p {
                 font-size: 18px;
-                margin-bottom: 5px;
+                margin: 2px 0;
+                color: #222831;
             }
             .bold-text {
                 font-weight: 600;
-                color: #f08a5d;
-                font-size: 22px;
+                color: #222831;
+                font-size: 19px;
             }
         }
 
