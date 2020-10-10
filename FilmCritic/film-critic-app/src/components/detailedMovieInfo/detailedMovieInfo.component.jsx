@@ -7,7 +7,7 @@ const DetailedMovieInfo = ({...props}) => {
     return (
         <div className='DetailedMovieInfo'>
             <div className='title-img'>                  
-                <img src={Poster} alt="movie" width='300px'/>
+                <img src={Poster} alt="movie" width='250px'/>
             </div>
             <div className='details'>
                 <h2>{Title} ({Year})</h2>

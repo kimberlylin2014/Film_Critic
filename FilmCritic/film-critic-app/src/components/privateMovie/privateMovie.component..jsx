@@ -37,7 +37,7 @@ class PrivateMovie extends React.Component {
         } else if (score >= 70 && score < 90) {
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
         } else if (score >= 90) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616490.svg'
+            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616656.svg'
         } else {
             imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
         }
@@ -50,8 +50,8 @@ class PrivateMovie extends React.Component {
             return 'Review'
         }
         return 'Reviews'
-
     }
+
     render() {
         const {Title, Poster, Actors, Released, imdbVotes, imdbID, fanreviews, history} = this.props;
         return (

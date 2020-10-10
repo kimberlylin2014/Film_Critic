@@ -8,8 +8,8 @@ const DetailedMovie = ({...props}) => {
     console.log(props)
     return(
         <div className='DetailedMovie'>
-            <h3>RATINGS</h3>
-            <hr/>
+            {/* <h3>RATINGS</h3>
+            <hr/> */}
             <DetailedMovieRatings {...props}/>
             <br/>
             <DetailedMovieInfo {...props}/>
