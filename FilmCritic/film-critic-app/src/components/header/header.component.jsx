@@ -42,7 +42,6 @@ class Header extends React.Component {
 
   render() {
     const {currentUser, history, resetMovieSearch} = this.props;
-    console.log(currentUser)
     return (
       <div className='Header'>
         <Navbar color="light" light expand="md">

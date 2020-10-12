@@ -111,3 +111,32 @@ export const getReviewsByMovieIDFailureSession = (error) => {
         payload: error
     }
 }
+
+// UPDATE REVIEW
+export const updateReviewStart = (updatedReview) => {
+    return {
+        type: movieActionTypes.UPDATE_REVIEW_START,
+        payload: updatedReview
+    }
+}
+
+export const updateReviewSuccess = (finalReview) => {
+    return {
+        type: movieActionTypes.UPDATE_REVIEW_SUCCESS,
+        payload: finalReview
+    }
+}
+
+export const updateReviewFailure = (error) => {
+    return {
+        type: movieActionTypes.UPDATE_REVIEW_FAILURE,
+        payload: error
+    }
+}
+
+export const updateReviewFailureSession = (error) => {
+    return {
+        type: movieActionTypes.UPDATE_REVIEW_FAILURE_SESSION,
+        payload: error
+    }
+}

@@ -5,7 +5,6 @@ import DetailedMovieRatings from '../detailedMovieRatings/detailedMovieRatings.c
 import DetailedMovieInfoContainer from '../detailedMovieInfo/detailedMovieInfo.container';
 
 const DetailedMovie = ({...props}) => {
-    console.log(props)
     return(
         <div className='DetailedMovie'>
             <DetailedMovieRatings {...props}/>

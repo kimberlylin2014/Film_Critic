@@ -1,6 +1,6 @@
 import React from 'react';
 import './singleMoviePage.styles.scss';
-import { getReviewsByMovieIDStart, submitMovieReviewStart} from '../../redux/movie/movie.actions';
+import { getReviewsByMovieIDStart, submitMovieReviewStart, updateReviewStart} from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -27,13 +27,12 @@ class SingleMoviePage extends React.Component {
 
     render(){
         const { movieList } = this.props;
-        console.log(movieList)
         return(
             <div className='SingleMoviePage'>
                 <div className='container'>
                     <div className='row justify-content-center'>
                         <div className='col-10'>
-                        {movieList.map(movie => {
+                        {movieList.map( movie => {
                             return <DetailedMovie {...movie} {...this.props} key={movie.imdbID}/>
                         })}
                         </div>
@@ -47,7 +46,8 @@ class SingleMoviePage extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         getReviewsByMovieIDStart: (reviewObj) => dispatch(getReviewsByMovieIDStart(reviewObj)),
-        submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review))
+        submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review)),
+        updateReviewStart: (reviewObj) => dispatch(updateReviewStart(reviewObj))
     }
 }
 

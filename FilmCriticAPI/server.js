@@ -99,9 +99,22 @@ app.post('/users/:userID/movies/:imdbID/review', auth.requireAuth, async (req, r
 
 app.get('/users/:userID/movies/:imdbID/reviews', auth.requireAuth, async (req, res) => {
     try {
-        const data = await movie.getReviewsByMovieID(req, res, db);
+        const data = await movie.getReviewsByMovieIDHandler(req, res, db);
         if(!data) {
             throw Error('Can not get reviews from selected movie')
+        }
+        res.json(data)
+    } catch(error) {
+        console.debug(error);
+        res.status(400).json(error)
+    }
+})
+
+app.put('/users/:userID/movies/:imdbID/reviews/:reviewID', auth.requireAuth, async (req, res) => {
+    try {
+        const data = await movie.updateReviewByReviewIDHandler(req, res, db);
+        if(!data) {
+            throw Error('Can not update selected review')
         }
         res.json(data)
     } catch(error) {

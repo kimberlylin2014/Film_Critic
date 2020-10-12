@@ -75,7 +75,7 @@ class FanReviewModal extends React.Component {
                 </form>
             </ModalBody>
             <ModalFooter>
-              <Button color="primary" onClick={this.handleReviewSubmit}>Submit</Button>{' '}
+              <Button color="warning" onClick={this.handleReviewSubmit}>Submit</Button>{' '}
               <Button color="secondary" onClick={this.toggle}>Cancel</Button>
             </ModalFooter>
           </Modal>

@@ -26,13 +26,17 @@ class DetailedFanReviews  extends React.Component{
         const {moreReviewInfo} = this.props;
         let reviews;
         if(moreReviewInfo) {
+            const sortedReviews = moreReviewInfo.sort((a,b) => {
+                return parseFloat(a.id) - parseFloat(b.id)
+            })
             reviews = 
                 <div className='row'>
-                    {moreReviewInfo.map(review => 
+                    {sortedReviews.map(review => 
                         <div className='col-6' key={review.userid}>
                             <Review {...review} {...this.props} key={review.userid}/>
                         </div>)
                     }
+                    
                 </div>;
             return reviews;
         }

@@ -10,9 +10,12 @@ import { getMovieSearchSuccess,
         getReviewsByMovieIDFailureSession,
         getPrivateMovieSearchSuccess,
         getPrivateMovieSearchFailure,
-        getPrivateMovieSearchFailureSession
+        getPrivateMovieSearchFailureSession,
+        updateReviewSuccess,
+        updateReviewFailure,
+        updateReviewFailureSession
     } from './movie.actions';
-import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID } from './movie.api';
+import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID } from './movie.api';
 
 function* getReviews({payload}) {
     try {
@@ -103,8 +106,38 @@ function* onGetPublicMovieSearchStart() {
     yield takeLatest(movieActionTypes.GET_MOVIESEARCH_START, fetchMoviesPublic)
 }
 
+// Edit Review By User Id
+function* updateReview({payload}) {
+    try {
+        const data = yield updateReviewsByReviewID(payload);
+        if(!data) {
+            throw Error('Can not update review')
+        } else if (data === 'Unauthorized') {
+            throw Error(data)
+        }
+        yield put(updateReviewSuccess(data))
+    }catch (error) {
+        if(error.message === 'Unauthorized'){
+            yield put(updateReviewFailureSession(error))
+        } else {
+            yield put(updateReviewFailure(error))
+        }  
+    }
+}
+
+function* onUpdateReviewStart() {
+    yield takeLatest(movieActionTypes.UPDATE_REVIEW_START, updateReview)
+}
+
 function* movieSagas() {
-    yield all([call(onGetPublicMovieSearchStart), call(onSubmitMovieReviewStart), call(onGetReviewsByMovieIDStart), call(onGetPrivateMovieSearchStart), call(onSubmitReviewSuccess)])
+    yield all([call(onGetPublicMovieSearchStart), 
+               call(onSubmitMovieReviewStart), 
+               call(onGetReviewsByMovieIDStart), 
+               call(onGetPrivateMovieSearchStart), 
+               call(onSubmitReviewSuccess),
+               call(onUpdateReviewStart)
+               
+            ])
 }
 
 export default movieSagas;

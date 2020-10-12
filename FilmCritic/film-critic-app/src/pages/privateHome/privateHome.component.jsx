@@ -14,9 +14,7 @@ class PrivateHome extends React.Component {
         super(props);
     }
     componentDidMount() {
-        console.debug('Home page mounting')
         const { getUserBlogStart, resetMovieSearch, currentUser } = this.props;
-        console.debug(currentUser)
         const token = window.sessionStorage.getItem('token');
         getUserBlogStart({currentUser, token});
     }

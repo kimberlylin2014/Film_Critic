@@ -20,12 +20,9 @@ class App extends React.Component {
   }
   componentDidMount() {
     const token = window.sessionStorage.getItem("token");
-    console.debug('App Component Mounting')
   }
   render() {
     const { currentUser } = this.props;
-    console.debug('Current User in App')
-    console.debug(currentUser)
     return (
       <div className='App'>
         <Header />
@@ -46,9 +43,7 @@ class App extends React.Component {
 
             <Route exact path='/movies/:imdbID/reviews' render={(props) => {
               return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/register'/>
-            }}
-            
-            
+            }} 
             />
         </Switch>
       </div>

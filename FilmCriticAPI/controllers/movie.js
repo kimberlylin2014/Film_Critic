@@ -73,14 +73,13 @@ const updateMovieTableWithNewReview = (tx, req, reviewID) => {
         .update({fanreviews: tx.raw('array_append(fanreviews, ?)', [reviewID[0]])})
         .returning("*")
         .then(movie => {
-            return movie;
+            const fanReviewIDs = movie[0].fanreviews;
+            return fanReviewIDs;
         })
 }
 
 // Get Reviews from Review Table from Array of Review IDs (movie table)
-const getMovieReviewArray = (tx, req, movie) => {
-    const fanReviewIDs = movie[0].fanreviews;
-
+const getMovieReviewArray = (tx, req, fanReviewIDs) => {
     return tx('reviews')
         .returning('*')
         .whereIn('id', fanReviewIDs)
@@ -90,7 +89,7 @@ const getMovieReviewArray = (tx, req, movie) => {
 }
 
 // Loop through Reviews to get Average Fan Score
-const getAverageFanScore = (tx, req, reviewData) => {
+const getAverageFanScore = (reviewData) => {
     let score = 0;
     reviewData.forEach(review => {
         score += parseInt(review.fanscore)
@@ -115,8 +114,8 @@ const updateAverageScore = (tx, req, averageScore) => {
 const handleSubmitReviewIfMovieExistsInDB = (tx, req, reviewID) => {
     console.log('movie already exists in db')
     return updateMovieTableWithNewReview(tx,req,reviewID)
-        .then(movie => getMovieReviewArray(tx, req, movie))
-        .then(reviewData =>  getAverageFanScore(tx, req, reviewData))
+        .then(fanReviewIDs => getMovieReviewArray(tx, req, fanReviewIDs))
+        .then(reviewData =>  getAverageFanScore(reviewData))
         .then(averageScore => updateAverageScore(tx, req, averageScore))
         .then(finalUpdatedMovie => finalUpdatedMovie[0])
 }
@@ -138,8 +137,8 @@ const handleSubmitReviewIfMovieDoesNotExistInDB = (tx, req, reviewID) => {
     console.debug('movie is not in db')
     return insertNewMovieToDB(tx, req)
         .then(movieDataTable => updateMovieTableWithNewReview(tx,req,reviewID))
-        .then(movie => getMovieReviewArray(tx, req, movie))
-        .then(reviewData => getAverageFanScore(tx, req, reviewData))
+        .then(fanReviewIDs => getMovieReviewArray(tx, req, fanReviewIDs))
+        .then(reviewData => getAverageFanScore(reviewData))
         .then(averageScore => updateAverageScore(tx, req, averageScore))
         .then(finalUpdatedMovie => finalUpdatedMovie[0])
 }
@@ -208,7 +207,6 @@ const submitReview = (req, res, db) => {
     return userAlreadyReviewedSelectedMovie(req, db)
         .then(denied => {
             if(denied) {
-            
                 return null;
             }
             return submitReviewTransaction(req, db)
@@ -217,43 +215,93 @@ const submitReview = (req, res, db) => {
 }
 
 // GET REVIEWS BY MOVIE ID
-const getReviewsByMovieID = (req, res, db) => {
-  
-        const { imdbID } = req.params;
-        return db.transaction(tx => {
-            return db('reviews')
-                .select('*')
-                .where({movieid: imdbID})
-                .join('users', 'reviews.userid', '=' , 'users.id')
-                .join('movies', 'reviews.movieid', '=', 'movies.id')
-                .then(reviewsArray => {
-                    console.log(reviewsArray)
-                    return getOneDetailMovieByID(imdbID)
-                        .then(detailedMovie => {
-                            console.log(detailedMovie)
-                            if(reviewsArray.length > 0) {
-                                const averageFanScore = reviewsArray[0].averagefanscore;
-                                const obj= [{...detailedMovie, averageFanScore: averageFanScore, moreReviewInfo: [...reviewsArray]}]
-                                console.log(obj);
-                                return obj;
-                            }
-                            const obj= [{...detailedMovie}]
-                            return obj;
-                        })
-                })
-                .then(tx.commit)
-                .catch(tx.rollback)
-        })
-        .catch(error => console.log(error))   
-}
-
 const getOneDetailMovieByID = async (imdbID) => {
     const resp = await fetch(`http://omdbapi.com/?apikey=${process.env.MOVIE_API_KEY}&i=${imdbID}`);
     const movieData = await resp.json()
     return movieData;
 }
+
+const getReviewsByMovieID = (tx, req) => {
+    const { imdbID } = req.params;
+    return tx('reviews')
+        .select(
+            'reviews.id',
+            'reviews.fanscore',
+            'reviews.review',
+            'reviews.userid',
+            'reviews.movieid',
+            'users.email',
+            'users.username',
+            'movies.fanreviews',
+            'movies.averagefanscore'
+        )
+        .where({movieid: imdbID})
+        .join('users', 'reviews.userid', '=' , 'users.id')
+        .join('movies', 'reviews.movieid', '=', 'movies.id')
+        .then(reviewsArray => {
+            console.log(reviewsArray)
+            return getOneDetailMovieByID(imdbID)
+                .then(detailedMovie => {
+                    if(reviewsArray.length > 0) {
+                        const averageFanScore = reviewsArray[0].averagefanscore;
+                        const obj= [{...detailedMovie, averageFanScore: averageFanScore, moreReviewInfo: [...reviewsArray]}]
+                        return obj;
+                    }
+                    const obj= [{...detailedMovie}]
+                    return obj;
+                })
+        })
+        .then(tx.commit)
+        .catch(tx.rollback)
+}
+const getReviewsByMovieIDHandler = (req, res, db) => {
+    return db.transaction(tx => {
+        return getReviewsByMovieID(tx, req)
+    })
+    .catch(error => console.log(error))    
+}
+
+// UPDATE REVIEW BY REVIEW ID
+const updateReviewByReviewID = (tx, req) => {
+    const {reviewID, imdbID} = req.params;
+    const { review, fanscore } = req.body;
+    return tx('reviews')
+        .where({id: reviewID})
+        .update({review : review,
+                fanscore: fanscore
+        })
+        .returning("*")
+        .then(updatedReview => {
+            return tx('movies')
+                .select('movies.fanreviews')
+                .where({id: imdbID})
+                .then(fanReviewArray => {
+                    const fanReviewIDS = fanReviewArray[0].fanreviews;
+                    return getMovieReviewArray(tx, req, fanReviewIDS)
+                        .then(reviewData => {
+                            const averageScore = getAverageFanScore(reviewData)
+                            return updateAverageScore(tx, req, averageScore)
+                                .then(finalUpdatedMovie => {
+                                    return getReviewsByMovieID(tx, req)
+                                })
+                        })                      
+                })
+        })
+    .then(tx.commit)
+    .catch(tx.rollback)
+}
+
+const updateReviewByReviewIDHandler = (req, res, db) => {
+
+    return db.transaction(tx => {
+        return updateReviewByReviewID(tx, req)
+    })   
+    .catch(error => console.log(error))
+}
+
 module.exports = {
     getMovies: getMovies,
     submitReview: submitReview,
-    getReviewsByMovieID: getReviewsByMovieID
+    getReviewsByMovieIDHandler: getReviewsByMovieIDHandler,
+    updateReviewByReviewIDHandler: updateReviewByReviewIDHandler
 }

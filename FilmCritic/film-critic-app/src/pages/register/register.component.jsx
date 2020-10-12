@@ -11,7 +11,6 @@ class Register extends React.Component {
     }
     componentDidMount() {
         window.sessionStorage.removeItem("token");
-        console.log('register page has removed user token')
     }
     render() {
         return (
