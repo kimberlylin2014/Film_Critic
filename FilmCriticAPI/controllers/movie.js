@@ -292,10 +292,47 @@ const updateReviewByReviewID = (tx, req) => {
 }
 
 const updateReviewByReviewIDHandler = (req, res, db) => {
-
     return db.transaction(tx => {
         return updateReviewByReviewID(tx, req)
     })   
+    .catch(error => console.log(error))
+}
+
+
+// Delete Review
+const deleteReviewByReviewID = (tx, req) => {
+    const {reviewID, imdbID} = req.params;
+    return tx('reviews')
+        .where({id: reviewID})
+        .del()
+        .then(deleted => {
+           return tx('movies')
+                .where({id: imdbID})
+                .update({fanreviews: tx.raw('array_remove(fanreviews, ?)', reviewID)})
+                .returning('*')
+                .then(data => {
+                    if(data[0].fanreviews.length > 0) {
+                        return getMovieReviewArray(tx, req, data[0].fanreviews)
+                            .then(reviewData => getAverageFanScore(reviewData))
+                            .then(averageScore => updateAverageScore(tx, req, averageScore))
+                            .then(finalUpdatedMovie => {
+                                console.log(finalUpdatedMovie);
+                                return finalUpdatedMovie[0]
+                            })
+                    } else {
+                        return updateAverageScore(tx, req, 0)
+                            .then(finalUpdatedMovie => finalUpdatedMovie[0])
+                    }  
+                })
+        })
+    .then(tx.commit)
+    .catch(tx.rollback)
+}
+
+const deleteReviewByReviewIDHandler = (req, res, db) => {
+    return db.transaction(tx => {
+        return deleteReviewByReviewID(tx, req)
+    })
     .catch(error => console.log(error))
 }
 
@@ -303,5 +340,6 @@ module.exports = {
     getMovies: getMovies,
     submitReview: submitReview,
     getReviewsByMovieIDHandler: getReviewsByMovieIDHandler,
-    updateReviewByReviewIDHandler: updateReviewByReviewIDHandler
+    updateReviewByReviewIDHandler: updateReviewByReviewIDHandler,
+    deleteReviewByReviewIDHandler: deleteReviewByReviewIDHandler
 }

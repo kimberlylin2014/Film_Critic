@@ -50,10 +50,10 @@ class EditMovieReview extends React.Component {
     }
 
     render() {
-
+        const {label} = this.props;
         return(
             <div>
-                <Button onClick={this.toggle}> Edit </Button>
+                <Button onClick={this.toggle}> {label} </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} >
                     <ModalHeader toggle={this.toggle}>Your Review</ModalHeader>
                     <ModalBody>

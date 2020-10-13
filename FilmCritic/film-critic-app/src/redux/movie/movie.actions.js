@@ -140,3 +140,31 @@ export const updateReviewFailureSession = (error) => {
         payload: error
     }
 }
+// DELETE REVIEW
+export const deleteReviewStart = (reviewObj) => {
+    return {
+        type: movieActionTypes.DELETE_REVIEW_START,
+        payload: reviewObj
+    }
+}
+
+export const deleteReviewSuccess = (resp) => {
+    return {
+        type: movieActionTypes.DELETE_REVIEW_SUCCESS,
+        payload: resp
+    }
+}
+
+export const deleteReviewFailure = (error) => {
+    return {
+        type: movieActionTypes.DELETE_REVIEW_FAILURE,
+        payload: error
+    }
+}
+
+export const deleteReviewFailureSession = (error) => {
+    return {
+        type: movieActionTypes.DELETE_REVIEW_FAILURE_SESSION,
+        payload: error
+    }
+}

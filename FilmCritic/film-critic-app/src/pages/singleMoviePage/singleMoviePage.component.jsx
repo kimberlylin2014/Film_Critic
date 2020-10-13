@@ -1,6 +1,6 @@
 import React from 'react';
 import './singleMoviePage.styles.scss';
-import { getReviewsByMovieIDStart, submitMovieReviewStart, updateReviewStart} from '../../redux/movie/movie.actions';
+import { getReviewsByMovieIDStart, submitMovieReviewStart, updateReviewStart, deleteReviewStart} from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -47,7 +47,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         getReviewsByMovieIDStart: (reviewObj) => dispatch(getReviewsByMovieIDStart(reviewObj)),
         submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review)),
-        updateReviewStart: (reviewObj) => dispatch(updateReviewStart(reviewObj))
+        updateReviewStart: (reviewObj) => dispatch(updateReviewStart(reviewObj)),
+        deleteReviewStart: (reviewObj) => dispatch(deleteReviewStart(reviewObj))
     }
 }
 

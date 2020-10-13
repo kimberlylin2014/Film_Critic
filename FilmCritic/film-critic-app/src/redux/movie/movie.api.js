@@ -66,6 +66,7 @@ export const submitMovieReview = async(reviewObj) => {
 
 export const getReviewsByMovieID = async(reviewObj) => {
     try {
+        console.log(reviewObj)
         const resp = await fetch(`http://localhost:3000/users/${reviewObj.userID}/movies/${reviewObj.imdbID}/reviews`, {
             method: "GET",
             headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${reviewObj.token}`}
@@ -104,7 +105,30 @@ export const updateReviewsByReviewID = async(reviewObj) => {
         }
         return null;
     } catch (error) {
-        console.debug('Caught an error inside getReviewByMovieID');
+        console.debug('Caught an error inside updateReviewsByReviewID');
+        console.debug(error);
+        return null;
+    }
+}
+
+export const deleteReviewByReviewID = async(reviewObj) => {
+    try {
+        const resp = await fetch(`http://localhost:3000/users/${reviewObj.userID}/movies/${reviewObj.imdbID}/reviews/${reviewObj.reviewID}`, {
+            method: "DELETE",
+            headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${reviewObj.token}`},
+        })
+        if(resp.status === 200) {
+            const data = await resp.json();
+            const { id } = data;
+            const newData = {imdbID: id, userID: reviewObj.userID, token: reviewObj.token}
+            console.log(newData)
+            return newData;
+        } else if (resp.status === 401) {
+            return resp.statusText;
+        }
+        return null;
+    } catch (error) {
+        console.debug('Caught an error inside deleteReviewByReviewID');
         console.debug(error);
         return null;
     }

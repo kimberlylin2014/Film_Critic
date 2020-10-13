@@ -13,12 +13,16 @@ import { getMovieSearchSuccess,
         getPrivateMovieSearchFailureSession,
         updateReviewSuccess,
         updateReviewFailure,
-        updateReviewFailureSession
+        updateReviewFailureSession,
+        deleteReviewSuccess, 
+        deleteReviewFailure,
+        deleteReviewFailureSession
     } from './movie.actions';
-import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID } from './movie.api';
+import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID, deleteReviewByReviewID } from './movie.api';
 
 function* getReviews({payload}) {
     try {
+        console.log(payload)
         const data = yield getReviewsByMovieID(payload);
         if(!data) {
             throw Error('Can not get reviews for this movie')
@@ -28,9 +32,9 @@ function* getReviews({payload}) {
         yield put(getReviewsByMovieIDSuccess(data))
     }catch (error) {
         if(error.message === 'Unauthorized'){
-            yield put(getReviewsByMovieIDFailureSession(error))
+            yield put(getReviewsByMovieIDFailureSession(error.message))
         } else {
-            yield put(getReviewsByMovieIDFailure(error))
+            yield put(getReviewsByMovieIDFailure(error.message))
         }  
     }
 }
@@ -51,13 +55,14 @@ function* submitReview({payload}) {
         } else if (data === 'Unauthorized') {
             throw Error(data)
         }
+        console.log(data)
         yield put(submitMovieReviewSuccess(data))
     } catch (error) {
         if(error.message === 'Unauthorized'){
             console.log('testing')
-            yield put(submitMovieReviewFailureSession(error))
+            yield put(submitMovieReviewFailureSession(error.message))
         } else {
-            yield put(submitMovieReviewFailure(error))
+            yield put(submitMovieReviewFailure(error.message))
         } 
         
     }
@@ -98,7 +103,7 @@ function* fetchMoviesPublic({payload}) {
         }
         yield put(getMovieSearchSuccess(data))
     } catch(error) {
-        yield put(getMovieSearchFailure(error))
+        yield put(getMovieSearchFailure(error.message))
     }
 }
 
@@ -118,15 +123,41 @@ function* updateReview({payload}) {
         yield put(updateReviewSuccess(data))
     }catch (error) {
         if(error.message === 'Unauthorized'){
-            yield put(updateReviewFailureSession(error))
+            yield put(updateReviewFailureSession(error.message))
         } else {
-            yield put(updateReviewFailure(error))
+            yield put(updateReviewFailure(error.message))
         }  
     }
 }
 
 function* onUpdateReviewStart() {
     yield takeLatest(movieActionTypes.UPDATE_REVIEW_START, updateReview)
+}
+function* onDeleteReviewSuccess() {
+    yield takeLatest(movieActionTypes.DELETE_REVIEW_SUCCESS, getReviews)
+}
+
+function* deleteReview({payload}) {
+    try {
+        const data = yield deleteReviewByReviewID(payload);
+        if(!data) {
+            throw Error('Can not delete review')
+        } else if (data === 'Unauthorized') {
+            throw Error(data)
+        }
+        console.log(data)
+        yield put(deleteReviewSuccess(data))
+    }catch (error) {
+        if(error.message === 'Unauthorized'){
+            yield put(deleteReviewFailureSession(error.message))
+        } else {
+            yield put(deleteReviewFailure(error.message))
+        }  
+    }
+}
+
+function* onDeleteReviewStart() {
+    yield takeLatest(movieActionTypes.DELETE_REVIEW_START, deleteReview)
 }
 
 function* movieSagas() {
@@ -135,8 +166,9 @@ function* movieSagas() {
                call(onGetReviewsByMovieIDStart), 
                call(onGetPrivateMovieSearchStart), 
                call(onSubmitReviewSuccess),
-               call(onUpdateReviewStart)
-               
+               call(onUpdateReviewStart),
+               call(onDeleteReviewStart),
+               call(onDeleteReviewSuccess)
             ])
 }
 

@@ -31,16 +31,14 @@
             display: flex;
             justify-content: start;
             width: 50%;
+            button {
+                margin-right: 5px;
+            }
             @media (max-width: 600px) {
                 width: 100%;
                justify-content: space-evenly;
                margin-bottom: 20px;
             }
-            img {
-                margin-right: 10px;
-                cursor: pointer;
-            }
-
         }
         .username {
             font-weight: 600;

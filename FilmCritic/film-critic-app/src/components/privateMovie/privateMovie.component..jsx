@@ -13,6 +13,7 @@ class PrivateMovie extends React.Component {
         this.calculateAudienceRating = this.calculateAudienceRating.bind(this)
         this.determineRatingImage = this.determineRatingImage.bind(this)
         this.determineIfPlural = this.determineIfPlural.bind(this)
+        this.determineAudienceRatingText = this.determineAudienceRatingText.bind(this)
     }
 
     calculateImdbRating() {
@@ -23,6 +24,9 @@ class PrivateMovie extends React.Component {
     calculateAudienceRating() {
         const {averagefanscore} = this.props;
         if(averagefanscore) {
+            if(parseFloat(averagefanscore) === 0) {
+                return ''
+            }
             return `${(parseFloat(averagefanscore)/5 * 100).toFixed(0)}%`
         } 
         return ''
@@ -32,13 +36,13 @@ class PrivateMovie extends React.Component {
         const {averagefanscore} = this.props;
         const score = (parseFloat(averagefanscore)/5 * 100).toFixed(0)
         let imgSrc;
-        if(score >= 0 && score < 70) {
+        if(score > 0 && score < 70) {
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
         } else if (score >= 70 && score < 90) {
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
         } else if (score >= 90) {
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616656.svg'
-        } else {
+        } else  {
             imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
         }
         return <img src={imgSrc} alt="audience-icon" width='70px'/> 
@@ -50,6 +54,18 @@ class PrivateMovie extends React.Component {
             return 'Review'
         }
         return 'Reviews'
+    }
+
+    determineAudienceRatingText() {
+        const {fanreviews} = this.props;
+        if(fanreviews) {
+            if(fanreviews.length === 0) {
+                return 'Be First to Review!'
+            }
+            return `${fanreviews.length} Fan ${this.determineIfPlural()}`
+        }
+        return 'Be First to Review!'
+     
     }
 
     render() {
@@ -89,7 +105,8 @@ class PrivateMovie extends React.Component {
                                     <p>  {this.calculateAudienceRating()}</p>
                                 </div>
                                 <div className='total'>
-                                    {fanreviews ? `${fanreviews.length} Fan ${this.determineIfPlural()}` : 'Be First to Review!'}
+                                    {this.determineAudienceRatingText()}
+                                    {/* {fanreviews ? `${fanreviews.length} Fan ${this.determineIfPlural()}` : 'Be First to Review!'} */}
                                 </div>
                             </div>     
                         </div>

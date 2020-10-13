@@ -89,6 +89,7 @@ app.post('/users/:userID/movies/:imdbID/review', auth.requireAuth, async (req, r
         if(!data) {
             throw Error('User Already Reviewed This Movie')
         }
+        console.log('posting')
         console.log(data)
         res.json(data)
     } catch (error) {
@@ -116,6 +117,21 @@ app.put('/users/:userID/movies/:imdbID/reviews/:reviewID', auth.requireAuth, asy
         if(!data) {
             throw Error('Can not update selected review')
         }
+        res.json(data)
+    } catch(error) {
+        console.debug(error);
+        res.status(400).json(error)
+    }
+})
+
+app.delete('/users/:userID/movies/:imdbID/reviews/:reviewID', auth.requireAuth, async (req, res) => {
+    try {
+        const data = await movie.deleteReviewByReviewIDHandler(req, res, db);
+        if(!data) {
+            throw Error('Can not delete selected review')
+        }
+        console.log('res.json')
+        console.log(data)
         res.json(data)
     } catch(error) {
         console.debug(error);
