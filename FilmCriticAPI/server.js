@@ -58,7 +58,7 @@ app.post('/signout', (req, res) => {
 
 app.get('/movieSearchPublic/:movie', async (req, res) => {
     try {
-        const movies = await movie.getMovies(req, res, db)
+        const movies = await movie.getMoviesHandler(req, res, db)
         if(!movies) {
             throw Error('Can not find movie')
         }
@@ -72,7 +72,7 @@ app.get('/movieSearchPublic/:movie', async (req, res) => {
 // Authenticated Routes
 app.get('/movieSearchPrivate/:movie', auth.requireAuth, async (req, res) => {
     try {
-        const movies = await movie.getMovies(req, res, db)
+        const movies = await movie.getMoviesHandler(req, res, db)
         if(!movies) {
             throw Error('Can not find movie')
         }
@@ -85,7 +85,7 @@ app.get('/movieSearchPrivate/:movie', auth.requireAuth, async (req, res) => {
 
 app.post('/users/:userID/movies/:imdbID/review', auth.requireAuth, async (req, res) => {
     try {
-        const data = await movie.submitReview(req, res, db);
+        const data = await movie.submitReviewHandler(req, res, db);
         if(!data) {
             throw Error('User Already Reviewed This Movie')
         }
