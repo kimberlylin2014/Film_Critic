@@ -1,8 +1,13 @@
 import React from 'react';
+import './publicMovieSearchBar.styles.scss'
 import FormInput from '../formInput/formInput.component';
 import { Button } from 'reactstrap';
 import { getMovieSearchStart } from '../../redux/movie/movie.actions'
 import {connect } from 'react-redux';
+import { selectMovieErrorMessage } from '../../redux/movie/movie.selectors'
+import { createStructuredSelector } from 'reselect';
+import ValidationMessage from '../validationMessage/validationMessage.component';
+
 
 class PublicMovieSearchBar extends React.Component {
     constructor(props){
@@ -25,9 +30,11 @@ class PublicMovieSearchBar extends React.Component {
         const { getMovieSearchStart } = this.props;
         getMovieSearchStart(movieSearch);
     }
+
     render() {
+        const { errorMessage } = this.props;
         return (
-            <div>
+            <div className='PublicMovieSearchBar'>
                 <form>
                     <FormInput 
                         id='movie-search'
@@ -37,6 +44,7 @@ class PublicMovieSearchBar extends React.Component {
                         placeholder='movie name'
                         handleOnChange={this.handleOnChange}
                     />
+                    {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleMovieSearchButton}>Search</Button>
                 </form>
             </div>
@@ -50,5 +58,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
+const mapStateToProps = createStructuredSelector({
+    errorMessage: selectMovieErrorMessage
+})
 
-export default connect(null, mapDispatchToProps)(PublicMovieSearchBar);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(PublicMovieSearchBar);

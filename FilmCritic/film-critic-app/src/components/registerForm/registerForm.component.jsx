@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form  } from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
 import './registerForm.styles.scss'
+import ValidationMessage from '../validationMessage/validationMessage.component';
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -27,8 +28,13 @@ class RegisterForm extends React.Component {
     handleOnSubmit(e) {
         e.preventDefault();
         const { email, password, username } = this.state;
-        const {registerUserStart} = this.props;
-        registerUserStart({email, password, username})
+        const {registerUserStart, registerUserFailure} = this.props;
+        if(email.length < 10 || password.length < 3 || username.length < 3) {
+            registerUserFailure('Please enter valid input')
+        } else {
+            registerUserStart({email, password, username})
+
+        }
     }
 
     handleAlreadyUserClick(e) {
@@ -38,6 +44,7 @@ class RegisterForm extends React.Component {
     }
     
     render() {
+        const { errorMessage } = this.props;
         return(
             <div className='RegisterForm'>
                 <Form>
@@ -66,6 +73,8 @@ class RegisterForm extends React.Component {
                         placeholder='Create Password'                    
                         handleOnChange = {this.handleOnChange}
                     />
+                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
+
                     <Button onClick={this.handleOnSubmit}>Submit</Button>
                     <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already A User </Button>
                 </Form>

@@ -11,52 +11,10 @@
         justify-content: center;
         background-color: #f6f6f6;
         padding: 0 15px 0 15px;
+        box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
+              0 2px 2px rgba(0,0,0,0.11), 
+              0 4px 4px rgba(0,0,0,0.11), 
+              0 6px 8px rgba(0,0,0,0.11),
+              0 2px 16px rgba(0,0,0,0.05);
     }
-
-    // .ratings {
-    //     display: flex;
-    //     justify-content: space-between;
-
-    //     .imdb-review {
-    //         display: flex;
-    //         align-items: center;
-
-    //         width: 50%;
-    //         p {
-    //             margin: 0 0 0 10px;
-    //             padding: 0;
-    //             font-weight: 600;
-    //         }
-    //     }
-    //     .fan-review {
-    //         display: flex;
-    //         align-items: center;
-    //         justify-content: space-evenly;
-    //         width: 50%;
-    //         background-color: #393b44;
-    //         padding: 20px;
-    //         .rating {
-    //             display: flex;
-    //             align-items: center;
-
-    //             p {
-    //                 margin: 0 0 0 10px;
-    //                 padding: 0;
-    //                 font-weight: 600;
-    //                 color: white;
-    //             }
-    //         }
-           
-    //         .write-review-btn {
-
-    //             button {
-    //                 padding: 3px 5px;
-    //                 background-color: #4e89ae;
-    //                 color: white;
-    //             }
-    //         }
-    //     }
-    // }
-
-
 }

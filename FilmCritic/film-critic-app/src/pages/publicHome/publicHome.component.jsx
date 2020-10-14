@@ -1,34 +1,40 @@
 import React from 'react';
 import './publicHome.styles.scss';
-import { getUserBlogStart } from '../../redux/user/user.actions';
+import { getUserBlogStart, loginUserStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectMovieList } from '../../redux/movie/movie.selectors';
 import PublicMovieSearchBar from '../../components/publicMovieSearchBar/publicMovieSearchBar.component';
-import MovieList from '../../components/movieList/movieList.component';
+import MovieListContainer from '../../components/movieList/movieList.container';
+import { resetMovieSearch } from '../../redux/movie/movie.actions';
+
 
 class PublicHome extends React.Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
-        const { getUserBlogStart, currentUser } = this.props;
+        const { getUserBlogStart, currentUser, resetMovieSearch } = this.props;
         const token = window.sessionStorage.getItem('token');
         getUserBlogStart({currentUser, token});
+        resetMovieSearch()
     }
     render() {
         return (
             <div className='PublicHome'>
-                <div className='row justify-content-center'>
-                    <div className='col-lg-8'>
-                        <h1>PUBLIC PAGE</h1>
+                <div className='container'>
+                    <div className='row justify-content-center'>
+                        <div className='col-lg-5'>
                         <PublicMovieSearchBar />
-                        <MovieList {...this.props} privateRoute={false}/>
+                        </div>
                     </div>
-
-                </div>
-               
+                    <div className='row justify-content-center'>
+                        <div className='col-lg-9'>
+                        <MovieListContainer {...this.props} color='dark' privateRoute={false}/>
+                        </div>
+                    </div>
+                </div>              
             </div>
         )
     }  
@@ -36,7 +42,9 @@ class PublicHome extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      getUserBlogStart: (accessBlogCredentials) => dispatch(getUserBlogStart(accessBlogCredentials)) 
+      getUserBlogStart: (accessBlogCredentials) => dispatch(getUserBlogStart(accessBlogCredentials)),
+      loginUserStart: (credentials) => dispatch(loginUserStart(credentials)),
+      resetMovieSearch: () =>  dispatch(resetMovieSearch())
     }
 }
 

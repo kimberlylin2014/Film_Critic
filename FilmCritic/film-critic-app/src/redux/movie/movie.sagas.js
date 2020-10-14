@@ -99,7 +99,7 @@ function* fetchMoviesPublic({payload}) {
     try {   
         const data = yield getMoviesPublicAPI(payload);
         if(!data) {
-            throw Error('Can not fetch movies')
+            throw Error('Can not find movie. Try Again.')
         }
         yield put(getMovieSearchSuccess(data))
     } catch(error) {

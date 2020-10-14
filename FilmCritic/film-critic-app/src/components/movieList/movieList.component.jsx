@@ -8,7 +8,7 @@ const MovieList = ({...props}) => {
     return(
         <div className='MovieList'>
             {movieList.map(movie => {
-                return  privateRoute ? <PrivateMovie {...movie} key={movie.imdbID} {...props}/> : <Movie {...movie} key={movie.imdbID}/> 
+                return  privateRoute ? <PrivateMovie {...movie} key={movie.imdbID} {...props}/> : <Movie {...movie} key={movie.imdbID} {...props}/> 
             })}
         </div>
     )

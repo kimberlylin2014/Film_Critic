@@ -46,9 +46,10 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 movieList: [],
                 singleMoviePage: [],
                 isLoading: false,
-                errorMessage: null
+                errorMessage: action.payload
             }
         case userActionTypes.LOGOUT_USER_SUCCESS:
+        case userActionTypes.LOGIN_USER_SUCCESS:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION:
         case movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION:
         case movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION:

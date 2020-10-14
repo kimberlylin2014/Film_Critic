@@ -58,7 +58,7 @@ class Header extends React.Component {
                   {currentUser ? <NavLink onClick={() => {
                     history.push('/home')
                     resetMovieSearch()
-                  }}>New Search</NavLink> :  ''}
+                  }}>New Search</NavLink> : <NavLink onClick={() => history.push('/')}>Search</NavLink>}
                 </NavItem>
                 <NavItem>
                   {currentUser ? <NavLink onClick={this.handleSignOut}>Sign Out</NavLink> : <NavLink onClick={() => history.push('/register')}>Register</NavLink>}

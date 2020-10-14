@@ -1,0 +1,19 @@
+.AccessPrivatePageModal {
+    .details {
+        p {
+            font-size: 16px;
+        }
+        ul {
+            margin: 30px 0;
+        }
+    }
+    .options {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 500;
+        button {
+            margin-left: 2px;
+        }
+    }
+}

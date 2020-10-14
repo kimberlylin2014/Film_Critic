@@ -14,6 +14,8 @@ class PrivateMovie extends React.Component {
         this.determineRatingImage = this.determineRatingImage.bind(this)
         this.determineIfPlural = this.determineIfPlural.bind(this)
         this.determineAudienceRatingText = this.determineAudienceRatingText.bind(this)
+        this.determinePoster = this.determinePoster.bind(this)
+        this.displayProperTitleLength = this.displayProperTitleLength.bind(this)
     }
 
     calculateImdbRating() {
@@ -68,19 +70,35 @@ class PrivateMovie extends React.Component {
      
     }
 
+    determinePoster() {
+        const {Poster, Title} = this.props;
+        if(Poster === 'N/A') {
+            return  <img src='https://www.flaticon.com/svg/static/icons/svg/16/16096.svg' alt={Title} width='130px' height='130px'/>
+        }
+        return  <img src={Poster} alt={Title} width='220px' height='280px'/>
+    }
+
+    displayProperTitleLength() {
+        const {Title} = this.props;
+        if(Title.length > 65) {
+            return Title.slice(0, 65) + '...'
+        }
+        return Title;
+    }
+
     render() {
-        const {Title, Poster, Actors, Released, imdbVotes, imdbID, fanreviews, history} = this.props;
+        const { Actors, Released, imdbVotes, imdbID, fanreviews, history} = this.props;
         return (
             <div className='PrivateMovie'>
                 <div className='main-section'>
                     <div className='img'>
-                        <img src={Poster} alt={Title} width='220px' height='280px'/>
+                        {this.determinePoster()}
                     </div>
                     <div className='details'>
                         <div className='top'>
                             <div className='d-flex justify-content-between align-items-center'>
                                 <div>
-                                <h3>{Title}</h3>
+                                <h3>{this.displayProperTitleLength()}</h3>
                                 </div>
                                 <div  className='view-more'>
                                     <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Details </Button>
@@ -106,7 +124,6 @@ class PrivateMovie extends React.Component {
                                 </div>
                                 <div className='total'>
                                     {this.determineAudienceRatingText()}
-                                    {/* {fanreviews ? `${fanreviews.length} Fan ${this.determineIfPlural()}` : 'Be First to Review!'} */}
                                 </div>
                             </div>     
                         </div>

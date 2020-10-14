@@ -1,9 +1,11 @@
 import React from 'react';
 import './movie.styles.scss';
 import { Button } from 'reactstrap';
+import AccessPrivatePageModal from '../accessPrivatePageModal/accessPrivatePageModal.component';
 
 // DB: id, Title, Year, Poster, Plot, Director, Rotten Tomatoes, Rated, Review[ids]
-const Movie = ({Title, Year, Poster, Plot, Director, imdbRating, Rated}) => {
+const Movie = ({...props}) => {
+    const {Title, Year, Poster, Plot, Director, imdbRating, Rated} = props;
     return (
         <div className='Movie'>
             <div className='img'>
@@ -13,7 +15,8 @@ const Movie = ({Title, Year, Poster, Plot, Director, imdbRating, Rated}) => {
                 <h4>{Title}</h4>
                 <p> {Plot}</p>
                 <div className='public-route text-right'>
-                    <Button>Click Here for Reviews!</Button>
+                    <AccessPrivatePageModal label='View Reviews and More!' {...props}/>
+                    {/* <Button>View Reviews and More!</Button> */}
                 </div>  
             </div>    
         </div>

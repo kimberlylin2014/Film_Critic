@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form  } from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
 import './loginForm.styles.scss';
+import ValidationMessage from '../validationMessage/validationMessage.component';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -37,6 +38,7 @@ class LoginForm extends React.Component {
     }
     
     render() {
+        const {errorMessage} = this.props;
         return(
             <div className='LoginForm'>
                 <Form>
@@ -57,6 +59,8 @@ class LoginForm extends React.Component {
                         placeholder='Create Password'                    
                         handleOnChange = {this.handleOnChange}
                     />
+                    {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
+
                     <Button onClick={this.handleOnSubmit}>Submit</Button>
                     <Button className='new-user-btn' onClick={this.handleNewUserClick}>New User</Button>
                 </Form>

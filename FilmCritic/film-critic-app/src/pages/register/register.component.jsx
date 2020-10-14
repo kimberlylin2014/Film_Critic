@@ -3,7 +3,9 @@ import RegisterForm from '../../components/registerForm/registerForm.component';
 import './register.styles.scss';
 
 import  { connect } from 'react-redux';
-import { registerUserStart } from '../../redux/user/user.actions';
+import { registerUserStart, registerUserFailure } from '../../redux/user/user.actions';
+import {selectUserErrorMessage} from '../../redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 class Register extends React.Component {
     constructor(props) {
@@ -30,8 +32,13 @@ class Register extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        registerUserStart: (credentials) => dispatch(registerUserStart(credentials))
+        registerUserStart: (credentials) => dispatch(registerUserStart(credentials)),
+        registerUserFailure: (error) => dispatch(registerUserFailure(error))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Register);
+const mapStateToProps = createStructuredSelector({
+    errorMessage: selectUserErrorMessage
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

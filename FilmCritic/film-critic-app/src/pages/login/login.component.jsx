@@ -4,6 +4,8 @@ import './login.styles.scss';
 
 import  { connect } from 'react-redux';
 import { loginUserStart } from '../../redux/user/user.actions';
+import { selectUserErrorMessage } from '../../redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
 
 class Login extends React.Component {
     constructor(props) {
@@ -11,7 +13,6 @@ class Login extends React.Component {
     }
     componentDidMount() {
         window.sessionStorage.removeItem("token");
-        console.log('sign in page has removed user token')
     }
     render() {
         return (
@@ -25,8 +26,7 @@ class Login extends React.Component {
                 </div>
             </div>
         )
-    }
-    
+    }  
 }
 
 const mapDispatchToProps = (dispatch) => {
@@ -35,4 +35,8 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+const mapStateToProps = createStructuredSelector({
+    errorMessage: selectUserErrorMessage
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

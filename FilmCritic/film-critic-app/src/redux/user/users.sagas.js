@@ -40,7 +40,7 @@ function* loginUser({payload}) {
         yield window.sessionStorage.setItem("token", accessToken.token)
         yield put(loginUserSuccess(userData));
     } catch (error) {
-        yield put(loginUserFailure(error))
+        yield put(loginUserFailure(error.message))
     }
 }
 
@@ -65,7 +65,7 @@ function* logOutUser() {
         yield window.sessionStorage.removeItem("token");
         yield put(logoutUserSuccess())
     } catch (error ) {
-        yield put(logoutUserFailure(error))
+        yield put(logoutUserFailure(error.message))
     }
 }
 
@@ -85,7 +85,7 @@ function* getUserBlogs({payload}) {
         } 
         yield put(getUserBlogSuccess())
     } catch (error) {
-        yield put(getUserBlogFailure(error))
+        yield put(getUserBlogFailure(error.message))
     }
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import './privateHome.styles.scss';
 import { getUserBlogStart } from '../../redux/user/user.actions';
-import { submitMovieReviewStart } from '../../redux/movie/movie.actions';
+import { submitMovieReviewStart, resetMovieSearch } from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
@@ -17,6 +17,7 @@ class PrivateHome extends React.Component {
         const { getUserBlogStart, resetMovieSearch, currentUser } = this.props;
         const token = window.sessionStorage.getItem('token');
         getUserBlogStart({currentUser, token});
+        resetMovieSearch();
     }
     render() {
         return (
@@ -29,7 +30,7 @@ class PrivateHome extends React.Component {
                     </div>
                     <div className='row justify-content-center'>
                         <div className='col-lg-9'>
-                            <MovieListContainer {...this.props} privateRoute={true}/>
+                            <MovieListContainer {...this.props} color='light' privateRoute={true}/>
                         </div>
                     </div>
                 </div>    
@@ -42,6 +43,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
       getUserBlogStart: (accessBlogCredentials) => dispatch(getUserBlogStart(accessBlogCredentials)),
       submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review)),
+      resetMovieSearch: () =>  dispatch(resetMovieSearch())
     }
 }
 
