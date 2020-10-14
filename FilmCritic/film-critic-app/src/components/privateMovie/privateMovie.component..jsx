@@ -39,12 +39,20 @@ class PrivateMovie extends React.Component {
         const score = (parseFloat(averagefanscore)/5 * 100).toFixed(0)
         let imgSrc;
         if(score > 0 && score < 70) {
+            // https://www.flaticon.com/free-icon/dislike_1301458
+            // Freepik
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
         } else if (score >= 70 && score < 90) {
+             // https://www.flaticon.com/free-icon/like_1301447?term=like%201301447&page=1&position=1
+            // Freepik
             imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
         } else if (score >= 90) {
-            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616656.svg'
+             // https://www.flaticon.com/free-icon/star_616655?term=star&page=1&position=15
+            // Freepik
+            imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616655.svg'
         } else  {
+             // https://www.flaticon.com/free-icon/conversation_942751?term=942751&page=1&position=1
+            // Freepik
             imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
         }
         return <img src={imgSrc} alt="audience-icon" width='70px'/> 
@@ -73,6 +81,8 @@ class PrivateMovie extends React.Component {
     determinePoster() {
         const {Poster, Title} = this.props;
         if(Poster === 'N/A') {
+            // https://www.flaticon.com/free-icon/not-available-circle_16096?term=not%20available&page=1&position=1
+            // Freepik
             return  <img src='https://www.flaticon.com/svg/static/icons/svg/16/16096.svg' alt={Title} width='130px' height='130px'/>
         }
         return  <img src={Poster} alt={Title} width='220px' height='280px'/>

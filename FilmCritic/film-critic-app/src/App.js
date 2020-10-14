@@ -9,6 +9,7 @@ import PublicHome from './pages/publicHome/publicHome.component';
 import SingleMoviePage from './pages/singleMoviePage/singleMoviePage.component';
 import Login from './pages/login/login.component';
 import Header from './components/header/header.component';
+import Footer from './components/footer/footer.component';
 import { loginUserStart } from  './redux/user/user.actions';
 import  { connect } from 'react-redux';
 import {selectCurrentUser} from './redux/user/user.selectors';
@@ -46,6 +47,7 @@ class App extends React.Component {
             }} 
             />
         </Switch>
+        <Footer />
       </div>
     )
   }

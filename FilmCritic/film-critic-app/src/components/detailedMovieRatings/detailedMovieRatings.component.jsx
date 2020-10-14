@@ -73,14 +73,22 @@ class DetailedMovieRatings extends React.Component  {
         if(averageFanScore) {
             const score = (parseFloat(averageFanScore)/5 * 100).toFixed(0)
             if(score >= 0 && score < 70) {
+                // https://www.flaticon.com/free-icon/dislike_1301458
+                // Freepik
                 imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
             } else if (score >= 70 && score < 90) {
+                // https://www.flaticon.com/free-icon/like_1301447?term=like%201301447&page=1&position=1
+                // Freepik
                 imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301447.svg'
             } else if (score >= 90) {
+                // https://www.flaticon.com/free-icon/star_616655?term=star&page=1&position=15
+                // Freepik
                 imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/616/616655.svg'
             } 
             return imgSrc
         }
+        // https://www.flaticon.com/free-icon/conversation_942751?term=942751&page=1&position=1
+        // Freepik
         imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
         return imgSrc
     }
@@ -106,6 +114,8 @@ class DetailedMovieRatings extends React.Component  {
                                         backgroundColor: '#3e98c7',
                                     })}
                                 >
+                                    {/* https://www.flaticon.com/free-icon/imdb_889118?term=imdb&page=1&position=3 */}
+                                    {/* Pixel Perfect */}
                                     <img style={{ width: 50, marginTop: 0}} src='https://www.flaticon.com/svg/static/icons/svg/889/889118.svg' alt="rating" />
                                     <div style={{ fontSize: 16, marginTop: -7 }}>
                                         {this.state.imdbRating}%

@@ -47,6 +47,8 @@ class Header extends React.Component {
         <Navbar color="light" light expand="md">
             <div className='container'>
             <NavbarBrand>
+              {/* https://www.flaticon.com/free-icon/popcorn_3132754?term=3132754&page=1&position=1 */}
+              {/* Freepik */}
                <img src="https://www.flaticon.com/svg/static/icons/svg/3132/3132754.svg" alt="logo" width='30px'/>
                FilmCritic App
             </NavbarBrand>
