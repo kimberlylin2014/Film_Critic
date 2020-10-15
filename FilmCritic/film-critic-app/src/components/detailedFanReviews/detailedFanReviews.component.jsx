@@ -1,7 +1,7 @@
 import React from 'react';
 import './detailedFanReviews.styles.scss';
-import Review from '../review/review.component';
-import  FanReviewModal  from '../fanReviewModal/fanReviewModal.component';
+import ReviewContainer from '../review/review.container';
+import FanReviewModal  from '../fanReviewModal/fanReviewModal.component';
 
 class DetailedFanReviews  extends React.Component{
     constructor(props) {
@@ -33,7 +33,7 @@ class DetailedFanReviews  extends React.Component{
                 <div className='row'>
                     {sortedReviews.map(review => 
                         <div className='col-6' key={review.userid}>
-                            <Review {...review} {...this.props} key={review.userid}/>
+                            <ReviewContainer {...review} {...this.props} key={review.userid}/>
                         </div>)
                     }
                     

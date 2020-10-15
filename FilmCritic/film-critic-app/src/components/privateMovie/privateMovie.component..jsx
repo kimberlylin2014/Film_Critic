@@ -75,7 +75,6 @@ class PrivateMovie extends React.Component {
             return `${fanreviews.length} Fan ${this.determineIfPlural()}`
         }
         return 'Be First to Review!'
-     
     }
 
     determinePoster() {

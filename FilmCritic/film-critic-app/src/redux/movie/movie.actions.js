@@ -5,6 +5,7 @@ export const resetMovieSearch = () => {
         type: movieActionTypes.RESET_MOVIESEARCH,
     }
 }
+
 // Get Movie Search for PUBLIC ROUTE
 export const getMovieSearchStart = (searchWords) => {
     return {
@@ -26,6 +27,7 @@ export const getMovieSearchFailure = (error) => {
         payload: error
     }
 }
+
 // Get Movie Search for PRIVATE ROUTE
 export const getPrivateMovieSearchStart = (searchWords) => {
     return {
@@ -47,6 +49,7 @@ export const getPrivateMovieSearchFailure = (error) => {
         payload: error
     }
 }
+
 export const getPrivateMovieSearchFailureSession = (error) => {
     return {
         type: movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION,
@@ -140,6 +143,7 @@ export const updateReviewFailureSession = (error) => {
         payload: error
     }
 }
+
 // DELETE REVIEW
 export const deleteReviewStart = (reviewObj) => {
     return {

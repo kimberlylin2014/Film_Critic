@@ -30,8 +30,6 @@ const Review = ({...props}) => {
                 </div>  
             </div>
         )
-
-    
 }
 
 export default Review;

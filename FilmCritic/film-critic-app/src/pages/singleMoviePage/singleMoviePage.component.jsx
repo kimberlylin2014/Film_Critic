@@ -4,7 +4,6 @@ import { getReviewsByMovieIDStart, submitMovieReviewStart, updateReviewStart, de
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-// import { selectMovieList } from '../../redux/movie/movie.selectors';
 import { selectSingleMoviePage } from '../../redux/movie/movie.selectors';
 import DetailedMovie from '../../components/detailedMovie/detailedMovie.component';
 
@@ -22,6 +21,7 @@ class SingleMoviePage extends React.Component {
             imdbID: imdbID,
             token: token
         }
+        console.log('mounting get reviews')
         getReviewsByMovieIDStart(reviewObj);
     }
 

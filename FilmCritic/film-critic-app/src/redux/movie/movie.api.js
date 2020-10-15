@@ -66,7 +66,6 @@ export const submitMovieReview = async(reviewObj) => {
 
 export const getReviewsByMovieID = async(reviewObj) => {
     try {
-        console.log(reviewObj)
         const resp = await fetch(`http://localhost:3000/users/${reviewObj.userID}/movies/${reviewObj.imdbID}/reviews`, {
             method: "GET",
             headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${reviewObj.token}`}
@@ -121,7 +120,6 @@ export const deleteReviewByReviewID = async(reviewObj) => {
             const data = await resp.json();
             const { id } = data;
             const newData = {imdbID: id, userID: reviewObj.userID, token: reviewObj.token}
-            console.log(newData)
             return newData;
         } else if (resp.status === 401) {
             return resp.statusText;

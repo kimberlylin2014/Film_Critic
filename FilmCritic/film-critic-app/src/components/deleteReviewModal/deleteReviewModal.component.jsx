@@ -1,7 +1,6 @@
 import React from 'react';
 import './deleteReviewModal.styles.scss';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input} from 'reactstrap';
-
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 class DeleteReviewModal extends React.Component {
     constructor(props) {
@@ -42,8 +41,7 @@ class DeleteReviewModal extends React.Component {
                 <Modal isOpen={this.state.modal} toggle={this.toggle} >
                     <ModalHeader toggle={this.toggle}>Your Review</ModalHeader>
                     <ModalBody>
-                    Are you sure you want to delete your review for <strong>{Title}</strong> ?
-                 
+                        Are you sure you want to delete your review for <strong>{Title}</strong> ?
                     </ModalBody>
                     <ModalFooter>
                         <Button color="warning" onClick={this.handleDeleteSubmit}>Delete</Button>{' '}

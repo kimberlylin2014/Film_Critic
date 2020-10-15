@@ -41,7 +41,6 @@ class FanReviewModal extends React.Component {
             imdbID: imdbID,
             token: token
         }
-        
         submitMovieReviewStart(reviewObjDB)
         this.toggle();
     }

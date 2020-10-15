@@ -20,9 +20,9 @@ import { getMovieSearchSuccess,
     } from './movie.actions';
 import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID, deleteReviewByReviewID } from './movie.api';
 
+// Get Reviews
 function* getReviews({payload}) {
     try {
-        console.log(payload)
         const data = yield getReviewsByMovieID(payload);
         if(!data) {
             throw Error('Can not get reviews for this movie')
@@ -43,6 +43,7 @@ function* onGetReviewsByMovieIDStart() {
     yield takeLatest(movieActionTypes.GET_REVIEWSBYMOVIEID_START, getReviews)
 }
 
+// Submit Review
 function* onSubmitReviewSuccess() {
     yield takeLatest(movieActionTypes.SUBMIT_MOVIEREVIEW_SUCCESS, getReviews)
 }
@@ -55,11 +56,9 @@ function* submitReview({payload}) {
         } else if (data === 'Unauthorized') {
             throw Error(data)
         }
-        console.log(data)
         yield put(submitMovieReviewSuccess(data))
     } catch (error) {
         if(error.message === 'Unauthorized'){
-            console.log('testing')
             yield put(submitMovieReviewFailureSession(error.message))
         } else {
             yield put(submitMovieReviewFailure(error.message))
@@ -71,7 +70,8 @@ function* submitReview({payload}) {
 function* onSubmitMovieReviewStart() {
     yield takeLatest(movieActionTypes.SUBMIT_MOVIEREVIEW_START, submitReview);
 }
-// Get Movies Private Route
+
+// Get Movies Authenticated Route
 function* fetchMoviesPrivate({payload}) {
     try {   
         const data = yield getMoviesPrivateAPI(payload);
@@ -111,7 +111,7 @@ function* onGetPublicMovieSearchStart() {
     yield takeLatest(movieActionTypes.GET_MOVIESEARCH_START, fetchMoviesPublic)
 }
 
-// Edit Review By User Id
+// Update Review 
 function* updateReview({payload}) {
     try {
         const data = yield updateReviewsByReviewID(payload);
@@ -133,6 +133,8 @@ function* updateReview({payload}) {
 function* onUpdateReviewStart() {
     yield takeLatest(movieActionTypes.UPDATE_REVIEW_START, updateReview)
 }
+
+// Delete Review
 function* onDeleteReviewSuccess() {
     yield takeLatest(movieActionTypes.DELETE_REVIEW_SUCCESS, getReviews)
 }

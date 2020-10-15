@@ -4,8 +4,6 @@ import { selectIsMovieListLoading} from '../../redux/movie/movie.selectors'
 import DetailedMovieInfo from'./detailedMovieInfo.component';
 import WithSpinner from '../withSpinner/withSpinner.component';
 
-
-
 const mapStateToProps = createStructuredSelector({
     isLoading: selectIsMovieListLoading
 })

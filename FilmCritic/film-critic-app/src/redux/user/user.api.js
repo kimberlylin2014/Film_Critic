@@ -36,7 +36,6 @@ export const loginUserAPI = async (payload) => {
     }
 }
 
-// Delete user token in Redis
 export const logoutUserAPI = async(token) => {
     try { 
         const resp = await fetch('http://localhost:3000/signout', {
@@ -58,23 +57,3 @@ export const logoutUserAPI = async(token) => {
     }
 }
 
-export const getUserBlogsAPI = async(payload) => {
-    try {
-        const {currentUser, token} = payload;
-        const resp = await fetch(`http://localhost:3000/${currentUser.id}/posts`, {
-            method: "GET",
-            headers: {'Content-Type': 'application/json',
-                     "authorization" : `bearer ${token}`
-            }
-        })
-        if(resp.status === 200) {
-            const data = await resp.json()
-            return data;
-        }
-       return null;
-    } catch (error) {
-        console.debug('Caught an error in getUserBlogsAPI');
-        console.debug(error)
-        return null;
-    }
-}

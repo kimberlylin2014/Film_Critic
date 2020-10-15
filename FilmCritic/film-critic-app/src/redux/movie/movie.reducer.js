@@ -1,6 +1,5 @@
 import movieActionTypes from './movie.types';
 import userActionTypes from '../user/user.types';
-import { updateMovieListWithNewReviews } from './movie.util';
 
 const INITIAL_STATE = {
     movieList: [],
@@ -23,7 +22,6 @@ const movieReducer = (state = INITIAL_STATE, action) => {
             }
         case movieActionTypes.GET_MOVIESEARCH_SUCCESS:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_SUCCESS:
-      
             return {
                 ...state,
                 isLoading: false,

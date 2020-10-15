@@ -1,7 +1,6 @@
 import React from 'react';
 import './detailedMovieRatings.styles.scss';
 import {
-    CircularProgressbar,
     CircularProgressbarWithChildren,
     buildStyles
   } from "react-circular-progressbar";
@@ -18,12 +17,23 @@ class DetailedMovieRatings extends React.Component  {
         this.calculateAudienceReviewLength = this.calculateAudienceReviewLength.bind(this);
         this.calculatePluralTense = this.calculatePluralTense.bind(this);
         this.determineRatingImage = this.determineRatingImage.bind(this);
+        this.timer = this.timer.bind(this)
     }
 
     componentDidMount() {
+        this.mounted = true;
+        this.timer()
+    }
+
+    componentWillUnmount() {
+        this.mounted = false;
+        clearTimeout(this.timer)
+    }
+
+    timer() {
         const {imdbRating} = this.props;
         setTimeout(() => {
-            this.setState({imdbRating: (parseFloat(imdbRating)/10 * 100).toFixed(0)})
+            (this.mounted &&  this.setState({imdbRating: (parseFloat(imdbRating)/10 * 100).toFixed(0)}))   
         }, 0)
     }
 
@@ -107,7 +117,7 @@ class DetailedMovieRatings extends React.Component  {
                                     styles={buildStyles({
                                         rotation: 0,
                                         strokeLinecap: 'round',
-                                        pathTransitionDuration: 0.8,
+                                        pathTransitionDuration: 1,
                                         pathColor: `rgba(240,138,93, ${this.state.imdbRating / 100})`,
                                         textColor: '#f88',
                                         trailColor: '#d6d6d6',
@@ -134,7 +144,7 @@ class DetailedMovieRatings extends React.Component  {
                                     styles={buildStyles({
                                         rotation: 0,
                                         strokeLinecap: 'round',
-                                        pathTransitionDuration: 0.8,
+                                        pathTransitionDuration: 1,
                                         pathColor: `rgba(62, 152, 199, ${this.calculateAudienceRating() / 100})`,
                                         textColor: '#f88',
                                         trailColor: '#d6d6d6',

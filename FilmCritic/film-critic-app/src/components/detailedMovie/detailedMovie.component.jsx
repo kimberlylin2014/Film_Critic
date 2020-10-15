@@ -1,13 +1,13 @@
 import React from 'react';
 import './detailedMovie.styles.scss';
 import DetailedFanReviews from '../detailedFanReviews/detailedFanReviews.component';
-import DetailedMovieRatings from '../detailedMovieRatings/detailedMovieRatings.component';
+import DetailedMovieRatingsContainer from '../detailedMovieRatings/detailedMovieRatings.container';
 import DetailedMovieInfoContainer from '../detailedMovieInfo/detailedMovieInfo.container';
 
 const DetailedMovie = ({...props}) => {
     return(
         <div className='DetailedMovie'>
-            <DetailedMovieRatings {...props}/>
+            <DetailedMovieRatingsContainer {...props}/>
             <DetailedMovieInfoContainer {...props}/>   
             <DetailedFanReviews {...props}/>
         </div>

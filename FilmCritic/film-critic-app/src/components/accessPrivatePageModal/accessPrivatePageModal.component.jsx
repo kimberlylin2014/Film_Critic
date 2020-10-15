@@ -1,6 +1,6 @@
 import React from 'react';
 import './accessPrivatePageModal.styles.scss';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody} from 'reactstrap';
 import {withRouter} from 'react-router-dom';
 
 class AccessPrivatePageModal extends React.Component {

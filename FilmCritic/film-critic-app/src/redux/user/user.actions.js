@@ -42,26 +42,6 @@ export const loginUserFailure = (error) => {
     }
 }
 
-export const getUserBlogStart = (accessBlogCredentials) => {
-    return {
-        type: userActionTypes.GET_USERBLOGS_START,
-        payload: accessBlogCredentials
-    }
-}
-
-export const getUserBlogSuccess = () => {
-    return {
-        type: userActionTypes.GET_USERBLOGS_SUCCESS,
-    }
-}
-
-export const getUserBlogFailure = (error) => {
-    return {
-        type: userActionTypes.GET_USERBLOGS_FAILURE,
-        payload: error
-    }
-}
-
 export const logoutUserStart = () => {
     return {
         type: userActionTypes.LOGOUT_USER_START,

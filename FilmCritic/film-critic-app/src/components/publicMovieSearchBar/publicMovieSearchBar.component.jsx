@@ -18,6 +18,7 @@ class PublicMovieSearchBar extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleMovieSearchButton = this.handleMovieSearchButton.bind(this);
     }
+
     handleOnChange(e) {
         const { name, value } = e.target;
         this.setState({
@@ -61,7 +62,5 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = createStructuredSelector({
     errorMessage: selectMovieErrorMessage
 })
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicMovieSearchBar);

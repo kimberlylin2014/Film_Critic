@@ -42,9 +42,7 @@ class EditMovieReview extends React.Component {
             imdbID: imdbID,
             token: token,
             reviewID: id
-        }
-        console.log(updatedReviewObjDB);
-        
+        }  
         updateReviewStart(updatedReviewObjDB)
         this.toggle();
     }
@@ -86,7 +84,6 @@ class EditMovieReview extends React.Component {
             </div>
         )
     }
-
 }
 
 export default EditMovieReview;

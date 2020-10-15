@@ -74,7 +74,6 @@ class RegisterForm extends React.Component {
                         handleOnChange = {this.handleOnChange}
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
-
                     <Button onClick={this.handleOnSubmit}>Submit</Button>
                     <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already A User </Button>
                 </Form>

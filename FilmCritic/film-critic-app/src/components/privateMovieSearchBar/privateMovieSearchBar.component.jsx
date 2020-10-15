@@ -17,6 +17,7 @@ class PrivateMovieSearchBar extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleMovieSearchButton = this.handleMovieSearchButton.bind(this);
     }
+
     handleOnChange(e) {
         const { name, value } = e.target;
         this.setState({
@@ -34,6 +35,7 @@ class PrivateMovieSearchBar extends React.Component {
         }
         getPrivateMovieSearchStart(searchObj);
     }
+
     render() {
         const { errorMessage } = this.props;
         return (
@@ -47,10 +49,8 @@ class PrivateMovieSearchBar extends React.Component {
                         placeholder='movie name'
                         handleOnChange={this.handleOnChange}
                     />
-                    {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
-                    
+                    {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}  
                     <Button onClick={this.handleMovieSearchButton} outline color='secondary'>Search</Button>
-    
                 </form>
             </div>
         )

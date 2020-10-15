@@ -60,7 +60,6 @@ class LoginForm extends React.Component {
                         handleOnChange = {this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
-
                     <Button onClick={this.handleOnSubmit}>Submit</Button>
                     <Button className='new-user-btn' onClick={this.handleNewUserClick}>New User</Button>
                 </Form>

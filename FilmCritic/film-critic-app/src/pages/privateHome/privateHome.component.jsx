@@ -13,12 +13,12 @@ class PrivateHome extends React.Component {
     constructor(props) {
         super(props);
     }
+
     componentDidMount() {
-        const { getUserBlogStart, resetMovieSearch, currentUser } = this.props;
-        const token = window.sessionStorage.getItem('token');
-        getUserBlogStart({currentUser, token});
+        const {resetMovieSearch } = this.props;
         resetMovieSearch();
     }
+
     render() {
         return (
             <div className='PrivateHome'>
@@ -41,7 +41,6 @@ class PrivateHome extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      getUserBlogStart: (accessBlogCredentials) => dispatch(getUserBlogStart(accessBlogCredentials)),
       submitMovieReviewStart: (review) => dispatch(submitMovieReviewStart(review)),
       resetMovieSearch: () =>  dispatch(resetMovieSearch())
     }
