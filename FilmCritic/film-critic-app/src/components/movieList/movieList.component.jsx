@@ -1,7 +1,7 @@
 import React from 'react';
 import './movieList.styles.scss';
 import PrivateMovie from '../privateMovie/privateMovie.component.';
-import Movie from '../movie/movie.component.';
+import Movie from '../movie/movie.component';
 
 const MovieList = ({...props}) => {
     const {movieList, privateRoute} = props;

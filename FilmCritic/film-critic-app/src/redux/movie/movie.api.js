@@ -18,6 +18,7 @@ export const getMoviesPublicAPI = async (searchWords) => {
 export const getMoviesPrivateAPI = async (searchObj) => {
     try {   
         const {token, movieSearch} = searchObj;
+        console.log(movieSearch)
         const resp = await fetch(`http://localhost:3000/movieSearchPrivate/${movieSearch}`, {
             method: "GET",
             headers: {'Content-Type' : 'application/json', 'authorization' : `bearer ${token}`}
@@ -26,6 +27,8 @@ export const getMoviesPrivateAPI = async (searchObj) => {
             const data = await resp.json();
             return data;
         } else if (resp.status === 401) {
+            const data = await resp.json();
+            console.log(data)
             return resp.statusText;
         }
         return null;

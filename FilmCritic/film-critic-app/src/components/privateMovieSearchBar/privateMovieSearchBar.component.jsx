@@ -47,7 +47,7 @@ class PrivateMovieSearchBar extends React.Component {
                         name='movieSearch'
                         type='text'
                         placeholder='movie name'
-                        handleOnChange={this.handleOnChange}
+                        onChange={this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}  
                     <Button onClick={this.handleMovieSearchButton} outline color='secondary'>Search</Button>
