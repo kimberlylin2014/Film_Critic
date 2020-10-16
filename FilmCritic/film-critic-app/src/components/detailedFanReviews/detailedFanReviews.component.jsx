@@ -32,7 +32,7 @@ class DetailedFanReviews  extends React.Component{
             reviews = 
                 <div className='row'>
                     {sortedReviews.map(review => 
-                        <div className='col-6' key={review.userid}>
+                        <div className='col-sm-12 col-md-6' key={review.userid}>
                             <ReviewContainer {...review} {...this.props} key={review.userid}/>
                         </div>)
                     }

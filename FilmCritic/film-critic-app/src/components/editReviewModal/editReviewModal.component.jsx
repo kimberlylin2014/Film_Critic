@@ -61,7 +61,7 @@ class EditMovieReview extends React.Component {
                                 label='Write Your Review Here'
                                 name='reviewText'
                                 type='textarea'
-                                handleOnChange={this.handleOnChange}
+                                onChange={this.handleOnChange}
                                 value={this.state.reviewText}
                             />
                             <FormGroup>

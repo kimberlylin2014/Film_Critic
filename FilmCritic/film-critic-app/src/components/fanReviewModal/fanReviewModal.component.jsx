@@ -59,7 +59,7 @@ class FanReviewModal extends React.Component {
                         label='Write Your Review Here'
                         name='reviewText'
                         type='textarea'
-                        handleOnChange={this.handleOnChange}
+                        onChange={this.handleOnChange}
                     />
                     <FormGroup>
                         <Label for="exampleSelect">Rate: </Label>

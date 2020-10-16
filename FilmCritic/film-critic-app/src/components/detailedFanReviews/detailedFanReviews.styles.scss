@@ -1,6 +1,11 @@
 .DetailedFanReviews {
     width: 86%;
     margin: 30px auto 50px;
+    .row {
+        .col-md-6, .col-sm-12 {
+            margin-bottom: 16px;
+        }
+    }
     .review-btn{
         display: flex;
         justify-content: space-between;

@@ -2,12 +2,11 @@
 # FilmCritic App
 
 ### Video Demo
-https://youtu.be/vZ5eMu0eBXg
+https://youtu.be/jALA4LWJ0Oo
 
 ### Frontend 
 * Javascript
 * React
-* Redux
 * Redux Saga
 * React-Router
 * Reselect 
@@ -20,14 +19,17 @@ https://youtu.be/vZ5eMu0eBXg
 * Express
 * PostgreSQL
 * Knex.js
+* Redis
 
 ### App Features
-* Unauthenticated users are allowed to search for movies, where details of each movie is limited.
-* WHen user is registered and signed in, they have access to more features
-* Authenticated users are able to write, edit, and delete reviews for each movie
-* Fan review rating are calculated and updated every time a user submits a review
-* IMDB and Fan rating scoreboards are displated with an animated progress bar
-* When user session expires, they will be automatically logged out of the app
+* Unauthenticated users are allowed to search for movies, where results only display movie poster, title, and plot.
+* Authenticated users have access to movie ratings and other movie details
+* An authenticated user can submit, edit, and delete his/her personal review for each movie
+* Submit Review Button is only available to the user if he/she has NOT submitted a review
+* Edit and Delete Buttons are only available to the user who submitted the review
+* The average fan rating score for each movie is re-calculated and updated when a user submits/updates/deletes his/her own review
+* IMDB and Fan rating scoreboards are displayed with an animated progress bar
+* When a user session expires, he/she will be automatically logged out of the app
 
 ### Overview
 * Built a client-server model using React.js and Redux-Saga (client), Node.js and Express (server), and PostgreSQL (database) to create a full stack movie application.
