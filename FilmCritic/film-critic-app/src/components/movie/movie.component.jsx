@@ -3,7 +3,7 @@ import './movie.styles.scss';
 import AccessPrivatePageModal from '../accessPrivatePageModal/accessPrivatePageModal.component';
 
 const Movie = ({...props}) => {
-    const {Title, Year, Poster, Plot, Director, imdbRating, Rated} = props;
+    const {Title, Poster, Plot} = props;
     return (
         <div className='Movie'>
             <div className='img'>

@@ -49,7 +49,7 @@ class LoginForm extends React.Component {
                         type='email'
                         name='email'
                         placeholder='example@gmail.com'                    
-                        handleOnChange = {this.handleOnChange}
+                        onChange = {this.handleOnChange}
                     />
                      <FormInput 
                         label='Password'
@@ -57,7 +57,7 @@ class LoginForm extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Create Password'                    
-                        handleOnChange = {this.handleOnChange}
+                        onChange = {this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleOnSubmit}>Submit</Button>

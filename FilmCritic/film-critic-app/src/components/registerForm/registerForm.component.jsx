@@ -55,7 +55,7 @@ class RegisterForm extends React.Component {
                         type='text'
                         name='username'
                         placeholder='kimberlylin'                    
-                        handleOnChange = {this.handleOnChange}
+                        onChange = {this.handleOnChange}
                     />
                     <FormInput 
                         label='Email'
@@ -63,7 +63,7 @@ class RegisterForm extends React.Component {
                         type='email'
                         name='email'
                         placeholder='example@gmail.com'                    
-                        handleOnChange = {this.handleOnChange}
+                        onChange = {this.handleOnChange}
                     />
                      <FormInput 
                         label='Password'
@@ -71,7 +71,7 @@ class RegisterForm extends React.Component {
                         type='password'
                         name='password'
                         placeholder='Create Password'                    
-                        handleOnChange = {this.handleOnChange}
+                        onChange = {this.handleOnChange}
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleOnSubmit}>Submit</Button>

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test if Movie component is rendering 1`] = `
+<div
+  className="Movie"
+>
+  <div
+    className="img"
+  >
+    <img
+      alt="Taxi"
+      height="250px"
+      src="https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg"
+      width="200px"
+    />
+  </div>
+  <div
+    className="details"
+  >
+    <h4>
+      Taxi
+    </h4>
+    <p>
+       
+      Short story.
+    </p>
+    <div
+      className="public-route text-right"
+    >
+      <withRouter(AccessPrivatePageModal)
+        Plot="Short story."
+        Poster="https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg"
+        Title="Taxi"
+        label="View Reviews and More!"
+      />
+    </div>
+  </div>
+</div>
+`;
