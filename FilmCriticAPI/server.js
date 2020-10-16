@@ -38,10 +38,6 @@ app.post('/login', async (req, res) => {
     signIn.signInAuthentication(req, res, bcrypt, db)
 })
 
-app.get('/:id/posts', auth.requireAuth, (req, res) => {
-    posts.getUserPosts(req, res, db);
-} )
-
 app.post('/signout', (req, res) => {
     const { authorization } = req.headers;
     const tokenID = authorization.split(" ")[1];
