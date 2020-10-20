@@ -14,6 +14,8 @@ import { loginUserStart } from  './redux/user/user.actions';
 import  { connect } from 'react-redux';
 import {selectCurrentUser} from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
+import { selectSessionExpireWarning } from './redux/movie/movie.selectors';
+import SessionExpireModal from './components/sessionExpireModal/sessionExpireModal.component';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,10 +25,11 @@ class App extends React.Component {
     const token = window.sessionStorage.getItem("token");
   }
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, sessionExpireWarning } = this.props;
     return (
       <div className='App'>
         <Header />
+        {sessionExpireWarning ? <SessionExpireModal/> : ''}
         <Switch>
             <Route exact path='/' render={() => {
               return currentUser ? <Redirect to='/home'/> :  <PublicHome />
@@ -39,11 +42,11 @@ class App extends React.Component {
               return currentUser ? <Redirect to='/home' /> :  <Login {...props} />
             }}/>
             <Route exact path='/home' render={() => {
-              return currentUser ? <PrivateHome /> :  <Redirect to='/register'/>
+              return currentUser ? <PrivateHome /> :  <Redirect to='/login'/>
             }}/>
 
             <Route exact path='/movies/:imdbID/reviews' render={(props) => {
-              return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/register'/>
+              return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/login'/>
             }} 
             />
         </Switch>
@@ -60,7 +63,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser : selectCurrentUser
+  currentUser : selectCurrentUser,
+  sessionExpireWarning: selectSessionExpireWarning
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

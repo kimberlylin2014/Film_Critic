@@ -21,3 +21,8 @@ export const selectSingleMoviePage = createSelector(
     [movieSelector],
     (movies) => movies.singleMoviePage
 )
+
+export const selectSessionExpireWarning = createSelector(
+    [movieSelector],
+    (movies) => movies.sessionExpireWarning
+)

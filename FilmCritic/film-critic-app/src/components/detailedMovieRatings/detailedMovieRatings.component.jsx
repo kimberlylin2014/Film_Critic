@@ -10,7 +10,8 @@ class DetailedMovieRatings extends React.Component  {
     constructor(props) {
         super(props)
         this.state = {
-            imdbRating: 0
+            imdbRating: 0,
+            audienceRating: 0
         }
         this.calculateImdbRating = this.calculateImdbRating.bind(this);
         this.calculateAudienceRating = this.calculateAudienceRating.bind(this);
@@ -19,6 +20,11 @@ class DetailedMovieRatings extends React.Component  {
         this.determineRatingImage = this.determineRatingImage.bind(this);
         this.timer = this.timer.bind(this)
     }
+
+    // componentDidUpdate(prevProps) {
+    //     if(this.props)
+
+    // }
 
     componentDidMount() {
         this.mounted = true;
@@ -32,8 +38,12 @@ class DetailedMovieRatings extends React.Component  {
 
     timer() {
         const {imdbRating} = this.props;
+        const audienceScore = this.calculateAudienceRating()
         setTimeout(() => {
-            (this.mounted &&  this.setState({imdbRating: (parseFloat(imdbRating)/10 * 100).toFixed(0)}))   
+            (this.mounted &&  
+                this.setState({imdbRating: (parseFloat(imdbRating)/10 * 100).toFixed(0),
+                               audienceRating: audienceScore
+                }))   
         }, 0)
     }
 
@@ -139,7 +149,8 @@ class DetailedMovieRatings extends React.Component  {
                         <div className='rating'>   
                             <div style={{width: '110px', height: '110px'}}>
                                 <CircularProgressbarWithChildren 
-                                    value={this.calculateAudienceRating()}
+                                    // value={this.calculateAudienceRating()}
+                                    value={this.state.audienceRating}
                                     strokeWidth= {11}
                                     styles={buildStyles({
                                         rotation: 0,

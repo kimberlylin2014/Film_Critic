@@ -17,6 +17,7 @@ class PublicHome extends React.Component {
 
     componentDidMount() {
         const {resetMovieSearch} = this.props;
+        window.sessionStorage.removeItem("token");
         resetMovieSearch();
     }
 

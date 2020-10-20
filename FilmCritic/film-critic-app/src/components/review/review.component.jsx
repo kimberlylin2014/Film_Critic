@@ -3,6 +3,7 @@ import './review.styles.scss';
 import EditReviewModal from '../editReviewModal/editReviewModal.component';
 import DeleteReviewModal from '../deleteReviewModal/deleteReviewModal.component';
 
+
 const Review = ({...props}) => {
         const {review, fanscore, username, userid, currentUser} = props;
         return(
@@ -31,5 +32,7 @@ const Review = ({...props}) => {
             </div>
         )
 }
+
+
 
 export default Review;

@@ -34,7 +34,7 @@ https://youtu.be/jALA4LWJ0Oo
 ### Overview
 * Built a client-server model using React.js and Redux-Saga (client), Node.js and Express (server), and PostgreSQL (database) to create a full stack movie application.
 * Developed REST API that handles user registration, user login/logout, fetching movie data from a third party API (OMDb API), fetching reviews for each movie, and review creation/update/deletion.
-* JSON Web Token is used to authenticate API routes and manage user sessions
+* JSON Web Token is used to authenticate client requests and manage user sessions
 * Utilized Redis to store tokens in the backend
 * Handle asynchronous calls and manage application states with Redux-Saga.
 * Using transactions in PostgreSQL to update multiple data tables at once within a single HTTP request.

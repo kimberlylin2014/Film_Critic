@@ -2,7 +2,7 @@ import React from 'react';
 import RegisterFormContainer from '../../components/registerForm/registerForm.container';
 import './register.styles.scss';
 import  { connect } from 'react-redux';
-import { registerUserStart, registerUserFailure } from '../../redux/user/user.actions';
+import { registerUserStart, registerUserFailure, resetUser } from '../../redux/user/user.actions';
 import {selectUserErrorMessage} from '../../redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
@@ -12,7 +12,9 @@ class Register extends React.Component {
     }
 
     componentDidMount() {
+        const {resetUser} = this.props;
         window.sessionStorage.removeItem("token");
+        resetUser();
     }
 
     render() {
@@ -33,7 +35,8 @@ class Register extends React.Component {
 const mapDispatchToProps = (dispatch) => {
     return {
         registerUserStart: (credentials) => dispatch(registerUserStart(credentials)),
-        registerUserFailure: (error) => dispatch(registerUserFailure(error))
+        registerUserFailure: (error) => dispatch(registerUserFailure(error)),
+        resetUser: ()=> dispatch(resetUser())
     }
 }
 

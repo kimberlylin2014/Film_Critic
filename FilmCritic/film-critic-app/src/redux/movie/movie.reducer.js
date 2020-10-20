@@ -5,7 +5,8 @@ const INITIAL_STATE = {
     movieList: [],
     singleMoviePage: [],
     errorMessage: null,
-    isLoading: false
+    isLoading: false,
+    sessionExpireWarning: false,
 }
 
 const movieReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +16,7 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.GET_REVIEWSBYMOVIEID_START:
         case movieActionTypes.UPDATE_REVIEW_START:
         case movieActionTypes.DELETE_REVIEW_START:
+        case movieActionTypes.SUBMIT_MOVIEREVIEW_START:
             return {
                 ...state,
                 errorMessage: null,
@@ -46,19 +48,24 @@ const movieReducer = (state = INITIAL_STATE, action) => {
                 isLoading: false,
                 errorMessage: action.payload
             }
-        case userActionTypes.LOGOUT_USER_SUCCESS:
-        case userActionTypes.LOGIN_USER_SUCCESS:
+        case movieActionTypes.DELETE_REVIEW_FAILURE_SESSION:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION:
         case movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION:
         case movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION:
         case movieActionTypes.UPDATE_REVIEW_FAILURE_SESSION:
+            return {
+                ...state,
+                sessionExpireWarning: true
+            }
+        case userActionTypes.LOGOUT_USER_SUCCESS:
+        case userActionTypes.LOGIN_USER_SUCCESS:
         case movieActionTypes.RESET_MOVIESEARCH:
-        case movieActionTypes.DELETE_REVIEW_FAILURE_SESSION:
             return {
                 movieList: [],
                 singleMoviePage: [],
                 errorMessage: null,
-                isLoading: false
+                isLoading: false,
+                sessionExpireWarning: false
             }
         default:
             return state

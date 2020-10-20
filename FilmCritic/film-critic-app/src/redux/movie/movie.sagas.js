@@ -29,6 +29,8 @@ function* getReviews({payload}) {
         } else if (data === 'Unauthorized') {
             throw Error(data)
         }
+        console.log(data)
+        console.log('get reviews after submitting review')
         yield put(getReviewsByMovieIDSuccess(data))
     }catch (error) {
         if(error.message === 'Unauthorized'){
@@ -82,7 +84,7 @@ function* fetchMoviesPrivate({payload}) {
         }
         yield put(getPrivateMovieSearchSuccess(data))
     } catch(error) {
-        if(error.message === 'Your session has expired. Please sign back in.'){
+        if(error.message === 'Unauthorized'){
             yield put(getPrivateMovieSearchFailureSession(error.message))
         } else {
             yield put(getPrivateMovieSearchFailure(error.message))
@@ -112,6 +114,8 @@ function* onGetPublicMovieSearchStart() {
 }
 
 // Update Review 
+
+
 function* updateReview({payload}) {
     try {
         const data = yield updateReviewsByReviewID(payload);
@@ -120,6 +124,7 @@ function* updateReview({payload}) {
         } else if (data === 'Unauthorized') {
             throw Error(data)
         }
+        console.log(data)
         yield put(updateReviewSuccess(data))
     }catch (error) {
         if(error.message === 'Unauthorized'){

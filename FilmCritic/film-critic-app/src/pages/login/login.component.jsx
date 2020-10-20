@@ -2,7 +2,7 @@ import React from 'react';
 import LoginFormContainer from '../../components/loginForm/loginForm.container';
 import './login.styles.scss';
 import  { connect } from 'react-redux';
-import { loginUserStart } from '../../redux/user/user.actions';
+import { loginUserStart, resetUser  } from '../../redux/user/user.actions';
 import { selectUserErrorMessage } from '../../redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
@@ -12,7 +12,9 @@ class Login extends React.Component {
     }
 
     componentDidMount() {
+        const {resetUser} = this.props;
         window.sessionStorage.removeItem("token");
+        resetUser();
     }
     
     render() {
@@ -32,7 +34,8 @@ class Login extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUserStart: (credentials) => dispatch(loginUserStart(credentials))
+        loginUserStart: (credentials) => dispatch(loginUserStart(credentials)),
+        resetUser: ()=> dispatch(resetUser())
     }
 }
 

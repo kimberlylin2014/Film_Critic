@@ -9,6 +9,7 @@ const requireAuth = (req, res, next) => {
     const tokenID = authorization.split(" ")[1]
     redis.redisClient.get(tokenID, (err, userID) => {
         if(err || !userID) {
+            console.log('token expired')
             return res.status(400).json('Unauthorized')
         }
         // Verify token has not expired

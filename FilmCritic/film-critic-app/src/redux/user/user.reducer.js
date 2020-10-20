@@ -30,10 +30,13 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 errorMessage: action.payload
             }
         case userActionTypes.LOGOUT_USER_SUCCESS:
+        case userActionTypes.RESET_USER:   
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE_SESSION:
         case movieActionTypes.SUBMIT_MOVIEREVIEW_FAILURE_SESSION:
         case movieActionTypes.GET_REVIEWSBYMOVIEID_FAILURE_SESSION:
-        case userActionTypes.GET_USERBLOGS_FAILURE:
+        case movieActionTypes.DELETE_REVIEW_FAILURE_SESSION:
+        case movieActionTypes.UPDATE_REVIEW_FAILURE_SESSION: 
+   
             return {
                 currentUser: null,
                 isLoading: false,

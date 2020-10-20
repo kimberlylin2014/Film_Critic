@@ -28,7 +28,6 @@ export const getMoviesPrivateAPI = async (searchObj) => {
             return data;
         } else if (resp.status === 401) {
             const data = await resp.json();
-            console.log(data)
             return resp.statusText;
         }
         return null;
@@ -68,6 +67,7 @@ export const submitMovieReview = async(reviewObj) => {
 
 
 export const getReviewsByMovieID = async(reviewObj) => {
+    console.log(reviewObj)
     try {
         const resp = await fetch(`http://localhost:3000/users/${reviewObj.userID}/movies/${reviewObj.imdbID}/reviews`, {
             method: "GET",

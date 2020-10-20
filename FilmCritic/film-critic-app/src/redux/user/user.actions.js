@@ -1,5 +1,11 @@
 import userActionTypes from './user.types';
 
+export const resetUser = () => {
+    return {
+        type: userActionTypes.RESET_USER
+    }
+}
+
 export const registerUserStart = (credentials) => {
     return {
         type: userActionTypes.REGISTER_USER_START,

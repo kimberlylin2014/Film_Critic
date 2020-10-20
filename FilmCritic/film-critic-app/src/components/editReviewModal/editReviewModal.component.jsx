@@ -33,7 +33,7 @@ class EditMovieReview extends React.Component {
 
     handleUpdateSubmit() {
         const { reviewText, fanScore } = this.state;
-        const {imdbID, updateReviewStart, currentUser, id } = this.props;
+        const {imdbID, updateReviewStart, currentUser, id} = this.props;
         const token = window.sessionStorage.getItem('token');
         const updatedReviewObjDB = {
             review: reviewText,
@@ -85,5 +85,6 @@ class EditMovieReview extends React.Component {
         )
     }
 }
+
 
 export default EditMovieReview;
