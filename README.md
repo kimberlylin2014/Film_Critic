@@ -2,7 +2,7 @@
 # FilmCritic App
 
 ### Video Demo
-https://youtu.be/jALA4LWJ0Oo
+https://youtu.be/R3mueh4cfcE
 
 ### Frontend 
 * Javascript
