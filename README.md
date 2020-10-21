@@ -11,6 +11,7 @@ https://youtu.be/R3mueh4cfcE
 * React-Router
 * Reselect 
 * Redux Persist
+* React.lazy and Suspense
 * Sass
 * Reactstrap
 
