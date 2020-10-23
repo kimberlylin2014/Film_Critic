@@ -23,7 +23,7 @@ class Login extends React.Component {
                 <div className='container'>
                     <div className='row justify-content-center align-items-center'>
                         <div className='col-lg-5'>
-                            <LoginFormContainer {...this.props} />
+                            <LoginFormContainer {...this.props} color='dark'/>
                         </div>
                     </div>
                 </div>
