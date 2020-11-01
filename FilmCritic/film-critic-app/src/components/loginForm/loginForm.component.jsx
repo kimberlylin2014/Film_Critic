@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form  } from 'reactstrap';
+import { Button, Form, InputGroup, Input, InputGroupAddon, InputGroupText  } from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
 import './loginForm.styles.scss';
 import ValidationMessage from '../validationMessage/validationMessage.component';
@@ -25,9 +25,9 @@ class LoginForm extends React.Component {
 
     handleOnSubmit(e) {
         e.preventDefault();
-        const { email, password } = this.state;
+        let { email, password } = this.state;
         const {loginUserStart} = this.props;
-        console.log("signing in ")
+        email += "@filmcritic.com"
         loginUserStart({email, password})
     }
 
@@ -43,14 +43,18 @@ class LoginForm extends React.Component {
             <div className='LoginForm'>
                 <Form>
                     <h3 className='text-center'>Login</h3>
-                    <FormInput 
-                        label='Email'
-                        id='email'
-                        type='email'
-                        name='email'
-                        placeholder='example@gmail.com'                    
-                        onChange = {this.handleOnChange}
-                    />
+                    <label htmlFor="email">Email</label>
+                    <InputGroup className='mb-3'>
+                        <Input placeholder="username" 
+                                id='email'
+                                type='text'
+                                name='email'                  
+                                onChange = {this.handleOnChange}
+                        />
+                        <InputGroupAddon addonType="append">
+                        <InputGroupText>@filmcritic.com</InputGroupText>
+                        </InputGroupAddon>
+                    </InputGroup>
                      <FormInput 
                         label='Password'
                         id='password'

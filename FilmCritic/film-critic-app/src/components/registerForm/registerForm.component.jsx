@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form  } from 'reactstrap';
+import { Button, Form, InputGroup, Input, InputGroupAddon, InputGroupText } from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
 import './registerForm.styles.scss'
 import ValidationMessage from '../validationMessage/validationMessage.component';
@@ -10,28 +10,38 @@ class RegisterForm extends React.Component {
         this.state = {
             email: '',
             password: '',
-            username: ''
+            username: '',
         }
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
         this.handleAlreadyUserClick = this.handleAlreadyUserClick.bind(this);
-
     }
     
     handleOnChange(e) {
+        this.setState({formErrorMessageDisplay: null, formErrorMessage: null});
         const { name, value } = e.target;
-        this.setState({
-            [name] : value
-        })
+        if(name === 'password') {
+            this.setState({
+                [name] : value
+            })
+        } else if(name === 'username' || name === 'email') {
+            this.setState({
+                email: value,
+                username: value
+            })
+        }
     }
 
     handleOnSubmit(e) {
         e.preventDefault();
-        const { email, password, username } = this.state;
+        this.setState({formErrorMessageDisplay: null, formErrorMessage: null});
+        let { email, password, username } = this.state;
         const {registerUserStart, registerUserFailure} = this.props;
-        if(email.length < 10 || email.length > 20 || password.length < 3 || password.length > 6 || username.length < 3 || username.length > 10) {
-            registerUserFailure('Please enter valid input')
-        } else {
+        if(username.length < 3 || username.length > 10 || password.length !== 4 || isNaN(parseInt(password))) {
+            registerUserFailure("Username needs to be 3-10 characters and passcode needs to be 4 digit number.")
+        }else {
+            this.setState({formErrorMessageDisplay: null});
+            email += "@filmcritic.com"
             registerUserStart({email, password, username})
         }
     }
@@ -43,7 +53,7 @@ class RegisterForm extends React.Component {
     }
     
     render() {
-        const { errorMessage } = this.props;
+        const {errorMessage} = this.props;
         return(
             <div className='RegisterForm'>
                 <Form>
@@ -53,28 +63,36 @@ class RegisterForm extends React.Component {
                         id='username'
                         type='text'
                         name='username'
-                        placeholder='kimberlylin'                    
+                        placeholder='3-10 characters'                    
                         onChange = {this.handleOnChange}
+                        value={this.state.username}
                     />
-                    <FormInput 
-                        label='Email'
-                        id='email'
-                        type='email'
-                        name='email'
-                        placeholder='example@gmail.com'                    
-                        onChange = {this.handleOnChange}
-                    />
+                    <label htmlFor="email">Email</label>
+                    <InputGroup className='mb-3'>
+                        <Input placeholder="3-10 characters" 
+                                id='email'
+                                type='text'
+                                name='email'                  
+                                onChange = {this.handleOnChange}
+                                value={this.state.email}
+                        />
+                        <InputGroupAddon addonType="append">
+                        <InputGroupText>@filmcritic.com</InputGroupText>
+                        </InputGroupAddon>
+                    </InputGroup>
                      <FormInput 
-                        label='Password'
+                        label='Passcode'
                         id='password'
                         type='password'
                         name='password'
-                        placeholder='Create Password'                    
+                        placeholder='4 Digit Number'                    
                         onChange = {this.handleOnChange}
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
-                    <Button onClick={this.handleOnSubmit}>Submit</Button>
-                    <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already A User </Button>
+                     <div className='mt-4'>
+                        <Button onClick={this.handleOnSubmit}>Submit</Button>
+                        <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already A User </Button>
+                     </div>
                 </Form>
             </div>
         )
