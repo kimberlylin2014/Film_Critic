@@ -34,7 +34,7 @@ class LoginForm extends React.Component {
     handleNewUserClick(e) {
         e.preventDefault();
         const { history } = this.props;
-        history.push('/')
+        history.push('/register')
     }
     
     render() {

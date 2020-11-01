@@ -2,7 +2,7 @@ import React from 'react';
 import './detailedMovieInfo.styles.scss';
 
 const DetailedMovieInfo = ({...props}) => {
-    const {Title, Year, Poster, Rated, Genre, Director, Actors, Plot, Production, Awards} = props;
+    const {Poster, Rated, Genre, Director, Actors, Plot, Production, Awards} = props;
     return (
         <div className='DetailedMovieInfo'>
             <div className='title-img'>                  

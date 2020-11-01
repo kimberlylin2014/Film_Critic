@@ -21,7 +21,7 @@ class Login extends React.Component {
         return (
             <div className='Login'>
                 <div className='container'>
-                    <div className='row justify-content-center align-items-center'>
+                    <div className='row justify-content-center'>
                         <div className='col-lg-5'>
                             <LoginFormContainer {...this.props} color='dark'/>
                         </div>

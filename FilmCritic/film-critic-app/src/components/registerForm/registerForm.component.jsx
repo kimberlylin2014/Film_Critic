@@ -29,11 +29,10 @@ class RegisterForm extends React.Component {
         e.preventDefault();
         const { email, password, username } = this.state;
         const {registerUserStart, registerUserFailure} = this.props;
-        if(email.length < 10 || password.length < 3 || username.length < 3) {
+        if(email.length < 10 || email.length > 20 || password.length < 3 || password.length > 6 || username.length < 3 || username.length > 10) {
             registerUserFailure('Please enter valid input')
         } else {
             registerUserStart({email, password, username})
-
         }
     }
 

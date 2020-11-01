@@ -8,9 +8,16 @@ const Review = ({...props}) => {
         const {review, fanscore, username, userid, currentUser} = props;
         return(
             <div className='Review'>
-                <p><span className='bold-text'>"</span> {review} <span className='bold-text'>"</span></p>
+                <div className='text-right'> <span className='username'>{username}</span> </div> 
+          
                 <p><span className='bold-text'>Scored:</span>  {fanscore}/5</p> 
-                <div className='footer d-flex justify-content-between'>
+       
+                <div className='review-text'>
+                    <p><span className='bold-text'></span> {review} <span className='bold-text'></span></p>
+                </div> 
+               
+                
+                <div className='footer'>
                     {userid === currentUser.id ? (
                         <div className='edit-delete'>
                                 <EditReviewModal
@@ -25,9 +32,6 @@ const Review = ({...props}) => {
                                 />
                         </div>
                     ): <div></div>}  
-                    <div>
-                        <div><span className='bold-text'> -</span> <span className='username'>{username}</span> </div>    
-                    </div>
                 </div>  
             </div>
         )

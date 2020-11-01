@@ -2,6 +2,7 @@ import React from 'react';
 import './editReviewModal.styles.scss';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input} from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
+import ValidationMessage from '../validationMessage/validationMessage.component';
 
 class EditMovieReview extends React.Component {
     constructor(props) {
@@ -9,7 +10,9 @@ class EditMovieReview extends React.Component {
         this.state = {
             modal: false,
             reviewText: props.reviewText,
-            fanScore: props.fanScore
+            fanScore: props.fanScore,
+            errorMessageDisplay: null,
+            errorMessage: null
         }
         this.toggle = this.toggle.bind(this)
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -19,7 +22,11 @@ class EditMovieReview extends React.Component {
     toggle() {
         this.setState((currState) =>{
             return {
-                modal: !currState.modal
+                modal: !currState.modal,
+                errorMessageDisplay: null,
+                errorMessageDisplay: null,
+                reviewText: this.props.reviewText,
+                fanScore: this.props.fanScore
             }
         })
     }
@@ -32,19 +39,29 @@ class EditMovieReview extends React.Component {
     }
 
     handleUpdateSubmit() {
-        const { reviewText, fanScore } = this.state;
-        const {imdbID, updateReviewStart, currentUser, id} = this.props;
-        const token = window.sessionStorage.getItem('token');
-        const updatedReviewObjDB = {
-            review: reviewText,
-            userID: currentUser.id,
-            fanscore: fanScore,
-            imdbID: imdbID,
-            token: token,
-            reviewID: id
-        }  
-        updateReviewStart(updatedReviewObjDB)
-        this.toggle();
+        if(this.props.reviewText === this.state.reviewText && this.props.fanScore === this.state.fanScore) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You did not make any changes."})
+        } else if (this.state.reviewText.length < 10 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 10 characters."})
+        } else if(this.state.reviewText.length > 500 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You went over the maximum of 500 characters."})
+        } else {
+            this.setState({errorMessageDisplay: null, errorMessage: null})
+            const { reviewText, fanScore } = this.state;
+            const {imdbID, updateReviewStart, currentUser, id} = this.props;
+            const token = window.sessionStorage.getItem('token');
+            const updatedReviewObjDB = {
+                review: reviewText,
+                userID: currentUser.id,
+                fanscore: fanScore,
+                imdbID: imdbID,
+                token: token,
+                reviewID: id
+            }  
+            updateReviewStart(updatedReviewObjDB)
+            this.toggle();
+        }
+        
     }
 
     render() {
@@ -56,6 +73,10 @@ class EditMovieReview extends React.Component {
                     <ModalHeader toggle={this.toggle}>Your Review</ModalHeader>
                     <ModalBody>
                         <form>
+                            {this.state.errorMessageDisplay ? <ValidationMessage 
+                                message={this.state.errorMessage}
+                                color='#ffa62b'
+                            /> : ''}
                             <FormInput 
                                 id='reviewText'
                                 label='Write Your Review Here'

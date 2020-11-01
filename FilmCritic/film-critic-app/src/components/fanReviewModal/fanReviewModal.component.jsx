@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input} from 'reactstrap';
 import FormInput from '../formInput/formInput.component';
+import ValidationMessage from '../validationMessage/validationMessage.component';
 
 class FanReviewModal extends React.Component {
     constructor(props) {
@@ -8,7 +9,9 @@ class FanReviewModal extends React.Component {
         this.state = {
             modal: false,
             reviewText: '',
-            fanScore: "1"
+            fanScore: "1",
+            errorMessageDisplay: null,
+            errorMessage: null
         }
         this.toggle = this.toggle.bind(this)
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -31,18 +34,26 @@ class FanReviewModal extends React.Component {
     }
 
     handleReviewSubmit() {
-        const { reviewText, fanScore } = this.state;
-        const {imdbID, submitMovieReviewStart, currentUser } = this.props;
-        const token = window.sessionStorage.getItem('token');
-        const reviewObjDB = {
-            review: reviewText,
-            userID: currentUser.id,
-            score: fanScore,
-            imdbID: imdbID,
-            token: token
+        if (this.state.reviewText.length < 10 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 10 characters."})
+
+        } else if(this.state.reviewText.length > 500 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You went over the maximum of 500 characters."})
+        } else {
+            this.setState({errorMessageDisplay: null, errorMessage: null})
+            const { reviewText, fanScore } = this.state;
+            const {imdbID, submitMovieReviewStart, currentUser } = this.props;
+            const token = window.sessionStorage.getItem('token');
+            const reviewObjDB = {
+                review: reviewText,
+                userID: currentUser.id,
+                score: fanScore,
+                imdbID: imdbID,
+                token: token
+            }
+            submitMovieReviewStart(reviewObjDB)
+            this.toggle();
         }
-        submitMovieReviewStart(reviewObjDB)
-        this.toggle();
     }
 
   render(){
@@ -54,6 +65,10 @@ class FanReviewModal extends React.Component {
             <ModalHeader toggle={this.toggle}>Your Review</ModalHeader>
             <ModalBody>
                 <form>
+                    {this.state.errorMessageDisplay ? <ValidationMessage 
+                            message={this.state.errorMessage}
+                            color='#ffa62b'
+                    /> : ''}
                     <FormInput 
                         id='reviewText'
                         label='Write Your Review Here'
@@ -61,6 +76,7 @@ class FanReviewModal extends React.Component {
                         type='textarea'
                         onChange={this.handleOnChange}
                     />
+      
                     <FormGroup>
                         <Label for="exampleSelect">Rate: </Label>
                         <Input type="select" name="fanScore" id="select" onChange={this.handleOnChange}>
@@ -71,6 +87,7 @@ class FanReviewModal extends React.Component {
                             <option value={5}>5</option>
                         </Input>
                     </FormGroup>
+          
                 </form>
             </ModalBody>
             <ModalFooter>

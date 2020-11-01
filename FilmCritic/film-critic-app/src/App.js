@@ -7,14 +7,15 @@ import { createStructuredSelector } from 'reselect';
 import { selectSessionExpireWarning } from './redux/movie/movie.selectors';
 import SpinnerLazy from './components/spinnerLazy/spinnerLazy.component';
 import ErrorBoundary from './components/errorBoundary/errorBoundary.component';
-const Register = lazy(() => import('./pages/register/register.component'))
-const PrivateHome = lazy(() => import('./pages/privateHome/privateHome.component'))
-const PublicHome = lazy(() => import('./pages/publicHome/publicHome.component'))
-const SingleMoviePage = lazy(() => import('./pages/singleMoviePage/singleMoviePage.component'))
-const Login = lazy(() => import('./pages/login/login.component'))
-const Header = lazy(() => import('./components/header/header.component'))
-const Footer = lazy(() => import('./components/footer/footer.component'))
-const SessionExpireModal = lazy(() => import('./components/sessionExpireModal/sessionExpireModal.component'))
+const NotFoundPage = lazy(() => import('./pages/notFoundPage/notFoundPage.component'));
+const Register = lazy(() => import('./pages/register/register.component'));
+const PrivateHome = lazy(() => import('./pages/privateHome/privateHome.component'));
+const PublicHome = lazy(() => import('./pages/publicHome/publicHome.component'));
+const SingleMoviePage = lazy(() => import('./pages/singleMoviePage/singleMoviePage.component'));
+const Login = lazy(() => import('./pages/login/login.component'));
+const Header = lazy(() => import('./components/header/header.component'));
+const Footer = lazy(() => import('./components/footer/footer.component'));
+const SessionExpireModal = lazy(() => import('./components/sessionExpireModal/sessionExpireModal.component'));
 
 class App extends React.Component {
   render() {
@@ -22,7 +23,8 @@ class App extends React.Component {
     return (
       <div className='App'>
           <ErrorBoundary >
-          <Suspense fallback={<SpinnerLazy height='200px' color='dark'/>}>
+          {/* <SpinnerLazy height='200px' color='dark'/> */}
+          <Suspense fallback={<p></p>}>
             <Header />
             {sessionExpireWarning ? <SessionExpireModal/> : ''}
             <Switch>
@@ -43,6 +45,7 @@ class App extends React.Component {
                   return currentUser ? <SingleMoviePage {...props}/> :  <Redirect to='/login'/>
                 }} 
                 />
+                <Route component={NotFoundPage} />
             </Switch>
             <Footer />
           </Suspense>
