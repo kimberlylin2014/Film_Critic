@@ -25,6 +25,9 @@ const registerUserToDB = (email, hashedPassword, username, db) => {
 const handleRegister = async(req, res, bcrypt, db) => {
     try {
         const {email, password, username} = req.body;
+        console.log(email)
+        console.log(password)
+        console.log(username)
         const hashedPassword =  await bcrypt.hash(password, 10)
         const registeredUser = await registerUserToDB(email, hashedPassword, username, db)
         res.json(registeredUser)

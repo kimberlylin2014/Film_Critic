@@ -1,7 +1,7 @@
-const redis = require('redis');
+// const redis = require('redis');
+// const redisClient = redis.createClient({host: '127.0.0.1'})
 const jwt = require('jsonwebtoken');
-// setup redis client
-const redisClient = redis.createClient({host: '127.0.0.1'})
+
 
 const fetchUserPasswordFromLoginTableDB = (email, db) => {
     return db('login')
@@ -33,12 +33,12 @@ const createUserJwtObj = (userData) => {
     return Promise.resolve(userJwtObj)
 }
 
-const setTokenInRedis = (token, id) => {
-    return Promise.resolve(redisClient.set(token, id))
-}
+// const setTokenInRedis = (token, id) => {
+//     return Promise.resolve(redisClient.set(token, id))
+// }
 const generateAccessToken = async (userJwtObj) => {
-    const token = await jwt.sign(userJwtObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '60s'});
-    await setTokenInRedis(token, userJwtObj.id)
+    const token = await jwt.sign(userJwtObj, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '5m'});
+    // await setTokenInRedis(token, userJwtObj.id)
     const accessToken = {...userJwtObj, token }
     console.log(accessToken)
     return accessToken;
@@ -47,6 +47,7 @@ const generateAccessToken = async (userJwtObj) => {
 const handleSignIn = async (req, res, bcrypt, db) => {
     try {
         const {email, password} = req.body;
+        console.log(typeof(password))
         const hashPw = await fetchUserPasswordFromLoginTableDB(email, db);
         const isValid = await validateCredentials(password, hashPw, bcrypt);
         const userData = await fetchUserDataFromUserTableDB(isValid, email, db)
@@ -72,5 +73,5 @@ const signInAuthentication = (req, res, bcrypt, db) => {
 
 module.exports = {
     signInAuthentication: signInAuthentication,
-    redisClient: redisClient
+    // redisClient: redisClient
 }

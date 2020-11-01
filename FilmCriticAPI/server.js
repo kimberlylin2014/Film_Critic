@@ -2,8 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const bcrypt = require('bcrypt');
-const redis = require('redis');
-const redisClient = redis.createClient({host: '127.0.0.1'})
+// const redis = require('redis');
+// const redisClient = redis.createClient({host: '127.0.0.1'})
 const cors = require('cors');
 
 const register = require('./controllers/register')
@@ -25,7 +25,7 @@ var db = require('knex')({
 });
 
 app.get('/', (req, res)=> {
-    res.json('worked')
+    res.json('testing')
 })
 
 // Input ===> email: str, password: str
@@ -39,17 +39,18 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/signout', (req, res) => {
-    const { authorization } = req.headers;
-    const tokenID = authorization.split(" ")[1];
-    redisClient.del(tokenID, (error, reply) => {
-        if(error) {
-            console.log(error)
-            res.status(400).json('Can not remove user token in Redis database')
-        } else {
-            console.log(reply)
-            res.json('signed out successful')
-        }
-    })
+    res.json('signed out successful')
+    // const { authorization } = req.headers;
+    // const tokenID = authorization.split(" ")[1];
+    // redisClient.del(tokenID, (error, reply) => {
+    //     if(error) {
+    //         console.log(error)
+    //         res.status(400).json('Can not remove user token in Redis database')
+    //     } else {
+    //         console.log(reply)
+    //         res.json('signed out successful')
+    //     }
+    // })
 })
 
 app.get('/movieSearchPublic/:movie', async (req, res) => {
