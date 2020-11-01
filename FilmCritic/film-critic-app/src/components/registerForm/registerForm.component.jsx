@@ -53,7 +53,7 @@ class RegisterForm extends React.Component {
     }
     
     render() {
-        const {errorMessage} = this.props;
+        const {errorMessage, isUserLoading} = this.props;
         return(
             <div className='RegisterForm'>
                 <Form>
@@ -90,8 +90,8 @@ class RegisterForm extends React.Component {
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                      <div className='mt-4'>
-                        <Button onClick={this.handleOnSubmit}>Submit</Button>
-                        <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already A User </Button>
+                        <Button onClick={this.handleOnSubmit} disabled={isUserLoading}>Submit</Button>
+                        <Button className='already-user-btn' onClick={this.handleAlreadyUserClick}> Already Have an Account </Button>
                      </div>
                 </Form>
             </div>

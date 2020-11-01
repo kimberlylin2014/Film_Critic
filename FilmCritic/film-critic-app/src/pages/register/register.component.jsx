@@ -3,7 +3,7 @@ import RegisterFormContainer from '../../components/registerForm/registerForm.co
 import './register.styles.scss';
 import  { connect } from 'react-redux';
 import { registerUserStart, registerUserFailure, resetUser } from '../../redux/user/user.actions';
-import {selectUserErrorMessage} from '../../redux/user/user.selectors';
+import {selectUserErrorMessage, selectIsUserLoading} from '../../redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
 class Register extends React.Component {
@@ -41,7 +41,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    errorMessage: selectUserErrorMessage
+    errorMessage: selectUserErrorMessage,
+    isUserLoading: selectIsUserLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

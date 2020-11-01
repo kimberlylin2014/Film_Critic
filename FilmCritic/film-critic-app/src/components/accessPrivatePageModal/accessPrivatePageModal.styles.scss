@@ -1,19 +1,22 @@
 .AccessPrivatePageModal {
     .details {
         p {
-            font-size: 16px;
+            font-size: 19px;
         }
         ul {
-            margin: 30px 0;
+            margin: 20px 0;
         }
     }
     .options {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         font-weight: 500;
+        font-size: 15px;
+        line-height: 10px;
+        margin-bottom: 15px;
         button {
-            margin-left: 2px;
+            border-radius: 0;
+            width: 90px;
+            margin-right: 10px;
+            padding: 5px 0;
         }
     }
 }

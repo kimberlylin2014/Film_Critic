@@ -5,7 +5,7 @@ import ValidationMessage from '../validationMessage/validationMessage.component'
 import { Button } from 'reactstrap';
 import { getPrivateMovieSearchStart } from '../../redux/movie/movie.actions'
 import {connect } from 'react-redux';
-import { selectMovieErrorMessage } from '../../redux/movie/movie.selectors'
+import { selectMovieErrorMessage, selectIsMovieListLoading } from '../../redux/movie/movie.selectors'
 import { createStructuredSelector } from 'reselect'
 
 class PrivateMovieSearchBar extends React.Component {
@@ -37,7 +37,7 @@ class PrivateMovieSearchBar extends React.Component {
     }
 
     render() {
-        const { errorMessage } = this.props;
+        const { errorMessage, isMovieListLoading } = this.props;
         return (
             <div className='PrivateMovieSearchBar'>
                 <form>
@@ -50,7 +50,7 @@ class PrivateMovieSearchBar extends React.Component {
                         onChange={this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}  
-                    <Button onClick={this.handleMovieSearchButton} outline color='secondary'>Search</Button>
+                    <Button onClick={this.handleMovieSearchButton} outline color='secondary' disabled={isMovieListLoading} >Search</Button>
                 </form>
             </div>
         )
@@ -64,7 +64,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 const mapStateToProps = createStructuredSelector({
-    errorMessage: selectMovieErrorMessage
+    errorMessage: selectMovieErrorMessage,
+    isMovieListLoading: selectIsMovieListLoading
 })
 
 

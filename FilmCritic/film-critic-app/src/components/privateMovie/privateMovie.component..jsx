@@ -80,9 +80,8 @@ class PrivateMovie extends React.Component {
     determinePoster() {
         const {Poster, Title} = this.props;
         if(Poster === 'N/A') {
-            // https://www.flaticon.com/free-icon/not-available-circle_16096?term=not%20available&page=1&position=1
             // Freepik
-            return  <img src='https://www.flaticon.com/svg/static/icons/svg/16/16096.svg' alt={Title} width='130px' height='130px'/>
+            return  <img src='https://www.flaticon.com/svg/static/icons/svg/20/20773.svg' alt={Title} width='100px' height='100px' style={{backgroundColor: '#84a9ac', padding: '0 30px'}}/>
         }
         return  <img src={Poster} alt={Title} width='220px' height='280px'/>
     }

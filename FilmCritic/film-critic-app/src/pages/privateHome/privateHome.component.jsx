@@ -5,7 +5,7 @@ import { submitMovieReviewStart, resetMovieSearch } from '../../redux/movie/movi
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { selectMovieList } from '../../redux/movie/movie.selectors';
+import { selectMovieList, selectIsMovieListLoading } from '../../redux/movie/movie.selectors';
 import PrivateMovieSearchBar from '../../components/privateMovieSearchBar/privateMovieSearchBar.component';
 import MovieListContainer from '../../components/movieList/movieList.container';
 
@@ -48,7 +48,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    movieList: selectMovieList
+    movieList: selectMovieList,
+    isMovieListLoading: selectIsMovieListLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PrivateHome);

@@ -44,21 +44,18 @@ class AccessPrivatePageModal extends React.Component {
                     <ModalBody>
                      <div className='AccessPrivatePageModal'>
                          <div className='details'>  
-                             <p> Login or Register to have access to the following features:</p>
-                             <ul>
-                                 <li>Write movie reviews</li>
-                                 <li>Rate movie scores</li>
-                                 <li>See movie ratings by IMDB Critics and other Users</li>
-                                 <li>Read more details about each movie</li>
-                             </ul>
+                             <p> Login or Register to Write A Movie Review!</p>
                          </div>
-                         <div className='options'>
-                             <div>
-                                 First Time User?  <button className='btn btn-sm btn-warning' onClick={this.handleRegister}>Register</button>
-                             </div>
-                            <div>
-                                Have an Account?  <button className='btn btn-sm btn-warning' onClick={this.handleLogin}>Login</button>
-                            </div>           
+                         <div>
+                            <div  className='options'>
+                            <button className='btn btn-sm btn-warning' onClick={this.handleRegister}>Register</button> Create New Account 
+                            </div>
+                            <div  className='options'>
+                                <button className='btn btn-sm btn-warning' onClick={this.handleLogin}>Login</button> Have Existing Account 
+                            </div>        
+                            <div  className='options'>
+                                <button className='btn btn-sm btn-info' onClick={this.handleLogin}>Guest</button>Login as Guest
+                            </div>       
                          </div>
                      </div>
                     </ModalBody>

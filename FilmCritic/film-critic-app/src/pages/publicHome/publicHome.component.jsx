@@ -1,10 +1,10 @@
 import React from 'react';
 import './publicHome.styles.scss';
-import { getUserBlogStart, loginUserStart } from '../../redux/user/user.actions';
+import { loginUserStart } from '../../redux/user/user.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
-import { selectMovieList } from '../../redux/movie/movie.selectors';
+import { selectMovieList, selectIsMovieListLoading } from '../../redux/movie/movie.selectors';
 import PublicMovieSearchBar from '../../components/publicMovieSearchBar/publicMovieSearchBar.component';
 import MovieListContainer from '../../components/movieList/movieList.container';
 import { resetMovieSearch } from '../../redux/movie/movie.actions';
@@ -50,7 +50,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
-    movieList: selectMovieList
+    movieList: selectMovieList,
+    isMovieListLoading: selectIsMovieListLoading
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PublicHome);

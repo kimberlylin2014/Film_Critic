@@ -8,15 +8,11 @@ const Review = ({...props}) => {
         const {review, fanscore, username, userid, currentUser} = props;
         return(
             <div className='Review'>
-                <div className='text-right'> <span className='username'>{username}</span> </div> 
-          
+                <div className='text-right'> <span className='username'>{username.toUpperCase()}</span> </div> 
                 <p><span className='bold-text'>Scored:</span>  {fanscore}/5</p> 
-       
                 <div className='review-text'>
                     <p><span className='bold-text'></span> {review} <span className='bold-text'></span></p>
-                </div> 
-               
-                
+                </div>   
                 <div className='footer'>
                     {userid === currentUser.id ? (
                         <div className='edit-delete'>

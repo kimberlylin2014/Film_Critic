@@ -34,9 +34,8 @@ class FanReviewModal extends React.Component {
     }
 
     handleReviewSubmit() {
-        if (this.state.reviewText.length < 10 ) {
-            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 10 characters."})
-
+        if (this.state.reviewText.length < 5 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 5 characters."})                                                                                                                                                                                                              
         } else if(this.state.reviewText.length > 500 ) {
             this.setState({errorMessageDisplay: true, errorMessage: "You went over the maximum of 500 characters."})
         } else {

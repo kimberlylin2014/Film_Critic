@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
         }
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
-        this.handleNewUserClick = this.handleNewUserClick.bind(this);
+        // this.handleNewUserClick = this.handleNewUserClick.bind(this);
     }
     
     handleOnChange(e) {
@@ -31,14 +31,14 @@ class LoginForm extends React.Component {
         loginUserStart({email, password})
     }
 
-    handleNewUserClick(e) {
-        e.preventDefault();
-        const { history } = this.props;
-        history.push('/register')
-    }
+    // handleNewUserClick(e) {
+    //     e.preventDefault();
+    //     const { history } = this.props;
+    //     history.push('/register')
+    // }
     
     render() {
-        const {errorMessage} = this.props;
+        const {errorMessage, isUserLoading} = this.props;
         return(
             <div className='LoginForm'>
                 <Form>
@@ -64,9 +64,11 @@ class LoginForm extends React.Component {
                         onChange = {this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
-                    <Button onClick={this.handleOnSubmit}>Submit</Button>
-                    <Button className='new-user-btn' onClick={this.handleNewUserClick}>New User</Button>
+                    <Button onClick={this.handleOnSubmit} disabled={isUserLoading}>Submit</Button>
+                    {/* <Button className='new-user-btn' onClick={this.handleNewUserClick}>Register</Button> */}
+                    <Button className='new-user-btn guest-btn' color='info'>LOGIN AS GUEST</Button>
                 </Form>
+
             </div>
         )
     }
