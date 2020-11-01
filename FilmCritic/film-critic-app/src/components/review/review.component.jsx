@@ -9,7 +9,7 @@ const Review = ({...props}) => {
         return(
             <div className='Review'>
                 <div className='text-right'> <span className='username'>{username.toUpperCase()}</span> </div> 
-                <p><span className='bold-text'>Scored:</span>  {fanscore}/5</p> 
+                <p><span className='bold-text'>Scored:</span> <span className='username'>{fanscore}/5</span> </p> 
                 <div className='review-text'>
                     <p><span className='bold-text'></span> {review} <span className='bold-text'></span></p>
                 </div>   

@@ -6,7 +6,7 @@ import {
   } from "react-circular-progressbar";
   import "react-circular-progressbar/dist/styles.css";
   
-class DetailedMovieRatings extends React.Component  {
+class Top3Movie extends React.Component  {
     constructor(props) {
         super(props)
         this.state = {
@@ -111,7 +111,7 @@ class DetailedMovieRatings extends React.Component  {
     render() {
         const {moreReviewInfo, imdbVotes} = this.props;
         return (
-            <div className='DetailedMovieRatings'>
+            <div className='Top3Movie'>
                 <div className='white-card'>
                     <div className='Critic'>
                         <div className='rating'>
@@ -174,4 +174,4 @@ class DetailedMovieRatings extends React.Component  {
     }
 }
 
-export default DetailedMovieRatings;
+export default Top3Movie;

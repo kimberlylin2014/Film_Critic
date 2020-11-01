@@ -20,11 +20,11 @@ class RegisterForm extends React.Component {
     handleOnChange(e) {
         this.setState({formErrorMessageDisplay: null, formErrorMessage: null});
         const { name, value } = e.target;
-        if(name === 'password') {
+        if(name === 'password' || name === 'email') {
             this.setState({
                 [name] : value
             })
-        } else if(name === 'username' || name === 'email') {
+        } else if(name === 'username' ) {
             this.setState({
                 email: value,
                 username: value
@@ -37,9 +37,10 @@ class RegisterForm extends React.Component {
         this.setState({formErrorMessageDisplay: null, formErrorMessage: null});
         let { email, password, username } = this.state;
         const {registerUserStart, registerUserFailure} = this.props;
-        if(username.length < 3 || username.length > 10 || password.length !== 4 || isNaN(parseInt(password))) {
-            registerUserFailure("Username needs to be 3-10 characters and passcode needs to be 4 digit number.")
+        if(username.length < 3 || username.length > 10 || password.length !== 4 ) {
+            registerUserFailure("Username needs to be 3-10 characters and password needs to be 4 characters.")
         }else {
+            console.log(typeof(password))
             this.setState({formErrorMessageDisplay: null});
             email += "@filmcritic.com"
             registerUserStart({email, password, username})
@@ -81,11 +82,11 @@ class RegisterForm extends React.Component {
                         </InputGroupAddon>
                     </InputGroup>
                      <FormInput 
-                        label='Passcode'
+                        label='Create Password'
                         id='password'
                         type='password'
                         name='password'
-                        placeholder='4 Digit Number'                    
+                        placeholder='4 characters'                    
                         onChange = {this.handleOnChange}
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}

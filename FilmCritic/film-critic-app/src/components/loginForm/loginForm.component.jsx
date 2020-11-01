@@ -13,6 +13,7 @@ class LoginForm extends React.Component {
         }
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
+        this.handleLoginAsGuest = this.handleLoginAsGuest.bind(this);
         // this.handleNewUserClick = this.handleNewUserClick.bind(this);
     }
     
@@ -27,7 +28,15 @@ class LoginForm extends React.Component {
         e.preventDefault();
         let { email, password } = this.state;
         const {loginUserStart} = this.props;
+        console.log(typeof(password))
         email += "@filmcritic.com"
+        loginUserStart({email, password})
+    }
+
+    handleLoginAsGuest() {
+        const {loginUserStart} = this.props;
+        const email = 'kimberly@filmcritic.com';
+        const password = "1234";
         loginUserStart({email, password})
     }
 
@@ -45,11 +54,11 @@ class LoginForm extends React.Component {
                     <h3 className='text-center'>Login</h3>
                     <label htmlFor="email">Email</label>
                     <InputGroup className='mb-3'>
-                        <Input placeholder="username" 
-                                id='email'
-                                type='text'
-                                name='email'                  
-                                onChange = {this.handleOnChange}
+                        <Input 
+                            id='email'
+                            type='text'
+                            name='email'                  
+                            onChange = {this.handleOnChange}
                         />
                         <InputGroupAddon addonType="append">
                         <InputGroupText>@filmcritic.com</InputGroupText>
@@ -59,14 +68,13 @@ class LoginForm extends React.Component {
                         label='Password'
                         id='password'
                         type='password'
-                        name='password'
-                        placeholder='Create Password'                    
+                        name='password'                  
                         onChange = {this.handleOnChange}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleOnSubmit} disabled={isUserLoading}>Submit</Button>
                     {/* <Button className='new-user-btn' onClick={this.handleNewUserClick}>Register</Button> */}
-                    <Button className='new-user-btn guest-btn' color='info'>LOGIN AS GUEST</Button>
+                    <Button className='new-user-btn guest-btn' color='info' onClick={this.handleLoginAsGuest}>LOGIN AS GUEST</Button>
                 </Form>
 
             </div>
