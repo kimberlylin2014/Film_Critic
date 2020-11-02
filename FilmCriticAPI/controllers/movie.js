@@ -1,27 +1,21 @@
 const fetch = require('node-fetch');
+
 // ************** START OF GET FAVORITE MOVIE REVIEW FUNCTIONS *********************/
 const getFavoriteMovieByIDHandler = async(req, res, db) => {
     try {
-        let Search = [{imdbID: 'tt0241527'}, {imdbID: 'tt2294629'}, {imdbID: 'tt1201607'}]
+        const Search = [{imdbID: 'tt0107290'}, {imdbID: 'tt0435761'}, {imdbID: 'tt0468569'}]
         const moviePromises = await Search.map(async (movie) => {
             const resp = await fetch(`http://omdbapi.com/?apikey=${process.env.MOVIE_API_KEY}&i=${movie.imdbID}`)
             const movieData = await resp.json()
             return movieData;
         })
         const detailedMovies = await Promise.all(moviePromises);
-        // console.log(detailedMovies);
-
-
-
         const moviesFoundInDB = await checkIfMoviesExistInDB(detailedMovies, db)
             if(moviesFoundInDB.length > 0) {
                 const detailedMoviesUpdated = await appendReviewScoreToMovie(detailedMovies, moviesFoundInDB, db) 
-                console.log(detailedMoviesUpdated) 
                 return detailedMoviesUpdated;
             }
-            // console.log(detailedMovies)
             return detailedMovies;
-        // return detailedMovies;
     } catch (error) {
         console.debug('Caught an error inside getFavoriteMovies')
         console.debug(error);
