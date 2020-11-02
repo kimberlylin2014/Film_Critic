@@ -66,6 +66,19 @@ app.get('/movieSearchPublic/:movie', async (req, res) => {
     }   
 })
 
+app.get('/movies/top3', async (req, res) => {
+    try {
+        const movieData = await movie.getFavoriteMovieByIDHandler(req, res, db);
+        if(!movieData) {
+            throw Error('Can not find movie')
+        }
+        res.json(movieData)
+    } catch(error) {
+        console.debug(error)
+        res.status(400).json(error)
+    }
+})
+
 // Authenticated Routes
 app.get('/movieSearchPrivate/:movie', auth.requireAuth, async (req, res) => {
     try {
