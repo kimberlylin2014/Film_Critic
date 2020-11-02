@@ -88,8 +88,8 @@ class PrivateMovie extends React.Component {
 
     displayProperTitleLength() {
         const {Title} = this.props;
-        if(Title.length > 65) {
-            return Title.slice(0, 65) + '...'
+        if(Title.length > 40) {
+            return Title.slice(0, 40) + '...'
         }
         return Title;
     }
@@ -108,12 +108,15 @@ class PrivateMovie extends React.Component {
                                 <div>
                                 <h3>{this.displayProperTitleLength()}</h3>
                                 </div>
-                                <div  className='view-more'>
-                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Click for More </Button>
-                                </div>
+                                {/* <div  className='view-more'>
+                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>More!</Button>
+                                </div> */}
                             </div>
                             <p><span className='text-bold'>Released:</span>  {Released}</p>
                             <p><span className='text-bold'>Actors:</span>  {Actors}</p>
+                            <div  className='view-more'>
+                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Click for More!</Button>
+                                </div>
                         </div>
                         <div className='ratings'>
                             <div className='imdb-review'>

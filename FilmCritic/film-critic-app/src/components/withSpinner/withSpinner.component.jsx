@@ -5,7 +5,6 @@ import './withSpinner.styles.scss';
 const WithSpinner = (WrappedComponent, height) => {
     const componentWithSpinner = ({isLoading, ...props}) => {
         const {color} = props;
-        console.log(props)
         return isLoading ? (
             <div className='PageWithSpinner' style={{height: height}}>
                 <Spinner style={{ width: '5rem', height: '5rem' }} color={color} />

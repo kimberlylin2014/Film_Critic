@@ -61,7 +61,9 @@ class Top3MovieReviewsPrivate extends React.Component {
         const {fanreviews } = this.props
         if(fanreviews.length === 1) {
             return `${fanreviews.length}`
-        } 
+        } else if (fanreviews.length < 1) {
+            return ''
+        }
         return `${fanreviews.length}`
     }
 
@@ -69,7 +71,9 @@ class Top3MovieReviewsPrivate extends React.Component {
         const { fanreviews } = this.props;
         if(fanreviews.length === 1) {
             return `Fan Review`
-        } 
+        } else if (fanreviews.length < 1) {
+            return 'No Reviews'
+        }
         return `Fan Reviews`
     }
 
@@ -78,10 +82,12 @@ class Top3MovieReviewsPrivate extends React.Component {
         let imgSrc;
         if(averagefanscore) {
             const score = (parseFloat(averagefanscore)/5 * 100).toFixed(0)
-            if(score >= 0 && score < 70) {
+            if(score > 0 && score < 70) {
                 // https://www.flaticon.com/free-icon/dislike_1301458
                 // Freepik
                 imgSrc = 'https://www.flaticon.com/svg/static/icons/svg/1301/1301458.svg';
+            } else if (score == 0){
+                imgSrc= 'https://www.flaticon.com/svg/static/icons/svg/942/942751.svg'
             } else if (score >= 70 && score < 90) {
                 // https://www.flaticon.com/free-icon/like_1301447?term=like%201301447&page=1&position=1
                 // Freepik
@@ -156,13 +162,13 @@ class Top3MovieReviewsPrivate extends React.Component {
                                     >
                                         <img style={{ width: 35, marginTop: 0}} src={`${this.determineRatingImage()}`} alt="rating" />
                                         <div className='percent' style={{ fontSize: 13, marginTop: 0 }}>
-                                            {this.calculateAudienceRating() === 0 ? '' : this.calculateAudienceRating() + '%'}
+                                            {this.calculateAudienceRating() == 0 ? '' : this.calculateAudienceRating() + '%'}
                                         </div> 
                                     </CircularProgressbarWithChildren>
                                 </div>
                             </div>
                             <div className='label'>
-                                {fanreviews.length>0 ? <div><span className='text-bold-audience'>{this.calculateAudienceReviewLength() } </span> {this.calculatePluralTense()}</div>: 'No Reviews'}    
+                                {fanreviews  ? <div><span className='text-bold-audience'>{this.calculateAudienceReviewLength() } </span> {this.calculatePluralTense()}</div>: 'No Reviews'}    
                             </div>
                         </div>
                     </div> 

@@ -8,6 +8,6 @@ const mapStateToProps = createStructuredSelector({
     isLoading: selectIsUserLoading
 })
 
-const LoginFormContainer = connect(mapStateToProps)(WithSpinner(LoginForm, '200px'))
+const LoginFormContainer = connect(mapStateToProps)(WithSpinner(LoginForm, '600px'))
 
 export default LoginFormContainer;

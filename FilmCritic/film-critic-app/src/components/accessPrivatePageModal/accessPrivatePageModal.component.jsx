@@ -9,9 +9,10 @@ class AccessPrivatePageModal extends React.Component {
         this.state = {
             modal: false,
         }
-        this.toggle = this.toggle.bind(this)
+        this.toggle = this.toggle.bind(this);
         this.handleRegister = this.handleRegister.bind(this);
-        this.handleLogin = this.handleLogin.bind(this)
+        this.handleLogin = this.handleLogin.bind(this);
+        this.handleLoginGuest = this.handleLoginGuest.bind(this);
     }
 
     toggle() {
@@ -29,6 +30,12 @@ class AccessPrivatePageModal extends React.Component {
     }
 
     handleLogin() {
+        const {history} = this.props;
+        history.push('/login');
+        this.toggle();
+    }
+
+    handleLoginGuest() {
         const {history} = this.props;
         history.push('/login');
         this.toggle();
@@ -54,7 +61,7 @@ class AccessPrivatePageModal extends React.Component {
                                 <button className='btn btn-sm btn-warning' onClick={this.handleLogin}>Login</button> Have Existing Account 
                             </div>        
                             <div  className='options'>
-                                <button className='btn btn-sm btn-info' onClick={this.handleLogin}>Guest</button>Login as Guest
+                                <button className='btn btn-sm btn-info' onClick={this.handleLoginGuest}>Guest</button>Login as Guest
                             </div>       
                          </div>
                      </div>
