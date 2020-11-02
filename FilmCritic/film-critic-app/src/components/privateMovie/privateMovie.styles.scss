@@ -100,8 +100,9 @@
         margin-left: 10px;
         button {
             padding: 5px;
-            background-color: #3282b8;
-            border: 2px solid #2d4059;
+            background-color: #66bfbf;
+            border-radius: 0;
+            border: 2px solid #66bfbf;
             color: white;
             &:hover,&:focus, &:active {
                 background-color: #0f4c75!important;

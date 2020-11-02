@@ -1,11 +1,18 @@
 .PublicMovieSearchBar {
-    margin: 40px 0;
+    margin: 30px 0 30px;
+    // color: #fafafa;
     color: #2d4059;
     font-size: 28px;
+    // background-color: #2d4059;;
+    padding: 5px 20px 20px;
     button {
         width: 100px;
         font-size: 15px;
-        background-color:#2d4059;
-        color: #f1f3f8
+        background-color: #2d4059;
+        color: #fafafa
+    }
+    button:hover, button:active, button:focus {
+        background-color: #2d4059;
+        color: #fafafa
     }
 }

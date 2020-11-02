@@ -15,11 +15,11 @@ class DetailedFanReviews  extends React.Component{
         if(moreReviewInfo) {
             const userAlreadyReviewed = moreReviewInfo.find(review => review.userid === currentUser.id);
             if(!userAlreadyReviewed) {
-                return <div><FanReviewModal buttonLabel='Review!' className={`review-modal`} {...this.props}/></div> 
+                return <div><FanReviewModal buttonLabel='Write a Review!' className={`review-modal`} {...this.props}/></div> 
             }
             return '';
         }
-        return  <div><FanReviewModal buttonLabel='Review!' className={`review-modal`} {...this.props}/></div> 
+        return  <div><FanReviewModal buttonLabel='Write a Review!' className={`review-modal`} {...this.props}/></div> 
     } 
 
     displayReviews() {

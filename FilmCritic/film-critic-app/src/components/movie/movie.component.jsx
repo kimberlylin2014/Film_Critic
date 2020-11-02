@@ -37,7 +37,7 @@ class Movie extends React.Component {
                     <h4>{this.displayProperTitleLength()}</h4>
                     <p> {Plot}</p>
                     <div className='public-route text-right'>
-                        <AccessPrivatePageModal label='View Reviews and More!' {...this.props}/>
+                        <AccessPrivatePageModal label='Write A Movie Review!' {...this.props}/>
                     </div>  
                 </div>    
             </div>

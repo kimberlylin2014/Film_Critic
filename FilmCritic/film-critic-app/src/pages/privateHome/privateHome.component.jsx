@@ -1,6 +1,5 @@
 import React from 'react';
 import './privateHome.styles.scss';
-import { getUserBlogStart } from '../../redux/user/user.actions';
 import { submitMovieReviewStart, resetMovieSearch } from '../../redux/movie/movie.actions';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -8,6 +7,7 @@ import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectMovieList, selectIsMovieListLoading } from '../../redux/movie/movie.selectors';
 import PrivateMovieSearchBar from '../../components/privateMovieSearchBar/privateMovieSearchBar.component';
 import MovieListContainer from '../../components/movieList/movieList.container';
+import Top3BannerPrivate from '../../components/top3BannerPrivate/top3BannerPrivate.component';
 
 class PrivateHome extends React.Component {
     constructor(props) {
@@ -22,6 +22,9 @@ class PrivateHome extends React.Component {
     render() {
         return (
             <div className='PrivateHome'>
+                <div className='Top3BannerPrivate'>
+                    <Top3BannerPrivate />
+                </div>
                 <div className='container'>
                     <div className='row justify-content-center'>
                         <div className='col-lg-5'>

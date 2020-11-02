@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     errorMessage: null,
     isLoading: false,
     sessionExpireWarning: false,
+    top3: []
 }
 
 const movieReducer = (state = INITIAL_STATE, action) => {
@@ -17,10 +18,17 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.UPDATE_REVIEW_START:
         case movieActionTypes.DELETE_REVIEW_START:
         case movieActionTypes.SUBMIT_MOVIEREVIEW_START:
+        case movieActionTypes.GET_FAVORITEMOVIEREVIEW_START:
             return {
                 ...state,
                 errorMessage: null,
                 isLoading: true
+            }
+        case movieActionTypes.GET_FAVORITEMOVIEREVIEW_SUCCESS: 
+            return {
+                ...state,
+                isLoading: false,
+                top3: [...action.payload]
             }
         case movieActionTypes.GET_MOVIESEARCH_SUCCESS:
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_SUCCESS:
@@ -41,6 +49,8 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.GET_PRIVATE_MOVIES_SEARCH_FAILURE:
         case movieActionTypes.UPDATE_REVIEW_FAILURE:
         case movieActionTypes.DELETE_REVIEW_FAILURE:
+        case movieActionTypes.GET_FAVORITEMOVIEREVIEW_FAILURE:
+        case movieActionTypes.GET_FAVORITEMOVIEREVIEW_START:
             return {
                 ...state,
                 movieList: [],
@@ -55,20 +65,21 @@ const movieReducer = (state = INITIAL_STATE, action) => {
         case movieActionTypes.UPDATE_REVIEW_FAILURE_SESSION:
             return {
                 ...state,
-                sessionExpireWarning: true
+                sessionExpireWarning: true,
             }
         case userActionTypes.LOGOUT_USER_SUCCESS:
         case userActionTypes.LOGIN_USER_SUCCESS:
         case movieActionTypes.RESET_MOVIESEARCH:
             return {
+                ...state,
                 movieList: [],
                 singleMoviePage: [],
                 errorMessage: null,
                 isLoading: false,
-                sessionExpireWarning: false
+                sessionExpireWarning: false,
             }
         default:
-            return state
+            return state;
     }
 }
 

@@ -1,4 +1,10 @@
 .PrivateHome {
     min-height: 100vh;
     background-color: #436f8a;
+    .Top3BannerPrivate {
+        button {
+            background-color: #2d4059;
+            color: #fafafa
+        }
+    }
 }

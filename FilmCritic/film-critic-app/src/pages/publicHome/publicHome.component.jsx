@@ -8,7 +8,7 @@ import { selectMovieList, selectIsMovieListLoading } from '../../redux/movie/mov
 import PublicMovieSearchBar from '../../components/publicMovieSearchBar/publicMovieSearchBar.component';
 import MovieListContainer from '../../components/movieList/movieList.container';
 import { resetMovieSearch } from '../../redux/movie/movie.actions';
-
+import Top3Banner from '../../components/top3Banner/top3Banner.component';
 
 class PublicHome extends React.Component {
     constructor(props) {
@@ -22,17 +22,20 @@ class PublicHome extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className='PublicHome'>
+                <Top3Banner {...this.props} />
                 <div className='container'>
+   
                     <div className='row justify-content-center'>
                         <div className='col-lg-5'>
-                        <PublicMovieSearchBar />
+                            <PublicMovieSearchBar />
                         </div>
                     </div>
                     <div className='row justify-content-center'>
                         <div className='col-lg-9'>
-                        <MovieListContainer {...this.props} color='dark' privateRoute={false}/>
+                            <MovieListContainer {...this.props} color='dark' privateRoute={false}/>
                         </div>
                     </div>
                 </div>              

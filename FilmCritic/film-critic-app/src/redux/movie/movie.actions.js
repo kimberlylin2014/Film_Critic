@@ -114,6 +114,33 @@ export const getReviewsByMovieIDFailureSession = (error) => {
         payload: error
     }
 }
+// GET FAVORITE MOVIE REVIEWS BY MOVIE ID
+export const getFavoriteMovieReviewsStart = () => {
+    return {
+        type: movieActionTypes.GET_FAVORITEMOVIEREVIEW_START,
+    }
+}
+
+export const getFavoriteMovieReviewsSuccess = (data) => {
+    return {
+        type: movieActionTypes.GET_FAVORITEMOVIEREVIEW_SUCCESS,
+        payload: data
+    }
+}
+
+export const getFavoriteMovieReviewsFailure = (error) => {
+    return {
+        type: movieActionTypes.GET_FAVORITEMOVIEREVIEW_FAILURE,
+        payload: error
+    }
+}
+
+// export const getFavoriteMovieReviewsFailureSession = (error) => {
+//     return {
+//         type: movieActionTypes.GET_FAVORITEMOVIEREVIEW_FAILURE_SESSION,
+//         payload: error
+//     }
+// }
 
 // UPDATE REVIEW
 export const updateReviewStart = (updatedReview) => {

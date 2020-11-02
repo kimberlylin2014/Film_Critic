@@ -14,6 +14,26 @@ export const getMoviesPublicAPI = async (searchWords) => {
     }
 }
 
+export const getReviewsByMovieIDPublic = async() => {
+    try {
+        const resp = await fetch(`http://localhost:3000/movies/top3`, {
+            method: "GET",
+            headers: {'Content-Type' : 'application/json'}
+        })
+        if(resp.status === 200) {
+            const data = await resp.json();
+            return data;
+        } else if (resp.status === 401) {
+            return resp.statusText;
+        }
+        return null;
+    } catch (error) {
+        console.debug('Caught an error inside getReviewByMovieID');
+        console.debug(error);
+        return null;
+    }
+}
+
 // authorized routes
 export const getMoviesPrivateAPI = async (searchObj) => {
     try {   

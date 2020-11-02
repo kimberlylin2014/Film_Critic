@@ -16,9 +16,11 @@ import { getMovieSearchSuccess,
         updateReviewFailureSession,
         deleteReviewSuccess, 
         deleteReviewFailure,
-        deleteReviewFailureSession
+        deleteReviewFailureSession,
+        getFavoriteMovieReviewsSuccess,
+        getFavoriteMovieReviewsFailure
     } from './movie.actions';
-import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID, deleteReviewByReviewID } from './movie.api';
+import { getMoviesPublicAPI, getMoviesPrivateAPI, submitMovieReview, getReviewsByMovieID, updateReviewsByReviewID, deleteReviewByReviewID, getReviewsByMovieIDPublic } from './movie.api';
 
 // Get Reviews
 function* getReviews({payload}) {
@@ -43,6 +45,27 @@ function* getReviews({payload}) {
 
 function* onGetReviewsByMovieIDStart() {
     yield takeLatest(movieActionTypes.GET_REVIEWSBYMOVIEID_START, getReviews)
+}
+
+// Get Favorite Movie Reviews
+function* getFavoriteMovieReviews() {
+    try {
+        const data = yield getReviewsByMovieIDPublic();
+        if(!data) {
+            throw Error('Can not get reviews for this movie')
+        } 
+        console.log(data)
+        yield put(getFavoriteMovieReviewsSuccess(data))
+    }catch (error) {
+
+        yield put(getFavoriteMovieReviewsFailure(error.message))
+
+    }
+}
+
+function * onGetFavoriteMovieReviewStart() {
+    yield takeLatest(movieActionTypes.GET_FAVORITEMOVIEREVIEW_START, getFavoriteMovieReviews)
+
 }
 
 // Submit Review
@@ -175,7 +198,8 @@ function* movieSagas() {
                call(onSubmitReviewSuccess),
                call(onUpdateReviewStart),
                call(onDeleteReviewStart),
-               call(onDeleteReviewSuccess)
+               call(onDeleteReviewSuccess),
+               call(onGetFavoriteMovieReviewStart)
             ])
 }
 

@@ -26,3 +26,8 @@ export const selectSessionExpireWarning = createSelector(
     [movieSelector],
     (movies) => movies.sessionExpireWarning
 )
+
+export const selectTopBanner = createSelector(
+    [movieSelector],
+    (movies) => movies.top3
+)

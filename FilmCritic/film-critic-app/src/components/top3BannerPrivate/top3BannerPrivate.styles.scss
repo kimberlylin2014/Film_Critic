@@ -1,0 +1,17 @@
+.Top3BannerPrivate {
+    padding: 14px 0;
+    background-color: #fafafa;
+    button {
+        background-color: #fafafa;
+        color: #2d4059;
+        border-radius: 0;
+        border: none;
+        padding: 8px;
+    }
+    @media screen and (max-width: 992px) {
+        padding: 25px 0;
+        h3 {
+            margin-bottom: 30px;
+        }
+    }
+}

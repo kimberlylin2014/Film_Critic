@@ -8,12 +8,16 @@
         background-color:#f1f3f8;
         color: #2d4059;
         &:hover {
-            background-color:#f1f3f8;
-            color: #2d4059;
+            background-color:#f1f3f8!important;
+            color: #2d4059!important;
         }
         &:active{
-            background-color:#f1f3f8;
-            color: #2d4059;
+            background-color:#f1f3f8!important;
+            color: #2d4059!important;
+        }
+        &:focus{
+            background-color:#f1f3f8!important;
+            color: #2d4059!important;
         }
     }
 }

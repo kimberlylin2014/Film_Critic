@@ -109,7 +109,7 @@ class PrivateMovie extends React.Component {
                                 <h3>{this.displayProperTitleLength()}</h3>
                                 </div>
                                 <div  className='view-more'>
-                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Details </Button>
+                                    <Button onClick={() => history.push(`/movies/${imdbID}/reviews`)} color='warning'>Click for More </Button>
                                 </div>
                             </div>
                             <p><span className='text-bold'>Released:</span>  {Released}</p>
