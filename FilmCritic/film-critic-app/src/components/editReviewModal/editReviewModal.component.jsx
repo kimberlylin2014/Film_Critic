@@ -41,8 +41,8 @@ class EditMovieReview extends React.Component {
     handleUpdateSubmit() {
         if(this.props.reviewText === this.state.reviewText && this.props.fanScore === this.state.fanScore) {
             this.setState({errorMessageDisplay: true, errorMessage: "You did not make any changes."})
-        } else if (this.state.reviewText.length < 10 ) {
-            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 10 characters."})
+        } else if (this.state.reviewText.length < 5 ) {
+            this.setState({errorMessageDisplay: true, errorMessage: "You need a minimum of 5 characters."})
         } else if(this.state.reviewText.length > 500 ) {
             this.setState({errorMessageDisplay: true, errorMessage: "You went over the maximum of 500 characters."})
         } else {

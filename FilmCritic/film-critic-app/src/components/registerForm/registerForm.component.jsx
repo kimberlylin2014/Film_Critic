@@ -15,6 +15,7 @@ class RegisterForm extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
         this.handleAlreadyUserClick = this.handleAlreadyUserClick.bind(this);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
     }
     
     handleOnChange(e) {
@@ -53,6 +54,12 @@ class RegisterForm extends React.Component {
         history.push('/login')
     }
     
+    handleOnKeyPress(e) {
+        if(e.key === 'Enter') {
+            this.handleOnSubmit(e);
+        }
+    }
+
     render() {
         const {errorMessage, isUserLoading} = this.props;
         return(
@@ -88,6 +95,7 @@ class RegisterForm extends React.Component {
                         name='password'
                         placeholder='4 characters'                    
                         onChange = {this.handleOnChange}
+                        onKeyPress = {this.handleOnKeyPress}
                     />
                      {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                      <div className='mt-4'>

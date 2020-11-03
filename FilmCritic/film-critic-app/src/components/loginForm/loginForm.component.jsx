@@ -14,7 +14,7 @@ class LoginForm extends React.Component {
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnSubmit = this.handleOnSubmit.bind(this);
         this.handleLoginAsGuest = this.handleLoginAsGuest.bind(this);
-        // this.handleNewUserClick = this.handleNewUserClick.bind(this);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this)
     }
     
     handleOnChange(e) {
@@ -35,16 +35,16 @@ class LoginForm extends React.Component {
 
     handleLoginAsGuest() {
         const {loginUserStart} = this.props;
-        const email = 'kimberly@filmcritic.com';
+        const email = 'guest@filmcritic.com';
         const password = "1234";
         loginUserStart({email, password})
     }
 
-    // handleNewUserClick(e) {
-    //     e.preventDefault();
-    //     const { history } = this.props;
-    //     history.push('/register')
-    // }
+    handleOnKeyPress(e) {
+        if(e.key === 'Enter') {
+            this.handleOnSubmit(e);
+        }
+    }
     
     render() {
         const {errorMessage, isUserLoading} = this.props;
@@ -70,6 +70,7 @@ class LoginForm extends React.Component {
                         type='password'
                         name='password'                  
                         onChange = {this.handleOnChange}
+                        onKeyPress = {this.handleOnKeyPress}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleOnSubmit} disabled={isUserLoading}>Submit</Button>

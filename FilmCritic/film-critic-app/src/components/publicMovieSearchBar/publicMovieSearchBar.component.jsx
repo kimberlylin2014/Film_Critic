@@ -16,6 +16,7 @@ class PublicMovieSearchBar extends React.Component {
         }
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleMovieSearchButton = this.handleMovieSearchButton.bind(this);
+        this.handleOnKeyPress = this.handleOnKeyPress.bind(this);
     }
 
     handleOnChange(e) {
@@ -25,10 +26,17 @@ class PublicMovieSearchBar extends React.Component {
         })
     }
 
-    handleMovieSearchButton() {
+    handleMovieSearchButton(e) {
+        e.preventDefault();
         const { movieSearch } = this.state;
         const { getMovieSearchStart } = this.props;
         getMovieSearchStart(movieSearch);
+    }
+
+    handleOnKeyPress(e) {
+        if(e.key === 'Enter') {
+            this.handleMovieSearchButton(e);
+        }
     }
 
     render() {
@@ -43,6 +51,7 @@ class PublicMovieSearchBar extends React.Component {
                         type='text'
                         placeholder='movie name'
                         onChange={this.handleOnChange}
+                        onKeyPress = {this.handleOnKeyPress}
                     />
                     {errorMessage ? <ValidationMessage colorCode='#363636' message={errorMessage}/> : ''}
                     <Button onClick={this.handleMovieSearchButton} disabled={isMovieListLoading}>Search</Button>
