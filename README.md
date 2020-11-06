@@ -1,8 +1,11 @@
 
 # FilmCritic App
 
-### LIVE APP
+### Live App
 https://kimberlylin2014.github.io/FilmCritic_Live/
+
+### Video Demo
+https://youtu.be/R3mueh4cfcE
 
 ### Frontend 
 * Javascript
